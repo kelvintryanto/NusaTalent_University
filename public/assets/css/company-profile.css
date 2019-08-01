@@ -1,0 +1,22 @@
+.panel-company-profile > div > div.form-group > label {
+	font-size: 14px;
+    margin: 0;
+	color: #000;
+}
+.panel-company-profile > div > div.form-group > div {
+    font-size: 16px;
+    color: #0E4071;
+}
+.panel-company-profile input,
+.panel-company-profile textarea {
+    color: #0E4071;
+    margin-top: 7px;
+}
+.panel-company-profile span {
+    color: #0E4071;
+}
+.company-logo {
+    width: auto;
+    height: 20rem;
+	cursor: pointer;
+}

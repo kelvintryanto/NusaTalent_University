@@ -1,0 +1,287 @@
+/* Declare Fonts */
+@font-face{ font-family: Lato; src: url('/assets/fonts/lato/Lato-Bold.ttf'); }
+@font-face{ font-family: InterUI-regular; src: url('/assets/fonts/interui/ttf/Inter-UI-Regular.ttf'); }
+@font-face{ font-family: InterUI-Medium; src: url('/assets/fonts/interui/ttf/Inter-UI-Medium.ttf'); }
+@font-face{ font-family: Robot-Medium; src: url('/assets/fonts/roboto/Roboto-Medium.ttf'); }
+@font-face{ font-family: Robot; src: url('/assets/fonts/roboto/Roboto-Regular.ttf'); }
+
+.input-text
+{
+	font-family: Roboto;
+	border: 1px solid rgba(0,0,0,0.2);
+	background-color: #E8E8E8;
+	width: 100%;
+	height: 10%;
+	padding-left: 1%;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	color: #04518D;
+}
+
+.input-text::placeholder
+{
+	font-size: 10px;
+	color: #04518D;
+}
+
+.input-text:focus
+{
+	border: 1px solid rgba(4,81,141,1);
+	box-shadow: 0.5px 0.1px 5px 0.5px;
+}
+
+.input-text:focus::-webkit-input-placeholder
+{
+	opacity: 0;
+}
+
+.input-text:hover
+{
+	transform: scaleX(1.01);
+}
+
+.btn-signin
+{
+	height: 35px;
+	background: linear-gradient(90deg, #04518D 0.15%, #0F76BC 100%);
+	border: 1px solid rgba(0,0,0,0.2);
+	box-sizing: border-box;
+	width: 100%;
+	border-radius: 20px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btn-signin:hover
+{
+	transform: scaleX(1.05);
+}
+
+
+
+/* Navbar Header Styling */
+
+li > a > span 
+{
+	color: #FFFFFF;
+}
+
+.navigation-accordion > li.active
+{
+	border-bottom: 1px solid #04518D;
+	/*background-color: rgba(0,0,0, 0.1);
+  	color: #fff;*/
+}
+
+li.active > a > span 
+{
+	color: #FFFFFF;
+}
+
+
+/* Company Profiling */
+
+.text-value{
+	color: #0E4071;
+	width: 100%;
+	padding: 7px;
+	border: 1px solid #E8E8E8;
+	background-color: #E8E8E8;
+	opacity: 1;
+}
+
+.text-value:focus
+{
+	border: 1px solid rgba(4,81,141,1);
+	box-shadow: 0.5px 0.1px 5px 0.5px;
+}
+
+.text-value:disabled
+{
+	width: 100%;
+	padding: 7px;
+	border: 1px solid #E8E8E8;
+	background-color: #E8E8E8;
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+
+.disabled
+{
+	cursor: not-allowed;
+	opacity: 0.7;
+}
+
+/* Denah styling */
+
+.denah-container {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+}
+
+.denah-container-14 {
+	display: grid;
+	grid-template-columns: repeat(14, 1fr);
+}
+
+.denah-container-border-left {
+	border-left: 2px solid black;
+}
+
+.denah-container-border-top {
+	border-top: 2px solid black;
+}
+
+.denah-container-border-right-2 {
+	border-right: 2px solid black;
+}
+
+.denah-container-border-right-1 {
+	border-right: 1px solid black;
+}
+
+.denah-grid-span-1 {
+	grid-column: span 1;
+}
+
+.denah-grid-span-3 {
+	grid-column: span 3;
+}
+
+.denah-grid-span-5 {
+	grid-column: span 5;
+}
+
+.denah-main-content {
+	border: 1px solid black;
+	background-color: #C7C7C7;
+	margin-top: 6%;
+}
+
+.denah-label-rotate-90 {
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	margin-left: 12%;
+}
+
+.denah-label-14 {
+	font-size: 14px;
+}
+/* /Denah */
+
+/* Blur thing */
+
+.blur {
+	-webkit-filter: blur(13px);
+    -moz-filter: blur(13px);
+    -o-filter: blur(13px);
+    -ms-filter: blur(13px);
+    filter: blur(13px);
+}
+
+/* /blur */
+
+/* Loader */
+
+.preload {
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(0deg, #04518D 6.88%, #0F76BC 85.61%);
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1100;
+}
+.loader-container {
+	display: none;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.6);
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1100;
+}
+
+.logo {
+	width: auto;
+	height: auto;
+	text-align: center;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid #0F76BC;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    -webkit-animation: spin 1s linear ease-in-out; /* Safari */
+    animation: spin 1s linear infinite;
+}
+
+/* /loader */
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* /loader */
+
+@media only screen and (min-width: 720px){
+    .denah-content-lg {
+		margin-top: 8%;
+		padding: 35px;
+		margin-left: 20%;
+	}
+
+	.denah-page-body-lg {
+		background: white;
+		box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
+		margin-bottom: 5%;
+		width: 75%;
+	}
+
+	.loader-logo {
+		width: auto;
+		height: auto;
+		text-align: center;
+	}
+}
+
+@media only screen and (max-width: 640px){
+    .denah-content-lg {
+		width: 40em;
+		overflow-x: auto;
+		white-space: nowrap;
+	}
+
+	.denah-page-body-xs {
+		background: white;
+		box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
+		margin-bottom: 5%;
+		width: 50em;
+	}
+
+	.loader-logo {
+		width: auto;
+		height: auto;
+		text-align: center;
+	}
+}

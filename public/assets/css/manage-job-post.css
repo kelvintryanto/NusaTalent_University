@@ -1,0 +1,207 @@
+.chips-container {
+	overflow-x: auto;
+	white-space: nowrap;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+}
+.chips-container > button {
+	background-color: #FFFFFF;
+	border: 0.3172px solid #7C7C7C;
+	color: #09314C;
+    padding-right: 12px;
+    margin-right: 10px;	
+}
+.chips-container > button.active {
+	background-color: #09314C;
+	border-color: #09314C;
+	color: #fff;
+}
+.chips-container > button:first-child {
+	width: 110px;
+}
+/*.chips-container > button:last-child {
+	width: 100px;
+    margin-right: 0;	
+}*/
+
+.panel-container {
+    border-radius: 12px;
+	margin-bottom: 10px;
+	font-size: 14px;
+}
+.panel-container .panel-body {
+    padding: 2rem 5rem 2rem 2rem;
+}
+
+i.job-post-status-icon {
+    position: absolute;
+    font-size: 20px;
+    left: 5px;
+    top: 5px;
+}
+.job-post-position {
+	font-weight: 700;
+    font-size: 16px;
+    color: #04518D;
+    margin-bottom: 3px;
+}
+.job-post-work-location {
+	font-weight: 500;
+	color: #04518D;
+	margin: 0;
+}
+.job-post-created-at {
+	color: #999999;
+	margin: 0;
+}
+p.job-post-status-text {
+    font-weight: 500;
+    margin: 2rem 0;
+}
+.manage-job-post {
+	margin: 1rem 0;
+}
+.job-post-checkbox {
+    position: absolute;
+    right: 3rem;
+    bottom: 9rem;
+}
+.job-post-action-button {
+	height: 35px;
+    padding: 8px;
+	border-radius: 3px;
+    border-color: #04518D;
+	background-color: #04518D;
+	color: #fff;
+}
+.job-post-action-button:hover, .job-post-action-button:focus {
+	background-color: #fff;
+	color: #04518D;
+	box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.job-post-action-button i {
+	font-size: 1.7rem;
+}
+
+
+
+
+
+
+/*
+	========== MANAGE TALENTS ==========
+*/
+.job-post-name {
+	margin: 1rem 0 0;
+    font-size: 30px;
+    font-weight: 700;
+}
+.applicants-chips-container {
+	overflow-x: auto;
+	white-space: nowrap;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+}
+.applicants-chips-container > button {
+	background-color: #FFFFFF;
+	border: 0.3172px solid #7C7C7C;
+	color: #09314C;
+    padding-right: 12px;
+    margin-right: 10px;	
+}
+.applicants-chips-container > button.active {
+	background-color: #09314C;
+	border-color: #09314C;
+	color: #fff;
+}
+/*.applicants-chips-container > button:last-child {
+	width: 100px;
+    margin-right: 0;	
+}*/
+
+.applicant-table-header {
+    padding: 0rem 6rem 1rem 3rem;
+    font-size: 14px;
+    font-weight: 500;
+}
+.applicant-table-header p {
+    margin: 0;
+}
+.applicant-name {
+	font-weight: 700;
+	font-size: 16px;
+	color: #04518D;
+}
+.applicant-detail p {
+	margin: 1rem 0;
+}
+
+/* 
+	* Pagination style 
+*/
+
+body {
+    overflow-x: hidden;
+    font-family: 'Oswald', sans-serif;
+    color: #212121;
+    font-size: 16px;
+}
+
+.pagination>li:first-child>a,
+.pagination>li:first-child>span,
+.pagination>li:last-child>a,
+.pagination>li:last-child>span{
+    /*margin-left: 0;*/
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+	border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+	padding: 12px 24px;
+	border: 1px solid #ccc;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+	text-align: center;
+	border: none;
+	margin-left: 2px;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+	    background-color: #727272;
+    border-color: #727272;
+}
+
+
+.pag-month {
+	font-size: 20px;
+	font-weight: 700;
+	color: #999;
+	text-transform: uppercase;
+	margin: 0;
+}
+
+.pag-year {
+	font-size: 12px;
+	font-weight: 400;
+	color: #515151;
+	margin-bottom: 3px;
+}
+
+.pagination>.active>a .pag-month,
+.pagination>.active>a .pag-year,
+.pagination>.active>a:focus .pag-month,
+.pagination>.active>a:focus .pag-year,
+.pagination>.active>a:hover .pag-month,
+.pagination>.active>a:hover .pag-year,
+.pagination>.active>span .pag-month,
+.pagination>.active>span .pag-year,
+.pagination>.active>span:focus .pag-month,
+.pagination>.active>span:focus .pag-year,
+.pagination>.active>span:hover .pag-month
+.pagination>.active>span:hover .pag-year {
+	    color: #fff;
+}

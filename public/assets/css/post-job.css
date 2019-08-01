@@ -1,0 +1,20 @@
+.add-another-job {
+	margin-left: -20px;
+    margin-right: -20px;
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    background-color: #DADADA;
+    border-color: #DADADA;
+    color: #000;
+    padding: 15px;
+}
+
+.invalid
+{
+	display: none;
+}
+
+.valid
+{
+	display: none;
+}
