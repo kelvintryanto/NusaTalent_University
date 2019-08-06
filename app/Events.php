@@ -10,11 +10,11 @@ class Events extends Model
 {
  	public function RetrieveCareerFair()
     {
-        $results = DB::table("career_fair")	
+        $results = DB::table("career_fair")
                         ->select("FairID", "FairName", "FairStartDate", "FairEndDate", "FairDetails")
                         ->get()
                         ->toArray();
-                        
+
         $data = array();
 
         foreach($results as $row)

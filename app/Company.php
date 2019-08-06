@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 use DB;
 
-class Company extends Model {
+class Company extends Model
+{
 
     private $_companyID;
     private $_upID;
@@ -24,10 +25,10 @@ class Company extends Model {
         $cuID = str_random(32);
 
         $exists = DB::table("company_user")
-                    ->where("id", $cuID)
-                    ->first();
+            ->where("id", $cuID)
+            ->first();
 
-        if(!is_null($exists))
+        if (!is_null($exists))
             $this->GenerateCompanyUserID();
 
         return $cuID;
@@ -37,10 +38,10 @@ class Company extends Model {
     {
         $partnershipID = str_random(64);
         $exists = DB::table("university_partnership")
-                    ->where("id", $partnershipID)
-                    ->first();
+            ->where("id", $partnershipID)
+            ->first();
 
-        if(!is_null($exists))
+        if (!is_null($exists))
             $this->GenerateUnivPartnershipID();
 
         return $partnershipID;
@@ -50,9 +51,9 @@ class Company extends Model {
     {
         $companyID = str_random(64);
 
-        $exists = DB::table("cp_event")->where("id", $companyID)->first();
+        $exists = DB::table("career_fair")->where("id", $companyID)->first();
 
-        if(!is_null($exists))
+        if (!is_null($exists))
             $this->GenerateCompanyID();
 
         return $companyID;
@@ -63,10 +64,10 @@ class Company extends Model {
         $boothID = str_random(64);
 
         $exists = DB::table("booth_event")
-                    ->where("id", $boothID)
-                    ->first();
+            ->where("id", $boothID)
+            ->first();
 
-        if(!is_null($exists))
+        if (!is_null($exists))
             $this->GenerateBoothID();
 
         return $boothID;
@@ -79,53 +80,80 @@ class Company extends Model {
 
     public function retrieveDataCompany($companyID)
     {
-        $result = DB::table("cp_event AS cp")
-                        ->where("cp.id", $companyID)
-                        ->leftJoin("total_employees AS te", "te.id", "=", "cp.employees")
-                        ->select("cp.name", "cp.website", "cp.email", "cp.contact", "cp.address", "cp.location",
-                            "cp.pic_hr", "cp.hr_contact", "cp.hr_email", "cp.industry", "cp.linkedin", "cp.employees", "cp.overview", "cp.reason",
-                            "cp.image_path", "te.total")
-                        ->get()
-                        ->first();
-        return $result;
+        // $result = DB::table("career_fair AS cf")
+        //     ->where("cf.id", $companyID)
+        //     ->leftJoin("total_employees AS te", "te.id", "=", "cf.employees")
+        //     ->select(
+        //         "cf.name",
+        //         "cf.website",
+        //         "cf.email",
+        //         "cf.contact",
+        //         "cf.address",
+        //         "cf.location",
+        //         "cf.pic_hr",
+        //         "cf.hr_contact",
+        //         "cf.hr_email",
+        //         "cf.industry",
+        //         "cf.linkedin",
+        //         "cf.employees",
+        //         "cf.overview",
+        //         "cf.reason",
+        //         "cf.image_path",
+        //         "te.total"
+        //     )
+        //     ->get()
+        //     ->first();
+        // return $result;
     }
 
-    public function AddCompany($companyName, $companyWebsite, $companyEmail, $companyContact, $hrName, $hrContact,
-                                    $hrEmail, $companyAddress, $companyLocation, $companyIndustry, $companyLinkedln,
-                                            $totalEmployee, $companyOverview, $companyReasons, $imagePath)
-    {
+    public function AddCompany(
+        $companyName,
+        $companyWebsite,
+        $companyEmail,
+        $companyContact,
+        $hrName,
+        $hrContact,
+        $hrEmail,
+        $companyAddress,
+        $companyLocation,
+        $companyIndustry,
+        $companyLinkedln,
+        $totalEmployee,
+        $companyOverview,
+        $companyReasons,
+        $imagePath
+    ) {
         $user = new User();
         $univID = $user->getUnivID();
 
         $createdAt = date('Y-m-d H:i:s');
 
         $data =
-        array(
-            "id"        => $this->_companyID,
-            "name"      => $companyName,
-            "website"   => $companyWebsite,
-            "email"     => $companyEmail,
-            "contact"   => $companyContact,
-            "pic_hr"    => $hrName,
-            "hr_contact" => $hrContact,
-            "hr_email" => $hrEmail,
-            "address"   => $companyAddress,
-            "location"  =>  $companyLocation,
-            "industry"  => $companyIndustry,
-            "linkedin"  => $companyLinkedln,
-            "employees" => $totalEmployee,
-            "overview"  => $companyOverview,
-            "reason"   => $companyReasons,
-            "image_path" => $imagePath,
-            "status_active" => 1,
-            "created_at" => $createdAt
-        );
+            array(
+                "id"        => $this->_companyID,
+                "name"      => $companyName,
+                "website"   => $companyWebsite,
+                "email"     => $companyEmail,
+                "contact"   => $companyContact,
+                "pic_hr"    => $hrName,
+                "hr_contact" => $hrContact,
+                "hr_email" => $hrEmail,
+                "address"   => $companyAddress,
+                "location"  =>  $companyLocation,
+                "industry"  => $companyIndustry,
+                "linkedin"  => $companyLinkedln,
+                "employees" => $totalEmployee,
+                "overview"  => $companyOverview,
+                "reason"   => $companyReasons,
+                "image_path" => $imagePath,
+                "status_active" => 1,
+                "created_at" => $createdAt
+            );
 
-        $resp = DB::table("cp_event")
-                ->insert($data);
+        $resp = DB::table("career_fair")
+            ->insert($data);
 
-        if($resp)
-        {
+        if ($resp) {
             unset($resp);
             $resp = $this->AddUnivPartnership($this->_companyID, $univID);
 
@@ -135,9 +163,24 @@ class Company extends Model {
         return false;
     }
 
-    public function UpdateCompany($companyName, $companyWebsite, $companyEmail, $companyContact, $companyHRName, $companyHRContact, $companyHREmail, $companyAddress, $companyLocation, $companyIndustry, $companyLinkedin,
-                                            $totalEmployee, $companyOverview, $companyReasons, $imagePath, $companyID)
-    {
+    public function UpdateCompany(
+        $companyName,
+        $companyWebsite,
+        $companyEmail,
+        $companyContact,
+        $companyHRName,
+        $companyHRContact,
+        $companyHREmail,
+        $companyAddress,
+        $companyLocation,
+        $companyIndustry,
+        $companyLinkedin,
+        $totalEmployee,
+        $companyOverview,
+        $companyReasons,
+        $imagePath,
+        $companyID
+    ) {
         $timestamp = date('Y-m-d H:i:s');
 
         $data = array(
@@ -159,9 +202,9 @@ class Company extends Model {
             "updated_at" => $timestamp
         );
 
-        $resp = DB::table("cp_event")
-                ->where("id", $companyID)
-                ->update($data);
+        $resp = DB::table("career_fair")
+            ->where("id", $companyID)
+            ->update($data);
 
         return $resp;
     }
@@ -182,134 +225,131 @@ class Company extends Model {
     }
 
     public function UploadImage($imagePath)
-    {
+    { }
 
-    }
-
+    // rebuild CompanyController@showListCompanyPage 05/08/2019 16:40 table status_job_post_event berubah
+    // menjadi 5 table : job_post_applied, job_post_reviewed, job_post_viewed, job_post_favorited, job_post_approval
     public function GetListCompany($sortBy)
     {
         $user = new User();
         $univID = $user->getUnivID();
-        if($sortBy == "")
-        {
+        if ($sortBy == "") {
             $results =
                 DB::table('university_partnership AS up')
-                ->join('cp_event AS cpe', 'cpe.id', '=', 'up.company_id')
-                ->leftJoin(DB::raw("(SELECT SUM(CASE WHEN sjpe.viewed = 1 THEN 1 ELSE 0 END) AS totalViewed,
-                                        SUM(CASE WHEN sjpe.applied = 1 THEN 1 ELSE 0 END) AS totalApplied,
-                                        SUM(CASE WHEN sjpe.favorite = 1 THEN 1 ELSE 0 END) AS totalFavorite,
-                                        SUM(CASE WHEN jpe.id IS NOT NULL THEN 1 ELSE 0 END) AS totalJobPost,
-                                        jpe.cp_id
-                                    FROM jp_event AS jpe
-                                    LEFT JOIN status_job_post_event AS sjpe ON sjpe.job_post_id = jpe.id
-                                    GROUP BY jpe.cp_id) AS jpe"), "jpe.cp_id", "=", "cpe.id")
-                ->leftJoin("booth_event AS be", "be.cp_id", "=", "cpe.id")
-                ->leftJoin("company_user AS cu", "cu.company_id", "=", "cpe.id")
-                ->select("cpe.id AS companyID",
-                            "cpe.name AS companyName",
-                            "cpe.location AS companyLocation",
-                            "cpe.industry AS companyIndustry",
-                            "cu.last_active AS updated_at",
-                            "jpe.totalViewed",
-                            "jpe.totalApplied",
-                            "jpe.totalFavorite",
-                            "jpe.totalJobPost",
-                            "be.booth_no AS boothNumber")
+                ->join('career_fair AS cf', 'cf.id', '=', 'up.company_id')
+                // ->leftJoin(DB::raw("(SELECT SUM(CASE WHEN sjpe.viewed = 1 THEN 1 ELSE 0 END) AS totalViewed,
+                //                         SUM(CASE WHEN sjpe.applied = 1 THEN 1 ELSE 0 END) AS totalApplied,
+                //                         SUM(CASE WHEN sjpe.favorite = 1 THEN 1 ELSE 0 END) AS totalFavorite,
+                //                         SUM(CASE WHEN jpe.id IS NOT NULL THEN 1 ELSE 0 END) AS totalJobPost,
+                //                         jpe.cf_id
+                //                     FROM jp_event AS jpe
+                //                     GROUP BY jpe.cf_id) AS jpe"), "jpe.cf_id", "=", "cf.id")
+                ->leftJoin("booth_event AS be", "be.event_id", "=", "cf.id")
+                // ->leftJoin("company_user AS cu", "cu.cf_id", "=", "cf.id")
+                ->select(
+                    // "cf.id AS companyID",
+                    // "cf.name AS companyName",
+                    // "cf.location AS companyLocation",
+                    // "cf.industry AS companyIndustry",
+                    // "jpe.totalViewed",
+                    // "jpe.totalApplied",
+                    // "jpe.totalFavorite",
+                    // "jpe.totalJobPost",
+                    "be.booth_no AS boothNumber"
+                )
                 ->where('up.univ_id', $univID)
-                ->where("cpe.status_active", 1)
-                ->groupBy("cpe.id")
-                ->orderBy("jpe.totalApplied", "asc")
+                // ->where("cf.status_active", 1)
+                ->groupBy("cf.id")
+                // ->orderBy("jpe.totalApplied", "asc")
                 ->get()
                 ->toArray();
             // $results =
-            // DB::table("cp_event AS cpe")
+            // DB::table("career_fair AS cf")
             // ->leftJoin(DB::raw("(SELECT SUM(CASE WHEN sjpe.viewed = 1 THEN 1 ELSE 0 END) AS totalViewed,
             //                             SUM(CASE WHEN sjpe.applied = 1 THEN 1 ELSE 0 END) AS totalApplied,
             //                             SUM(CASE WHEN sjpe.favorite = 1 THEN 1 ELSE 0 END) AS totalFavorite,
             //                             SUM(CASE WHEN jpe.id IS NOT NULL THEN 1 ELSE 0 END) AS totalJobPost,
-            //                             jpe.cp_id
+            //                             jpe.cf_id
             //                         FROM jp_event AS jpe
-            //                         LEFT JOIN status_job_post_event AS sjpe ON sjpe.job_post_id = jpe.id
-            //                         GROUP BY jpe.cp_id) AS jpe"), "jpe.cp_id", "=", "cpe.id")
-            // ->leftJoin("booth_event AS be", "be.cp_id", "=", "cpe.id")
-            // ->leftJoin("company_user AS cu", "cu.company_id", "=", "cpe.id")
-            // ->select("cpe.id AS companyID",
-            //             "cpe.name AS companyName",
-            //             "cpe.location AS companyLocation",
-            //             "cpe.industry AS companyIndustry",
-            //             "cu.last_active AS updated_at",
+
+            //                         GROUP BY jpe.cf_id) AS jpe"), "jpe.cf_id", "=", "cf.id")
+            // ->leftJoin("booth_event AS be", "be.cf_id", "=", "cf.id")
+            // ->leftJoin("company_user AS cu", "cu.cf_id", "=", "cf.id")
+            // ->select("cf.id AS companyID",
+            //             "cf.name AS companyName",
+            // "cf.location AS companyLocation",
+            //             "cf.industry AS companyIndustry",
+            //
             //             "jpe.totalViewed",
             //             "jpe.totalApplied",
             //             "jpe.totalFavorite",
             //             "jpe.totalJobPost",
             //             "be.booth_no AS boothNumber")
-            // ->where("cpe.status_active", 1)
-            // ->groupBy("cpe.id")
+            // ->where("cf.status_active", 1)
+            // ->groupBy("cf.id")
             // ->orderBy("jpe.totalApplied", "asc")
             // ->get()
             // ->toArray();
-        }
-        else
-        {
+        } else {
             $results =
                 DB::table('university_partnership AS up')
-                ->join('cp_event AS cpe', 'cpe.id', '=', 'up.company_id')
-                ->leftJoin(DB::raw("(SELECT SUM(CASE WHEN sjpe.viewed = 1 THEN 1 ELSE 0 END) AS totalViewed,
-                                        SUM(CASE WHEN sjpe.applied = 1 THEN 1 ELSE 0 END) AS totalApplied,
-                                        SUM(CASE WHEN sjpe.favorite = 1 THEN 1 ELSE 0 END) AS totalFavorite,
-                                        SUM(CASE WHEN jpe.id IS NOT NULL THEN 1 ELSE 0 END) AS totalJobPost,
-                                        jpe.cp_id
-                                    FROM jp_event AS jpe
-                                    LEFT JOIN status_job_post_event AS sjpe ON sjpe.job_post_id = jpe.id
-                                    GROUP BY jpe.cp_id) AS jpe"), "jpe.cp_id", "=", "cpe.id")
-                ->leftJoin("booth_event AS be", "be.cp_id", "=", "cpe.id")
-                ->leftJoin("company_user AS cu", "cu.company_id", "=", "cpe.id")
-                ->select("cpe.id AS companyID",
-                            "cpe.name AS companyName",
-                            "cpe.location AS companyLocation",
-                            "cpe.industry AS companyIndustry",
-                            "cu.last_active AS updated_at",
-                            "jpe.totalViewed",
-                            "jpe.totalApplied",
-                            "jpe.totalFavorite",
-                            "jpe.totalJobPost",
-                            "be.booth_no AS boothNumber")
+                ->join('career_fair AS cf', 'cf.id', '=', 'up.company_id')
+                // ->leftJoin(DB::raw("(SELECT SUM(CASE WHEN sjpe.viewed = 1 THEN 1 ELSE 0 END) AS totalViewed,
+                //                         SUM(CASE WHEN sjpe.applied = 1 THEN 1 ELSE 0 END) AS totalApplied,
+                //                         SUM(CASE WHEN sjpe.favorite = 1 THEN 1 ELSE 0 END) AS totalFavorite,
+                //                         SUM(CASE WHEN jpe.id IS NOT NULL THEN 1 ELSE 0 END) AS totalJobPost,
+                //                         jpe.cf_id
+                //                     FROM jp_event AS jpe
+                //                     GROUP BY jpe.cf_id) AS jpe"), "jpe.cf_id", "=", "cf.id")
+                ->leftJoin("booth_event AS be", "be.cf_id", "=", "cf.id")
+                ->leftJoin("company_user AS cu", "cu.cf_id", "=", "cf.id")
+                ->select(
+                    "cf.id AS companyID",
+                    "cf.name AS companyName",
+                    // "cf.location AS companyLocation",
+                    // "cf.industry AS companyIndustry",
+                    "jpe.totalViewed",
+                    "jpe.totalApplied",
+                    "jpe.totalFavorite",
+                    "jpe.totalJobPost",
+                    "be.booth_no AS boothNumber"
+                )
                 ->where('up.univ_id', $univID)
-                ->where("cpe.status_active", 1)
-                ->groupBy("cpe.id")
-                ->orderBy("jpe.".$sortBy, "desc")
+                // ->where("cf.status_active", 1)
+                ->groupBy("cf.id")
+                ->orderBy("jpe." . $sortBy, "desc")
                 ->get()
                 ->toArray();
             // $results =
-            // DB::table("cp_event AS cpe")
+            // DB::table("career_fair AS cf")
             // ->leftJoin(DB::raw("(SELECT SUM(CASE WHEN sjpe.viewed = 1 THEN 1 ELSE 0 END) AS totalViewed,
             //                             SUM(CASE WHEN sjpe.applied = 1 THEN 1 ELSE 0 END) AS totalApplied,
             //                             SUM(CASE WHEN sjpe.favorite = 1 THEN 1 ELSE 0 END) AS totalFavorite,
             //                             SUM(CASE WHEN jpe.id IS NOT NULL THEN 1 ELSE 0 END) AS totalJobPost,
-            //                             jpe.cp_id
+            //                             jpe.cf_id
             //                         FROM jp_event AS jpe
-            //                         LEFT JOIN status_job_post_event AS sjpe ON sjpe.job_post_id = jpe.id
-            //                         GROUP BY jpe.cp_id) AS jpe"), "jpe.cp_id", "=", "cpe.id")
-            // ->leftJoin("booth_event AS be", "be.cp_id", "=", "cpe.id")
-            // ->leftJoin("company_user AS cu", "cu.company_id", "=", "cpe.id")
-            // ->select("cpe.id AS companyID",
-            //             "cpe.name AS companyName",
-            //             "cpe.location AS companyLocation",
-            //             "cpe.industry AS companyIndustry",
-            //             "cu.last_active AS updated_at",
+
+            //                         GROUP BY jpe.cf_id) AS jpe"), "jpe.cf_id", "=", "cf.id")
+            // ->leftJoin("booth_event AS be", "be.cf_id", "=", "cf.id")
+            // ->leftJoin("company_user AS cu", "cu.cf_id", "=", "cf.id")
+            // ->select("cf.id AS companyID",
+            //             "cf.name AS companyName",
+            // "cf.location AS companyLocation",
+            //             "cf.industry AS companyIndustry",
+            //
             //             "jpe.totalViewed",
             //             "jpe.totalApplied",
             //             "jpe.totalFavorite",
             //             "jpe.totalJobPost",
             //             "be.booth_no AS boothNumber")
-            // ->where("cpe.status_active", 1)
-            // ->groupBy("cpe.id")
+            // ->where("cf.status_active", 1)
+            // ->groupBy("cf.id")
             // ->orderBy("jpe.".$sortBy, "desc")
             // ->get()
             // ->toArray();
         }
 
-        if(!empty($results))
+        if (!empty($results))
             return $results;
 
         return false;
@@ -321,13 +361,14 @@ class Company extends Model {
             "status_active" => 2
         );
 
-        $resp = DB::table("cp_event")
-                ->where("id", $companyID)
-                ->update($data);
+        $resp = DB::table("career_fair")
+            ->where("id", $companyID)
+            ->update($data);
 
         return $resp;
     }
 
+    // rechecked this method on 05/08/2019 16:50
     public function GetTotalCompany()
     {
         $user = new User();
@@ -336,13 +377,13 @@ class Company extends Model {
 
         $results =
             DB::table("university_partnership AS up")
-            ->join("cp_event AS cpe", "cpe.id", "=", "up.company_id")
-            ->select(DB::raw("SUM(CASE WHEN cpe.id IS NOT NULL THEN 1 ELSE 0 END) AS totalCompany"))
+            ->join("career_fair AS cf", "cf.id", "=", "up.company_id")
+            ->select(DB::raw("SUM(CASE WHEN cf.id IS NOT NULL THEN 1 ELSE 0 END) AS totalCompany"))
             ->where("up.univ_id", $univID)
-            ->where("cpe.status_active", 1)
+            // ->where("cf.status_active", 1)
             ->value("totalCompany");
 
-        if(!is_null($results))
+        if (!is_null($results))
             return $results;
 
         return false;
@@ -369,27 +410,30 @@ class Company extends Model {
         return $resp;
     }
 
+    // checked 02/08/2019 17:15
     public function GetBoothNumber()
     {
         $user = new User();
 
         $univID = $user->getUnivID();
 
-        $eventID = DB::table("university_event")
-                ->where("university_id", $univID)
-                ->value("id");
+        // mengganti table university_event menjadi career_fair beserta kolomnya
+        $eventID = DB::table("career_fair")
+            ->where("univ_id", $univID)
+            ->value("id");
 
-        if(!is_null($eventID) && $eventID !== "")
-        {
+
+        //jika universitas mempunyai event
+        if (!is_null($eventID) && $eventID !== "") {
             $resp = DB::table("booth_event AS be")
-                    ->join("cp_event AS cpe", "cpe.id", "=", "be.cp_id")
-                    ->where("be.event_id", $eventID)
-                    ->where("cpe.status_active", 1)
-                    ->orderBy("booth_no", "asc")
-                    ->pluck("booth_no")
-                    ->toArray();
+                ->join("career_fair AS cf", "cf.id", "=", "be.cf_id")
+                ->where("be.event_id", $eventID)
+                ->where("cf.status_active", 1)
+                ->orderBy("booth_no", "asc")
+                ->pluck("booth_no")
+                ->toArray();
 
-            if(!empty($resp))
+            if (!empty($resp))
                 return $resp;
 
             return false;
@@ -401,10 +445,10 @@ class Company extends Model {
     public function GetSingleBoothNumber($companyID)
     {
         $resp =
-            DB::table("cp_event AS cpe")
-            ->join("booth_event AS be", "be.cp_id", "=", "cpe.id")
+            DB::table("career_fair AS cf")
+            ->join("booth_event AS be", "be.cf_id", "=", "cf.id")
             ->select('be.booth_no AS boothNumber', 'be.id AS boothID')
-            ->where("cpe.id", "=", $companyID)
+            ->where("cf.id", "=", $companyID)
             ->get()
             ->toArray();
 
@@ -422,19 +466,18 @@ class Company extends Model {
             ->where("university_id", $univID)
             ->value("id");
 
-        if(!is_null($eventID) && $eventID != "")
-        {
+        if (!is_null($eventID) && $eventID != "") {
             $resp =
                 DB::table("booth_event AS be")
-                ->join("cp_event AS cpe", "cpe.id", "=", "be.cp_id")
-                ->select("cpe.name AS companyName", "cpe.image_path AS imagePath", "be.booth_no")
+                ->join("career_fair AS cf", "cf.id", "=", "be.cf_id")
+                ->select("cf.name AS companyName", "cf.image_path AS imagePath", "be.booth_no")
                 ->where("event_id", $eventID)
-                ->where("cpe.status_active", 1)
+                ->where("cf.status_active", 1)
                 ->orderBy("booth_no", "asc")
                 ->get()
                 ->toArray();
 
-            if(!empty($resp))
+            if (!empty($resp))
                 return $resp;
 
             return false;
@@ -452,24 +495,23 @@ class Company extends Model {
         $univID = $user->getUnivID();
 
         $eventID = DB::table("university_event")
-                    ->where("university_id", "=", $univID)
-                    ->where("status", 1)
-                    ->value("id");
+            ->where("university_id", "=", $univID)
+            ->where("status", 1)
+            ->value("id");
 
-        if(!is_null($eventID))
-        {
+        if (!is_null($eventID)) {
 
             $data =
                 array(
                     "id" => $this->boothID,
                     "event_id" => $eventID,
-                    "cp_id" => $companyID,
+                    "cf_id" => $companyID,
                     "booth_no" => $boothNumber,
                     "created_at" => date("Y-m-d H:i:s")
                 );
 
             $resp = DB::table("booth_event")
-                    ->insert($data);
+                ->insert($data);
 
             return $resp;
         }
@@ -486,9 +528,9 @@ class Company extends Model {
         );
 
         $resp = DB::table('booth_event')
-                ->where('id', '=', $boothID)
-                ->where('cp_id', '=', $companyID)
-                ->update($data);
+            ->where('id', '=', $boothID)
+            ->where('cf_id', '=', $companyID)
+            ->update($data);
 
         return $resp;
     }
@@ -523,15 +565,15 @@ class Company extends Model {
     public function CheckEmail($email)
     {
         $results =
-            DB::table('cp_event AS cpe')
-            ->join('company_user AS cu', 'cu.company_id', '=', 'cpe.id')
+            DB::table('career_fair AS cf')
+            ->join('company_user AS cu', 'cu.cf_id', '=', 'cf.id')
             ->where('email', $email)
             ->orWhere('hr_email', $email)
-            ->select('cpe.name', 'cu.username')
+            ->select('cf.name', 'cu.username')
             ->get()
             ->toArray();
 
-        if(empty($results))
+        if (empty($results))
             return true;
 
         return false;

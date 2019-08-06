@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Dashboard;
 use App\User;
-class DashboardController extends Controller {
+use Illuminate\Support\Facades\Session;
 
-    public function index() {
+class DashboardController extends Controller
+{
+
+    //checked 02/08/2019 11:16
+    //ada error di dashboard.js untuk chart
+    public function index()
+    {
         $user = new User();
         $dashboard = new Dashboard();
         $data[] = array();
@@ -17,8 +23,13 @@ class DashboardController extends Controller {
         $data['sidebar'] = view('template.sidebar');
         $data['footer'] = view('template.footer');
 
-    	return view('Dashboard.index')->with('data', $data);
+        // dd($data);
+
+        return view('Dashboard.index')->with('data', $data);
     }
+    // checked finished 02/08/2019 11:16
+    // matikan dulu untuk dashboard.js
+
 
     public function GetChartAreaData()
     {

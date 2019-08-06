@@ -3,7 +3,7 @@
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> Career Center - Manage Student </title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">		
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     {!!$data['css']!!}
     <link href="{!! url('assets/css/manage-job-post.css') !!}" rel="stylesheet" type="text/css">
 </head>
@@ -14,99 +14,113 @@
     <div class="page-container no-padding">
         <!-- Page Content -->
         <div class="page-content bg-main-color">
-        {!!$data['sidebar']!!}		
+        {!!$data['sidebar']!!}
 
-            <!-- Main content -->			
-            <div class="content-wrapper">				
-                <!-- Content area -->				
-                <div class="content">									
-                    <!-- Page header -->					
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <!-- Content area -->
+                <div class="content">
+                    <!-- Page header -->
                     <div class="page-header border-bottom border-bottom-grey-50">
-                        <div class="page-header-content">							
-                            <div class="page-title">								
-                                <div class="row">									
-                                    <div class="col-lg-4">										
+                        <div class="page-header-content">
+                            <div class="page-title">
+                                <div class="row">
+                                    <div class="col-lg-4">
                                         <p class="no-margin"> Student Detail </p>
                                         <span class="no-padding" id="total-applicant">
-                                            {{ $data['students'] == 'FETCH_FAILED' && $data['students'] == 'ERROR' ? 0 : count($data['students']) }} 
+                                            {{ $data['students'] == 'FETCH_FAILED' && $data['students'] == 'ERROR' ? 0 : count($data['students']) }}
                                             {{ count($data['students']) > 1 ? "Students" : "Student" }}
                                         </span>
-                                    </div>																		
-                                    <div class="col-lg-5">	
+                                    </div>
+                                    <div class="col-lg-5">
                                         <div class="form-group col-md-8">
                                             <select class="select" data-placeholder="Type search" id="search-type">
                                                 <option value=""></option>
                                                 <option value="student"> Student </option>
                                                 <option value="university"> University </option>
                                             </select>
-                                        </div>  
+                                        </div>
                                         <div class="input-group col-md-12" id="form-search" style="display: none;">
                                             <input type="text" class="form-control" id="search-applicant" placeholder="Search applicants">
                                             <span class="input-group-btn">
                                                 <button class="btn btn-default">
                                                     <i class="icon-search4"></i>
-                                                </button>												
-                                            </span>											
-                                        </div>					
-                                    </div>	
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
                                     <!-- <div class="col-lg-3">
                                         <button class="btn btn-success" id="export-to-excel">
                                             <i class="icon-box-add"></i> Export to EXCEL
                                         </button>
                                     </div>  -->
-                                </div>							
-                            </div>						
-                        </div>					
-                    </div>					
-                    <!-- /page header -->									
-                    
-                    <div class="row applicant-table-header text-nusatalent">
-                        <div class="col-lg-4">							
-                            <p> Student's Name</p>						
-                        </div>						
-
-                        <div class="col-lg-2">							
-                            <p> Student's University </p>						
-                        </div>						
-                        
-                        <div class="col-lg-2">							
-                            <p> Student's Register Date</p>						
-                        </div>					
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
-					@if ($data['students'] != 'FETCH_FAILED' && $data['students'] != 'ERROR')
+                    <!-- /page header -->
+
+                    <div class="row applicant-table-header text-nusatalent">
+                        <div class="col-lg-1">
+                            <p>#</p>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <p> Student's Name</p>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <p> Student's University </p>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <p> Student's Register Date</p>
+                        </div>
+                    </div>
+
+                    @if ($data['students'] != 'FETCH_FAILED' && $data['students'] != 'ERROR')
+                        @php
+                            $p = 1;
+                        @endphp
                         @foreach($data['students'] as $row)
-                        
+
                             <div class="panel panel-white panel-container applicant-detail applicant-container-{{ $row->studentID }}" data-s="{{ $row->studentID }}" style="display: block">
                                 <div class="panel-body">
-                                    <div class="col-lg-4">								
+                                    <div class="col-lg-1">
+                                        <p class="applicant-name">{{ $p }}</p>
+                                    </div>
+
+                                    <div class="col-lg-4">
                                         <p class="applicant-name">{{ $row->fullName }}</p>
-                                    </div>														
-                                    
+                                    </div>
+
                                     <div class="col-lg-4">
                                         <p class="university-name"> {{ $row->universityName }} </p>
                                     </div>
-                                    
-                                    <div class="col-lg-4">
+
+                                    <div class="col-lg-3">
                                         <p class="text-semibold text-blue-800 applicant-applied-date">
                                             {{ date_format(date_create($row->registerDate), "j F Y") }}</p>
-                                    </div>																				
-                                    <!-- <div class="checkbox job-post-checkbox">								
-                                        <input type="checkbox" class="styled">							
+                                    </div>
+                                    <!-- <div class="checkbox job-post-checkbox">
+                                        <input type="checkbox" class="styled">
                                     </div>						 -->
-                                </div>					
+                                </div>
                             </div>
+                            @php
+                                $p++;
+                            @endphp
 						@endforeach
-					@endif												
-                </div>				
-                <!-- /content area -->			
-            </div>			
-            <!-- /main content -->		
-        </div>		
-        <!-- /page content -->	
+					@endif
+                </div>
+                <!-- /content area -->
+            </div>
+            <!-- /main content -->
+        </div>
+        <!-- /page content -->
     </div>
-    <!-- /page container -->			
-        
+    <!-- /page container -->
+
     <!-- Modal Export -->
 
     <div class="modal fade" id="modal-export">
@@ -149,10 +163,10 @@
                 </div>
           </div>
           <div class="modal-footer">
-            <a href="#" class="export"> 
-                <button class="btn btn-success"> 
+            <a href="#" class="export">
+                <button class="btn btn-success">
                     <i class="icon-folder-download2"> </i> Export to EXCEL
-                </button>  
+                </button>
             </a>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
@@ -233,7 +247,7 @@
             $('#export-to-excel').on('click', function(e)
             {
                 e.preventDefault();
-                
+
                 $('#modal-export').modal({
                     backdrop: 'static',
                     keyboard: false
@@ -270,7 +284,7 @@
                     {
                         let table = "<table class='table table-bordered' width='1%'><thead>";
                         let column = "";
-                        
+
                         if(namaTrue == "checked")
                             column = "<th>Full Name</th>";
                         if(univTrue == "checked")
@@ -356,7 +370,7 @@
             //     if (status == "New applicant")
             //         $('#status-'+student_id).text("In reviewed");
             // });
-            
+
 
             // $('#tblJobVacancy').DataTable();
 
@@ -364,21 +378,21 @@
             //     e.preventDefault();
             //     var jobPostID = $(this).data('id');
             //     var jobPostName = $(this).data('name');
-                
+
             //     swal({
             //         title: "Are you sure to delete <b>" + jobPostName + "</b>?",
-            //         text: "You will not be able to recover this job postings!",			            
-            //         type: "warning",			            
-            //         html: true,			            
-            //         showCancelButton: true,			            
-            //         confirmButtonColor: "#EF5350",			           
-            //         confirmButtonText: "Yes",			            
-            //         cancelButtonText: "No",			            
-            //         closeOnConfirm: false,			            
-            //         closeOnCancel: true,			            
-            //         showLoaderOnConfirm: true			        
-            //     }, function(isConfirm){			        	
-            //         if(!isConfirm)			        		
+            //         text: "You will not be able to recover this job postings!",
+            //         type: "warning",
+            //         html: true,
+            //         showCancelButton: true,
+            //         confirmButtonColor: "#EF5350",
+            //         confirmButtonText: "Yes",
+            //         cancelButtonText: "No",
+            //         closeOnConfirm: false,
+            //         closeOnCancel: true,
+            //         showLoaderOnConfirm: true
+            //     }, function(isConfirm){
+            //         if(!isConfirm)
             //             return;
 
             //         var url = "/ManageJobPosts/Delete/jpID="+jobPostID;
@@ -387,128 +401,128 @@
             //             url: url,
             //             success: function(resp){
             //                 console.log(resp);
-            //                 if(resp) {					                
-            //                     swal({							            
-            //                         title: "Job Posting Deleted!",							            
-            //                         confirmButtonColor: "#66BB6A",							            
-            //                         type: "success",							           
-            //                         timer: 2000								    
-            //                     });						            
-                                
+            //                 if(resp) {
+            //                     swal({
+            //                         title: "Job Posting Deleted!",
+            //                         confirmButtonColor: "#66BB6A",
+            //                         type: "success",
+            //                         timer: 2000
+            //                     });
+
             //                     setTimeout(function(){
             //                         location.reload();
-            //                     }, 2500);			        			
-            //                 } else {					                
-            //                     swal({					                	
-            //                         type: "error",					                    
+            //                     }, 2500);
+            //                 } else {
+            //                     swal({
+            //                         type: "error",
             //                         title: "Delete Failed !",
             //                         confirmButtonColor: "#EF5350",
             //                         timer: 2000
             //                     });
-            //                 }			        		
-            //             }, error: function(resp){				                
-            //                 swal({				                	
-            //                     type: "error",				                   
+            //                 }
+            //             }, error: function(resp){
+            //                 swal({
+            //                     type: "error",
             //                     title: "Delete Failed !",
-            //                     confirmButtonColor: "#EF5350",				                    
+            //                     confirmButtonColor: "#EF5350",
             //                     timer: 2000
-            //                 });			        		
-            //             }			        	
+            //                 });
+            //             }
             //         });
-            //     });		    
-            // });		   
-            
+            //     });
+            // });
+
             // $("#tblJobVacancy").on("change", '#cbJobFunction', function(e){
-            //     e.preventDefault();		    	
-            //     var active = $(this).val();		    	
-            //     var tempArr = active.split("&");		    	
-            //     var jobPostName = tempArr[0];	    		
-            //     var jobPostID = tempArr[1];	    		
-            //     console.log(jobPostName);		    	
-                
-            //     if(tempArr[2] === "active") {		    		
-            //         $(this).removeProp("selected");		    		
-            //         $(this).val(jobPostName+"&"+jobPostID+"&inactive");		    		
-            //         swal({		    			
-            //             title: "Are you sure to set " + jobPostName + " <b> Active </b>?",		    	type: "warning",		    			
-            //             html: true,		    			
-            //             showCancelButton: true,		    			
-            //             confirmButtonColor: "#EF5350",		    			
-            //             confirmButtonText: "Yes",		    			
-            //             cancelButtonText: "No",		    			
-            //             closeOnConfirm: false,		    			
-            //             closeOnCancel: true,		    			
-            //             showLoaderOnConfirm: true,		    		
+            //     e.preventDefault();
+            //     var active = $(this).val();
+            //     var tempArr = active.split("&");
+            //     var jobPostName = tempArr[0];
+            //     var jobPostID = tempArr[1];
+            //     console.log(jobPostName);
+
+            //     if(tempArr[2] === "active") {
+            //         $(this).removeProp("selected");
+            //         $(this).val(jobPostName+"&"+jobPostID+"&inactive");
+            //         swal({
+            //             title: "Are you sure to set " + jobPostName + " <b> Active </b>?",		    	type: "warning",
+            //             html: true,
+            //             showCancelButton: true,
+            //             confirmButtonColor: "#EF5350",
+            //             confirmButtonText: "Yes",
+            //             cancelButtonText: "No",
+            //             closeOnConfirm: false,
+            //             closeOnCancel: true,
+            //             showLoaderOnConfirm: true,
             //         }, function(isConfirm){
-            //             let url = "/SetJobPostActive";		    			
-            //             if(!isConfirm)		    				
-            //                 return;		    			
-            //             else {		    				
-            //                 $.ajax({			            		
-            //                     url: url,			            		
-            //                     method: "POST",			            		
+            //             let url = "/SetJobPostActive";
+            //             if(!isConfirm)
+            //                 return;
+            //             else {
+            //                 $.ajax({
+            //                     url: url,
+            //                     method: "POST",
             //                     data: {_token: "<?php echo csrf_token(); ?>", jobPostID: jobPostID},
-            //                     success: function(resp)	{			            			
-            //                         if(resp) {			            				 
-            //                             swal({								           
+            //                     success: function(resp)	{
+            //                         if(resp) {
+            //                             swal({
             //                                 title: "Success!",
             //                                 showConfirmButton: false,
             //                                 type: "success",
             //                                 timer: 2000
             //                             });
-                                        
-            //                             setTimeout(function(){
-            //                                 location.reload();
-            //                             }, 1500);
-            //                         }
-            //                     }
-            //                 });		    			
-            //             }		    		
-            //         });		    	
-            //     } else {		    		
-            //         $(this).removeProp("selected");		    		
-            //         $(this).val(jobPostName+"&"+jobPostID+"&active");		    		
-            //         swal({		    			
-            //             title: "Are you sure to set " + jobPostName + " <b> Not Active </b>?",
-            //             type: "warning",		    			
-            //             html: true,		    			
-            //             showCancelButton: true,		    			
-            //             confirmButtonColor: "#EF5350",		    			
-            //             confirmButtonText: "Yes",		    			
-            //             cancelButtonText: "No",		    			
-            //             closeOnConfirm: false,		    			
-            //             closeOnCancel: true,		    			
-            //             showLoaderOnConfirm: true,		    		
-            //         }, function(isConfirm){		    			
-            //             let url = "/SetJobPostNonActive";		    			
-                        
-            //             if(!isConfirm)		    				
-            //                 return;		    			
-            //             else {		    				
-            //                 $.ajax({			            		
-            //                     url: url,			            		
-            //                     method: "POST",			            		
-            //                     data: {_token: "<?php echo csrf_token(); ?>", jobPostID: jobPostID},
-            //                     success: function(resp)	{			            			
-            //                         if(resp) {			            				 
-            //                             swal({								            
-            //                                 title: "Success!",
-            //                                 showConfirmButton: false,
-            //                                 type: "success",
-            //                                 timer: 2000
-            //                             });	
+
             //                             setTimeout(function(){
             //                                 location.reload();
             //                             }, 1500);
             //                         }
             //                     }
             //                 });
-            //             }		    		
-            //         });		    	
-            //     }		    
+            //             }
+            //         });
+            //     } else {
+            //         $(this).removeProp("selected");
+            //         $(this).val(jobPostName+"&"+jobPostID+"&active");
+            //         swal({
+            //             title: "Are you sure to set " + jobPostName + " <b> Not Active </b>?",
+            //             type: "warning",
+            //             html: true,
+            //             showCancelButton: true,
+            //             confirmButtonColor: "#EF5350",
+            //             confirmButtonText: "Yes",
+            //             cancelButtonText: "No",
+            //             closeOnConfirm: false,
+            //             closeOnCancel: true,
+            //             showLoaderOnConfirm: true,
+            //         }, function(isConfirm){
+            //             let url = "/SetJobPostNonActive";
+
+            //             if(!isConfirm)
+            //                 return;
+            //             else {
+            //                 $.ajax({
+            //                     url: url,
+            //                     method: "POST",
+            //                     data: {_token: "<?php echo csrf_token(); ?>", jobPostID: jobPostID},
+            //                     success: function(resp)	{
+            //                         if(resp) {
+            //                             swal({
+            //                                 title: "Success!",
+            //                                 showConfirmButton: false,
+            //                                 type: "success",
+            //                                 timer: 2000
+            //                             });
+            //                             setTimeout(function(){
+            //                                 location.reload();
+            //                             }, 1500);
+            //                         }
+            //                     }
+            //                 });
+            //             }
+            //         });
+            //     }
             // });
 
-            
+
         });
     </script>
 </body>

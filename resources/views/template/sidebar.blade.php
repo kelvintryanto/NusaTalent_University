@@ -1,4 +1,4 @@
-<!-- Main sidebar -->	
+<!-- Main sidebar -->
 <div class="sidebar sidebar-main sidebar-fixed" style="background-color: white;">
     <div class="sidebar-content">
         <div class="sidebar-category sidebar-category-visible">
@@ -9,14 +9,14 @@
                     <!-- Main -->
                     <li class="{{ request()->is('Dashboard') ? 'active' : '' }}">
                         <a href="/Dashboard">
-                            <i class="icon-copy" style="color: black;"></i> 
+                            <i class="icon-copy" style="color: black;"></i>
                             <span style="color: #04518D;"> Dashboard </span>
                         </a>
                     </li>
 
                     <li>
                         <a href="#">
-                            <i class="icon-stack2" style="color: black;"></i> 
+                            <i class="icon-stack2" style="color: black;"></i>
                             <span style="color: #04518D;"> Job </span>
                         </a>
                         <ul>
@@ -26,23 +26,23 @@
                                 </a>
                             </li>
                             <li class="{{ request()->is('JobPost/Edit/*') || request()->is('JobPost/list-job-post') ? 'active' : '' }}">
-                                <a href="/JobPost/list-job-post"> 
+                                <a href="/JobPost/list-job-post">
                                     <span style="color: #04518D;"> List Job Post </span>
                                 </a>
                             </li>
                         </ul>
                     </li>
-    
+
                     <li class="{{ request()->is('Student') ? 'active' : '' }}">
                         <a href="/Student">
-                            <i class="icon-user" style="color: black;"></i> 
+                            <i class="icon-user" style="color: black;"></i>
                             <span style="color: #04518D;"> Student </span>
                         </a>
                     </li>
 
                     <li>
                         <a href="#">
-                            <i class="icon-copy" style="color: black;"></i> 
+                            <i class="icon-copy" style="color: black;"></i>
                             <span style="color: #04518D;"> Company </span>
                         </a>
                         <ul>

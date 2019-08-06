@@ -11,22 +11,23 @@
 |
 */
 
-Route::get('/', 
-	function()
-	{
-		return redirect('/Login');
-	}
+Route::get(
+    '/',
+    function () {
+        return redirect('/Login');
+    }
 );
 
-/* Main Controller */ 
+/* Main Controller */
 
-Route::get("/logout",
-	function()
-	{
-		return redirect('/Login');
-	}
+Route::get(
+    "/logout",
+    function () {
+        return redirect('/Login');
+    }
 );
 
+//checked MainController@showLoginPage 08/08/2019 10:46
 Route::get('/Login', "MainController@showLoginPage");
 
 Route::get("/Access/change-password", "MainController@ChangePasswordPage");
@@ -39,46 +40,53 @@ Route::get('/ManageJobPosts/ViewDetails/jpID={id}', "MainController@ViewDetails"
 
 Route::get("/ManageJobPosts/TalentReviewed/sID={id}", "MainController@TalentReviewed");
 
+// checked StudentController@showStudentDetailPage 08/08/2019 11:27
 Route::get('/Student', 'StudentController@showStudentDetailPage');
 
 Route::post('/get-export-data-student', 'MainController@getStudentExportData');
 
-Route::post('UpdateJobPost', 
-	['uses' => 'MainController@UpdateJobPost']
+Route::post(
+    'UpdateJobPost',
+    ['uses' => 'MainController@UpdateJobPost']
 );
 
-Route::post("/authorizedAccess", 
-	["uses" => "MainController@authorizedAccess"]
+Route::post(
+    "/authorizedAccess",
+    ["uses" => "MainController@authorizedAccess"]
 );
 
-Route::post("ChangePassword", 
-	["uses" => "MainController@ChangePassword"]
+Route::post(
+    "ChangePassword",
+    ["uses" => "MainController@ChangePassword"]
 );
 
-Route::post("/GetJobPostAnswers", 
-	["uses" => "MainController@GetJobPostAnswers"]
+Route::post(
+    "/GetJobPostAnswers",
+    ["uses" => "MainController@GetJobPostAnswers"]
 );
 
 Route::post("/UploadImage", "MainController@SaveProfilePicture");
 
 Route::post("/SetJobPostActive", "MainController@SetActive");
-
 /* End of Controller */
 
-/* Dashboard Controller */
 
+/* Dashboard Controller */
 Route::get('/Dashboard', 'DashboardController@index');
 
-Route::post('/Dashboard/get-chart-area-data', 
-	["uses" => "DashboardController@GetChartAreaData"]
+Route::post(
+    '/Dashboard/get-chart-area-data',
+    ["uses" => "DashboardController@GetChartAreaData"]
 );
 
-Route::post('/Dashboard/get-chart-bar-weekly-data', 
-	["uses" => "DashboardController@GetChartBarDataWeekly"]
+Route::post(
+    '/Dashboard/get-chart-bar-weekly-data',
+    ["uses" => "DashboardController@GetChartBarDataWeekly"]
 );
 
-Route::post('/Dashboard/get-chart-bar-monthly-data', 
-	["uses" => "DashboardController@GetChartBarDataMonthly"]
+Route::post(
+    '/Dashboard/get-chart-bar-monthly-data',
+    ["uses" => "DashboardController@GetChartBarDataMonthly"]
 );
 
 /* End of Dashboard */
@@ -87,16 +95,19 @@ Route::post('/Dashboard/get-chart-bar-monthly-data',
 
 Route::get('/JobPost/post-job', "JobPostController@ShowCreateJobPostPage");
 
-Route::post("/JobPost/create-job-post", 
-	["uses" => "JobPostController@createJobPost"]
+Route::post(
+    "/JobPost/create-job-post",
+    ["uses" => "JobPostController@createJobPost"]
 );
 
-Route::post("/update-job-post", 
-	["uses" => "JobPostController@updateJobPost"]
+Route::post(
+    "/update-job-post",
+    ["uses" => "JobPostController@updateJobPost"]
 );
 
-Route::post("/delete-job-post", 
-	["uses" => "JobPostController@deleteJobPost"]
+Route::post(
+    "/delete-job-post",
+    ["uses" => "JobPostController@deleteJobPost"]
 );
 
 Route::post("/update-job-post-status", "JobPostController@updateJobPostStatus");
@@ -106,32 +117,33 @@ Route::get('/JobPost/list-job-post', "JobPostController@showListJobPostPage");
 /* End of Controller */
 
 /* Company Controller */
-
 Route::post('/Company/sort-list-company', "CompanyController@SortListCompany");
-
 Route::get("/Company/add-company-page", "CompanyController@showAddCompanyPage");
 
+
+// FOKUS SAMA KEDUA FUNGSI INI DULU
+// rebuild CompanyController@addCompany 05/08/2019 16:40 table berubah
 Route::post("/Company/add-company", "CompanyController@AddCompany");
 
+// checked CompanyController@showListCompanyPage 02/08/2019 16:23
+// rebuild CompanyController@showListCompanyPage 05/08/2019 16:40 table berubah
 Route::get("/Company/list-company", "CompanyController@showListCompanyPage");
 
+
+
+
 Route::post('/Company/delete-company', "CompanyController@DeleteCompany");
-
 Route::get('/profile', "CompanyController@showCompanyProfilePage");
-
 Route::post('/Company/check-email', "CompanyController@CheckEmail");
-
 Route::get('/Company/edit-profile/cID={id}', "CompanyController@showEditCompanyProfilePage");
-
-Route::post("/update-profile", 
-	["uses" => "CompanyController@updateProfile"]
+Route::post(
+    "/update-profile",
+    ["uses" => "CompanyController@updateProfile"]
 );
-
-/* End of Controller */
+/* End of Company Controller */
 
 /* Event Controller */
 
 Route::get("/Event/denah", "EventsController@index");
 
 /* End of Controller */
-

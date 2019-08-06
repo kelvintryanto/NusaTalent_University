@@ -20,15 +20,15 @@
     <!-- /loader -->
 
     <!-- Navbar -->
-    <?php echo $data['navbar']; ?>
+    {!!$data['navbar']!!}
 	<!-- /navbar -->
 
     <!-- Page container -->
     <div class="page-container no-padding">
-        <div class="page-content bg-main-color">    
+        <div class="page-content bg-main-color">
 
-            <?php echo $data['sidebar']; ?>
-            
+            {!!$data['sidebar']!!}
+
             <div class="container-fluid" style="margin-top: 40px;margin-bottom: 3%;">
                 <div class="row">
                     <div class="col-md-3">
@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-md-offset-1"></div>
                     <div class="col-md-3">
-                        <h4 id="total"> 
+                        <h4 id="total">
                         </h4>
                         <h4 id="total-university">
                         </h4>
@@ -80,8 +80,8 @@
         </div>
     </div>
     <!-- /Page container -->
-    <?php echo $data['js']; ?>
+    {!!$data['js']!!}
     <script type="text/javascript" src="{{ url('assets/js/plugins/visualization/echarts/echarts.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/js/dashboard.js') }}"></script>
+    {{--    <script type="text/javascript" src="{{ url('assets/js/dashboard.js') }}"></script> --}}
 </body>
 </html>

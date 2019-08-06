@@ -13,7 +13,8 @@ use App\User;
 use App\Student;
 use Validator;
 
-class MainController extends Controller {
+class MainController extends Controller
+{
 
     private function checkSession()
     {
@@ -29,7 +30,7 @@ class MainController extends Controller {
         $data['css'] = view('css');
         $data['js'] = view('js');
         $data['navbar'] = view('template.navbar');
-    	$data['sidebar'] = view('template.sidebar');
+        $data['sidebar'] = view('template.sidebar');
         $data['footer'] = view('template.footer');
 
         return view('index')->with('data', $data);
@@ -40,11 +41,10 @@ class MainController extends Controller {
         $talent = new Talents;
         $resp = $talent->TalentReviewed($id);
 
-        if($resp)
+        if ($resp)
             echo json_encode("success");
         else
             echo json_encode("failed");
-
     }
 
     public function GetJobPostAnswers()
@@ -52,18 +52,16 @@ class MainController extends Controller {
         $jobPostID = $_POST['jobPostID'];
         $studentID = $_POST['studentID'];
 
-        if(!empty($jobPostID) && !empty($studentID))
-        {
+        if (!empty($jobPostID) && !empty($studentID)) {
             $dashboard = new Dashboard;
 
             $resp = $dashboard->GetJobPostAnswer($jobPostID, $studentID);
 
-            if(!is_null($resp))
+            if (!is_null($resp))
                 return $resp;
             else
                 return false;
-        }
-        else
+        } else
             return false;
     }
 
@@ -100,7 +98,7 @@ class MainController extends Controller {
     //                 );
     //                 array_push($dataStd, $data);
     //             }
-    //             else if($row->reviewed === 1 && $row->hired === 1 && $row->rejected === 0 || 
+    //             else if($row->reviewed === 1 && $row->hired === 1 && $row->rejected === 0 ||
     //                     $row->reviewed === 1 && $row->hired === 0 && $row->rejected === 1)
     //             {
     //                 $data = array(
@@ -136,29 +134,34 @@ class MainController extends Controller {
             $data['css'] = view('css');
             $data['js'] = view('js');
             $data['navbar'] = view('template.navbar')->with('univName', $user->getUnivName());
-        	$data['sidebar'] = view('template.sidebar');
+            $data['sidebar'] = view('template.sidebar');
             $data['footer'] = view('template.footer');
 
             return view('change-password')->with('data', $data);
         }
 
-         return redirect("/login");
+        return redirect("/login");
     }
 
+    // checked 02/08/2019 10:24
     public function authorizedAccess()
     {
         $email    = htmlspecialchars(Input::get('txtEmail'));
         $password = htmlspecialchars(Input::get('txtPassword'));
-        
+
+        //membuat object class baru User
         $user = new User();
 
+        //authenticateUser
         $resp = $user->authenticateUser($email, $password);
 
-        if($resp)
+        if ($resp)
             return redirect("/Dashboard");
         else
             return redirect("/Login")->with("failed", "Invalid email/password!");
     }
+    //checked finished 08/08/2019 10:44
+    // return redirect /Dashboard bermasalah, elsenya tidak bermasalah
 
     public function ChangePassword()
     {
@@ -168,20 +171,15 @@ class MainController extends Controller {
 
         $user = new User();
 
-        if($newPassword === $retypePassword)
-        {
+        if ($newPassword === $retypePassword) {
             $resp = $user->changePassword($oldPassword, $newPassword);
 
-            if($resp)
+            if ($resp)
                 return redirect("/Access/change-password")->with("success", "Successfully change password");
             else
                 return redirect("/Access/change-password")->with("failed", "Old password is not correct");
-        }
-        else
-        {
+        } else {
             return redirect("/Access/change-password")->with("failed", "New passwords do not match");
         }
-
     }
-    
 }
