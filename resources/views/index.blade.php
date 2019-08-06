@@ -22,7 +22,7 @@
 			<div class="content-wrapper">
 				<!-- Simple login form -->
 				<div class="row" style="width: 20%;height: 30px;margin-left: 40%;">
-				     @if (\Session::has('failed'))
+				     @if (Session::has('failed'))
 					 	<div class="alert alert-danger" id="alert">
 				            <a class="close" data-dismiss="alert">×</a>
 				            {!!Session::get('failed')!!}
@@ -31,16 +31,16 @@
 							setTimeout(function(){
 								$('#alert').fadeOut('slow');
 							}, 2000);
-				       	</script>		
+				       	</script>
 				    @endif
 				</div>
 				<form action="{{ action('MainController@authorizedAccess') }}" method="post" style="margin-top: 1.5%;">
 				    {{ csrf_field() }}
 					<div class="panel panel-body login-form" style="padding: 35px;width: 28%;height: 450px;">
 						<div class="text-center">
-							<h1 style="font-family: Roboto;color: #0F76BC;font-size: 32px;"> 
+							<h1 style="font-family: Roboto;color: #0F76BC;font-size: 32px;">
 								Career Center
-								<br/> 
+								<br/>
 								<b> Sign In </b>
 							</h1>
 						</div>

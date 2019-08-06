@@ -33,7 +33,8 @@ class MainController extends Controller
         $data['sidebar'] = view('template.sidebar');
         $data['footer'] = view('template.footer');
 
-        return view('index')->with('data', $data);
+        // return view('index')->with('data', $data);
+        return view('pages.login')->with('data', $data);
     }
 
     public function TalentReviewed($id)

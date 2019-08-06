@@ -14,7 +14,7 @@
 Route::get(
     '/',
     function () {
-        return redirect('/Login');
+        return redirect('/login');
     }
 );
 
@@ -23,12 +23,12 @@ Route::get(
 Route::get(
     "/logout",
     function () {
-        return redirect('/Login');
+        return redirect('/login');
     }
 );
 
 //checked MainController@showLoginPage 08/08/2019 10:46
-Route::get('/Login', "MainController@showLoginPage");
+Route::get('/login', "MainController@showLoginPage");
 
 Route::get("/Access/change-password", "MainController@ChangePasswordPage");
 
@@ -147,3 +147,5 @@ Route::post(
 Route::get("/Event/denah", "EventsController@index");
 
 /* End of Controller */
+
+Route::get("/pages/login", "PagesController@login");

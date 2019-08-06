@@ -1,0 +1,122 @@
+.div-forgot{
+	margin-top: 15px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+html, body{
+	width: 100%;
+	height: 100%;
+}
+
+body {
+  overflow:hidden;
+	background-image: url(/images/bg.jpg);
+  background -position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.panel-body{
+  background-color: #ffffffde !important;
+  border-radius: 20px !important;
+  width: 500px;
+  height: 490px;
+}
+
+.div-submit{
+  opacity: 1;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.content1{
+  margin-bottom: 0px !important;
+  font-family: signika;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.content4{
+  margin-top: 0px !important;
+  font-family: signika;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.content2{
+  font-family: roboto;
+  font-size: 18px;
+  padding-left: 60px;
+  padding-right : 60px;
+
+}
+
+.content5{
+  font-family: roboto;
+  font-size: 18px;
+  padding-left: 60px;
+  padding-right : 60px;
+  padding-bottom: 20px;
+}
+
+.btn{
+  font-family: helvetica;
+  text-transform: capitalize !important;
+  font-size: 24px !important;
+  color: white;
+}
+
+.btnlogin{
+  color: white;
+  background-color: #f0D446;
+  text-transform: capitalize;
+  font-weight: 550 !important;
+  border-radius: 10px !important;
+  padding-right: 60px;
+  padding-left: 60px;
+}
+
+.custom-footer{
+  margin-left: 10px;
+  position: fixed;
+  font-family: roboto;
+  bottom: 0px;
+  height: 20px;
+  width: 100%;
+  background-color: #04518D;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+}
+
+.login-form{
+  margin : auto auto auto auto !important;
+  width: 500px !important;
+  height: 490px;
+  
+}
+
+.page-container{
+  padding-top: 10px !important;
+  /*width: 0px !important;*/  
+}
+
+.form-control{
+  font-size: 18px !important;
+}
+
+.roboto{
+  font-size: 18px;
+}
+
+.text-center {
+  text-align: left !important;
+  margin-left : 60px;
+  margin-bottom: 40px;
+}
+
+.content{
+  padding: 0 0px 0px 0px !important; 
+}
