@@ -18,6 +18,6 @@
 <link href="/css/brands.css" rel="stylesheet" >
 <link href="/css/solid.css" rel="stylesheet" >
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<link rel="shortcut icon" href="https://campus.nusatalent.com/assets/icons/nusatalent.png">
 
 
-	

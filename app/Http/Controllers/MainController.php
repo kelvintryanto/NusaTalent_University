@@ -150,18 +150,22 @@ class MainController extends Controller
         $email    = htmlspecialchars(Input::get('txtEmail'));
         $password = htmlspecialchars(Input::get('txtPassword'));
 
+
         //membuat object class baru User
         $user = new User();
 
         //authenticateUser
         $resp = $user->authenticateUser($email, $password);
 
-        if ($resp)
-            return redirect("/Dashboard");
-        else
-            return redirect("/Login")->with("failed", "Invalid email/password!");
+        if ($resp) {
+            Session::put('email', $email);
+            return redirect("/dashboard");
+        } else {
+            return redirect("/login")->with("failed", "Invalid email/password!");
+        }
     }
-    //checked finished 08/08/2019 10:44
+    // checked finished 02/08/2019 10:44
+    // checked again 06/08/2019
     // return redirect /Dashboard bermasalah, elsenya tidak bermasalah
 
     public function ChangePassword()

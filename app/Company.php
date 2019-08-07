@@ -8,7 +8,7 @@ use DB;
 
 class Company extends Model
 {
-
+    public $table = 'company_user';
     private $_companyID;
     private $_upID;
     private $_cuID;
@@ -78,32 +78,21 @@ class Company extends Model
         return $this->_companyID;
     }
 
-    public function retrieveDataCompany($companyID)
+
+    public function retrieveDataCompany($univID)
     {
-        // $result = DB::table("career_fair AS cf")
-        //     ->where("cf.id", $companyID)
-        //     ->leftJoin("total_employees AS te", "te.id", "=", "cf.employees")
-        //     ->select(
-        //         "cf.name",
-        //         "cf.website",
-        //         "cf.email",
-        //         "cf.contact",
-        //         "cf.address",
-        //         "cf.location",
-        //         "cf.pic_hr",
-        //         "cf.hr_contact",
-        //         "cf.hr_email",
-        //         "cf.industry",
-        //         "cf.linkedin",
-        //         "cf.employees",
-        //         "cf.overview",
-        //         "cf.reason",
-        //         "cf.image_path",
-        //         "te.total"
-        //     )
-        //     ->get()
-        //     ->first();
-        // return $result;
+        $result = DB::table("university_partnership AS up")
+            ->where("univ_id", $univID)
+            ->leftJoin("company_profile AS cp", "cp.id", "=", "up.company_id")
+            ->select(
+                "cp.name as name",
+                "cp.website as website",
+                "cp.industry as industry",
+                "cp.linkedin as linkedin",
+            )
+            ->get()
+            ->toArray();
+        return $result;
     }
 
     public function AddCompany(

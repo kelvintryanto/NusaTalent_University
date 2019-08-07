@@ -20,6 +20,7 @@ Route::get(
 
 /* Main Controller */
 
+//checked 06/08/2019 16:24
 Route::get(
     "/logout",
     function () {
@@ -71,8 +72,9 @@ Route::post("/SetJobPostActive", "MainController@SetActive");
 /* End of Controller */
 
 
+// checked dashboard controller 06/08/2019 15:03
 /* Dashboard Controller */
-Route::get('/Dashboard', 'DashboardController@index');
+Route::get('/dashboard', 'DashboardController@index');
 
 Route::post(
     '/Dashboard/get-chart-area-data',
@@ -128,6 +130,7 @@ Route::post("/Company/add-company", "CompanyController@AddCompany");
 // checked CompanyController@showListCompanyPage 02/08/2019 16:23
 // rebuild CompanyController@showListCompanyPage 05/08/2019 16:40 table berubah
 Route::get("/Company/list-company", "CompanyController@showListCompanyPage");
+Route::get("/company", "CompanyController@index");
 
 
 

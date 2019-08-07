@@ -9,6 +9,7 @@ use App\Company;
 use App\Dashboard;
 // use App\Talents;
 use App\User;
+use Session;
 use Validator;
 
 class CompanyController extends Controller
@@ -19,6 +20,26 @@ class CompanyController extends Controller
         $user = new User();
 
         return $user->checkSession();
+    }
+
+    public function index()
+    {
+        if ($this->checkSession()) {
+            $company = new Company;
+            $data_company = $company->retrieveDataCompany(Session::get('univID'));
+
+            $data[] = array();
+            // $data['css'] = view('css');
+            // $data['js'] = view('js');
+            $data['navbar'] = view('includes.navbar');
+            // $data['sidebar'] = view('template.sidebar');
+            // $data['footer'] = view('template.footer');
+
+            $data['companyData'] = $data_company;
+            return view('company.index')->with('data', $data);
+        }
+
+        return redirect("/login");
     }
 
     public function CheckEmail()
@@ -84,7 +105,7 @@ class CompanyController extends Controller
             return view('Company.list-company')->with('data', $data);
         }
 
-        return redirect("/Login");
+        return redirect("/login");
     }
 
     public function showEditCompanyProfilePage($companyID)

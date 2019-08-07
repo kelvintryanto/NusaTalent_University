@@ -14,18 +14,15 @@ class DashboardController extends Controller
     //ada error di dashboard.js untuk chart
     public function index()
     {
-        $user = new User();
-        $dashboard = new Dashboard();
         $data[] = array();
-        $data['css'] = view('css');
-        $data['js'] = view('js');
-        $data['navbar'] = view('template.navbar')->with("univName", $user->getUnivName());
-        $data['sidebar'] = view('template.sidebar');
-        $data['footer'] = view('template.footer');
+        // $data['css'] = view('css');
+        // $data['js'] = view('js');
+        $data['navbar'] = view('includes.navbar');
+        // $data['sidebar'] = view('template.sidebar');
+        // $data['footer'] = view('template.footer');
 
-        // dd($data);
-
-        return view('Dashboard.index')->with('data', $data);
+        // return view('Dashboard.index')->with('data', $data);
+        return view('pages.dashboard')->with('data', $data);
     }
     // checked finished 02/08/2019 11:16
     // matikan dulu untuk dashboard.js

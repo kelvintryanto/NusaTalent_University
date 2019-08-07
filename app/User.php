@@ -114,7 +114,7 @@ class User extends Model
     {
         $oldData =
             DB::table("university_user")
-            ->select("id", "password", "salt")
+            ->select("id", "password", "salt", "up_id")
             ->where("email", "=", $email)
             ->get()
             ->toArray();
@@ -140,8 +140,9 @@ class User extends Model
             //mengambil nama universitas
             $univName =
                 DB::table("university_profile")
-                ->where("id", $oldData[0]->id)
+                ->where("id", $oldData[0]->up_id)
                 ->value("name");
+
 
             Session::put("univName", $univName);
             Session::put('univID', $oldData[0]->id);
