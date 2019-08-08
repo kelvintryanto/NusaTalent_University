@@ -3,7 +3,7 @@
 		<a class="navbar-brand " href="index.html"><img src="/images/logomini.png" class="img-navbar" alt="" ></a>
 	</div>
 
-	<div class="nav-menu1 text2 content-nonactive">Dashboard</div>
+	<div class="nav-menu1 text2 content-active">Dashboard</div>
 	<div class="nav-menu1 text2 content-nonactive" >Job</div>
 	<div class="nav-menu1 text2 content-nonactive">Student</div>
 	<div class="nav-menu1 text2 content-nonactive" >Company</div>
