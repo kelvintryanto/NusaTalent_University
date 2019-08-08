@@ -15,13 +15,8 @@ class DashboardController extends Controller
     public function index()
     {
         $data[] = array();
-        // $data['css'] = view('css');
-        // $data['js'] = view('js');
         $data['navbar'] = view('includes.navbar');
-        // $data['sidebar'] = view('template.sidebar');
-        // $data['footer'] = view('template.footer');
 
-        // return view('Dashboard.index')->with('data', $data);
         return view('pages.dashboard')->with('data', $data);
     }
     // checked finished 02/08/2019 11:16

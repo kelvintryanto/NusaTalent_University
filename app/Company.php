@@ -79,7 +79,7 @@ class Company extends Model
     }
 
 
-    public function retrieveDataCompany($univID)
+    public function RetrieveDataCompany($univID)
     {
         $result = DB::table("university_partnership AS up")
             ->where("univ_id", $univID)

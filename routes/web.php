@@ -28,6 +28,18 @@ Route::get(
     }
 );
 
+// fokus dulu sama PagesController setiap navigasi
+// KT rebuild company controller 07/08/2019 15:18
+// checked dashboard controller 06/08/2019 15:03
+/* Dashboard Controller */
+Route::get('/dashboard', 'DashboardController@index');
+Route::get('/company', 'CompanyController@showListCompanyPartnership');
+Route::get('/job','JobController@index');
+Route::get('/student','StudentController@index');
+Route::get('/event','EventController@index');
+
+Route::get("/company/add-company-page", "CompanyController@showAddCompanyPage");
+
 //checked MainController@showLoginPage 08/08/2019 10:46
 Route::get('/login', "MainController@showLoginPage");
 
@@ -72,9 +84,7 @@ Route::post("/SetJobPostActive", "MainController@SetActive");
 /* End of Controller */
 
 
-// checked dashboard controller 06/08/2019 15:03
-/* Dashboard Controller */
-Route::get('/dashboard', 'DashboardController@index');
+
 
 Route::post(
     '/Dashboard/get-chart-area-data',
@@ -129,10 +139,6 @@ Route::post("/Company/add-company", "CompanyController@AddCompany");
 // checked CompanyController@showListCompanyPage 02/08/2019 16:23
 // rebuild CompanyController@showListCompanyPage 05/08/2019 16:40 table berubah
 Route::get("/Company/list-company", "CompanyController@showListCompanyPage");
-
-// KT rebuild company controller 07/08/2019 15:18
-Route::get("/company", "CompanyController@index");
-Route::get("/company/add-company-page", "CompanyController@showAddCompanyPage");
 
 
 

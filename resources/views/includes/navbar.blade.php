@@ -3,12 +3,12 @@
 		<a class="navbar-brand " href="index.html"><img src="/images/logomini.png" class="img-navbar" alt="" ></a>
 	</div>
 
-	<div class="nav-menu1 text2 content-active">Dashboard</div>
-	<div class="nav-menu1 text2 content-nonactive" >Job</div>
-	<div class="nav-menu1 text2 content-nonactive">Student</div>
-	<div class="nav-menu1 text2 content-nonactive" >Company</div>
-	<div class="nav-menu1 text2 content-nonactive">Event</div>
-	<div class="nav-menu2 text2 content-nonactive">
+	<div class="nav-menu1 text2 {{ request()->is('dashboard') ? 'content-active' : 'content-nonactive' }}"><a href="/dashboard">Dashboard</a></div>
+	<div class="nav-menu1 text2 {{ request()->is('job') ? 'content-active' : 'content-nonactive' }}"><a href="/job">Job</a></div>
+	<div class="nav-menu1 text2 {{ request()->is('student') ? 'content-active' : 'content-nonactive' }}"><a href="/student">Student</a></div>
+	<div class="nav-menu1 text2 {{ request()->is('company') ? 'content-active' : 'content-nonactive' }}"><a href="/company">Company</a></div>
+	<div class="nav-menu1 text2 {{ request()->is('event') ? 'content-active' : 'content-nonactive' }}"><a href="/event">Event</a></div>
+	<div class="nav-menu2 text2 content-active">
 		<div class="has-feedback">
 			<input type="search" class="form-control box-search text2" placeholder="Search">
 			<div class="form-control-feedback" style="z-index: 0;">
@@ -19,9 +19,9 @@
 	<div class="nav-menu3 text2" style="margin-top: 15px;">|</div>
 	<div class="nav-menu1 text2">
 		<div class="dropdown">
-			<a href="#" class="text2 dropdown-toggle" data-toggle="dropdown" style="margin-top: 10px;"><img src="http://placehold.it/18x18" class="profile-image img-circle"> Username<span class="glyphicon glyphicon-chevron-down glyphicon-c " aria-hidden="true"></span></a>
+			<a href="#" class="text2 dropdown-toggle" data-toggle="dropdown" style="margin-top: 10px;"><img src="http://placehold.it/18x18" class="profile-image img-circle"> {{Session::get('univName')}}<span class="glyphicon glyphicon-chevron-down glyphicon-c " aria-hidden="true"></span></a>
 			<ul class="dropdown-menu">
-				<a class=" text3 margintitledropdown">Username</a>
+				<a class=" text3 margintitledropdown">{{Session::get('univName')}}</a>
 				<a class=" text4 margintitledropdown">hr@zengroup.co.id</a>
 				<br>
 				<a class=" text4 margintitledropdown">Human Resource</a>
