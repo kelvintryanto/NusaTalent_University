@@ -128,25 +128,20 @@ class CompanyController extends Controller
             return view('Company.edit-profile')->with('data', $data);
         }
 
-        return redirect("/Login");
+        return redirect("/login");
     }
 
     public function showAddCompanyPage()
     {
-        $user = new User();
-        $company = new Company();
         if ($this->checkSession()) {
-            $data[]          = array();
-            $data['css']     = view('css');
-            $data['js']      = view('js');
-            $data['navbar']  = view('template.navbar')->with('univName', $user->getUnivName());
-            $data['sidebar'] = view('template.sidebar');
-            $data['footer']  = view('template.footer');
-            $data['boothNumber'] = $company->GetBoothNumber();
+            $data[] = array();
+            $data['js'] = view('js');
+            $data['css'] = view('css');
+            $data['navbar'] = view('includes.navbar');
 
-            return view('Company.add-company')->with('data', $data);
+            return view('company.add-company')->with('data', $data);
         }
-        return redirect("/Login");
+        return redirect("/login");
     }
 
     public function ChangePassword()

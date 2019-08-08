@@ -7,9 +7,9 @@
     {{-- tadinya menggunakan huruf kapital, diganti menjadi huruf kecil semua untuk address --}}
 	<div class="nav-menu1 text2 {{ request()->is('dashboard') ? 'opacity1' : 'opacity2' }}"><a href="/dashboard">Dashboard</a></div>
 	<div class="nav-menu1 text2 {{ request()->is('Jobpost/post-job') ? 'opacity1' : 'opacity2' }}"><a href="/JobPost/post-job">Job</a></div>
-	<div class="nav-menu1 text2 {{ request()->is('student') ? 'opacity1' : 'opacity2' }}""><a href="/Student">Student</a></div>
-	<div class="nav-menu1 text2 {{ request()->is('company') ? 'opacity1' : 'opacity2' }}""><a href="/company">Company</a></div>
-	<div class="nav-menu1 text2 {{ request()->is('Jobpost/post-job') ? 'opacity1' : 'opacity2' }}""><a href="/Event">Event</a></div>
+	<div class="nav-menu1 text2 {{ request()->is('student') ? 'opacity1' : 'opacity2' }}" ><a href="/Student">Student</a></div>
+	<div class="nav-menu1 text2 {{ request()->is('company','company/*') ? 'opacity1' : 'opacity2' }}"><a href="/company">Company</a></div>
+	<div class="nav-menu1 text2 {{ request()->is('Jobpost/post-job') ? 'opacity1' : 'opacity2' }}"><a href="/Event">Event</a></div>
 	<div class="nav-menu2 text2 opacity1">
 		<div class="has-feedback">
 			<input type="search" class="form-control box-search" placeholder="Search">

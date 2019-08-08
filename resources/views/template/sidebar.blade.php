@@ -7,8 +7,8 @@
                 <ul class="navigation navigation-main navigation-accordion">
 
                     <!-- Main -->
-                    <li class="{{ request()->is('Dashboard') ? 'active' : '' }}">
-                        <a href="/Dashboard">
+                    <li class="{{ request()->is('dashboard') ? 'active' : '' }}">
+                        <a href="/dashboard">
                             <i class="icon-copy" style="color: black;"></i>
                             <span style="color: #04518D;"> Dashboard </span>
                         </a>

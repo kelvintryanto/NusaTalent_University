@@ -8,6 +8,11 @@ use Session;
 
 class Events extends Model
 {
+    public function __construct()
+    {
+        date_default_timezone_set("Asia/Bangkok");
+    }
+
  	public function RetrieveCareerFair()
     {
         $results = DB::table("career_fair")

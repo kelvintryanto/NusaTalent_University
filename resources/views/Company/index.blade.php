@@ -2,11 +2,12 @@
 @section('content')
 
 <body>
-<!-- Page Header -->
+    {!!$data['navbar']!!}
+    <!-- Page Header -->
 	<div class="page-header responsive">
 		<!-- Navbar -->
         {{-- @include('includes.navbar') --}}
-        {!!$data['navbar']!!}
+
 		<!-- /Navbar -->
 
         <!-- Page Container -->
@@ -14,9 +15,11 @@
             <div  class="row">
                 <h1>Company Page</h1>
 
-                <button class="btn btn-primary">
-                    Add Company
-                </button>
+                <a href="/company/add-company-page">
+                    <button class="btn btn-primary">
+                        Add Company
+                    </button>
+                </a>
             </div>
 
             <table class="table">
@@ -46,15 +49,9 @@
                 @endphp
                 @endforeach
                 </tbody>
-
             </table>
-            {{-- {{ $data['company']->links() }} --}}
-
         </div>
-
-
-
-	</div>
+    </div>
 <!-- /Page Header -->
 <body>
 @endsection

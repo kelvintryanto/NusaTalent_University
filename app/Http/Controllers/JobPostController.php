@@ -16,14 +16,13 @@ class JobPostController extends Controller
         return $user->checkSession();
     }
 
-    public function showListJobPostPage() 
+    public function showListJobPostPage()
     {
         $user = new User();
 
         $jp = new JobPost();
 
-        if ($this->checkSession()) 
-        {
+        if ($this->checkSession()) {
             $data[] = array();
             $data['css'] = view('css');
             $data['js'] = view('js');
@@ -34,17 +33,16 @@ class JobPostController extends Controller
             $data['totalJobPost'] = $jp->GetTotalJobPost();
             return view('JobPosts.manage-job-post')->with('data', $data);
         }
-        return redirect("/Login");
+        return redirect("/login");
     }
 
-    public function ShowCreateJobPostPage() 
+    public function ShowCreateJobPostPage()
     {
         $user = new User();
-    
+
         $jp = new JobPost();
-    
-        if ($this->checkSession()) 
-        {
+
+        if ($this->checkSession()) {
             $data[] = array();
             $data['css'] = view('css');
             $data['js'] = view('js');
@@ -60,18 +58,18 @@ class JobPostController extends Controller
         return redirect("/login");
     }
 
-    public function showEditJobPostPage($j) {
+    public function showEditJobPostPage($j)
+    {
         $user = new User();
         $jp = new JobPost();
-        if ($this->checkSession()) 
-        {    
+        if ($this->checkSession()) {
             $data[] = array();
             $data['css'] = view('css');
             $data['js'] = view('js');
             $data['navbar'] = view('template.navbar')->with('univName', $user->getUnivName());
             $data['sidebar'] = view('template.sidebar');
             $data['footer'] = view('template.footer');
-            
+
             $data['job_category'] = $jp->GetListCategory();
             $data['job_post'] = $jp->GetSingeJobPost($j);
             $data['job_post_id'] = $j;
@@ -79,10 +77,11 @@ class JobPostController extends Controller
             return view('JobPosts.edit-job-post')->with('data', $data);
         }
 
-       return redirect("/Login");
+        return redirect("/login");
     }
 
-    public function ViewDetails($jpID) {
+    public function ViewDetails($jpID)
+    {
         $data[] = array();
 
         $data['css'] = view('css');
@@ -94,7 +93,7 @@ class JobPostController extends Controller
         $data['jobPosts'] = $company->RetrieveDetailJobPost($jpID);
 
         return view('JobPosts.view-details')->with('data', $data);
-    }   
+    }
 
     public function edit($id)
     {
@@ -112,7 +111,8 @@ class JobPostController extends Controller
         return view('JobPosts.edit-job-post')->with('data', $data);
     }
 
-    public function updateJobPostStatus() {
+    public function updateJobPostStatus()
+    {
 
         $job_post_id     = htmlspecialchars(Input::get('job_post_id'));
         $status          = htmlspecialchars(Input::get('status'));
@@ -135,10 +135,9 @@ class JobPostController extends Controller
         }
 
         return json_encode($response);
-        
     }
 
-    public function createJobPost() 
+    public function createJobPost()
     {
         $jobPosition     = htmlspecialchars(Input::get('job_position'));
         $workLocation    = htmlspecialchars(Input::get('work_location'));
@@ -155,34 +154,46 @@ class JobPostController extends Controller
         $salaryMax       = htmlspecialchars(Input::get('salary_max'));
         $endDate         = "24-04-2019";
         $companyID =    htmlspecialchars(Input::get('txtCompanyID'));
-        
+
         $jp = new JobPost();
 
-        $resp = $jp->createJobPost($jobPosition, $workLocation, $jobCategory,$talentNeeded, 
-                                        $jobDescription, $jobRequirement, $employeeBenefit, $employeeSkill, $careerPath, 
-                                        $workingHours, $probationPeriod, $salaryMin, $salaryMax, $endDate, $companyID);
+        $resp = $jp->createJobPost(
+            $jobPosition,
+            $workLocation,
+            $jobCategory,
+            $talentNeeded,
+            $jobDescription,
+            $jobRequirement,
+            $employeeBenefit,
+            $employeeSkill,
+            $careerPath,
+            $workingHours,
+            $probationPeriod,
+            $salaryMin,
+            $salaryMax,
+            $endDate,
+            $companyID
+        );
 
         $response = '';
 
-        if ($resp) 
-        {
+        if ($resp) {
             $response = array(
                 'status' => 'success',
                 'msg' => 'Successfully add new job post',
                 'data' => $jobCategory
             );
-        } else 
-        {
+        } else {
             $response = array(
                 'status' => 'error',
                 'msg' => 'Failed add new',
             );
         }
-        
+
         return json_encode($response);
     }
 
-    public function UpdateJobPost() 
+    public function UpdateJobPost()
     {
         $jobPostID       = htmlspecialchars(Input::get('job_post_id'));
         $jobPosition     = htmlspecialchars(Input::get('job_position'));
@@ -202,9 +213,23 @@ class JobPostController extends Controller
 
         $jp = new JobPost();
 
-        $resp = $jp->updateJobPost($jobPostID, $jobPosition, $workLocation, $jobCategory, $talentNeeded, 
-                                        $jobDescription, $jobRequirement, $employeeBenefit, $employeeSkill, $careerPath, 
-                                        $workingHours, $probationPeriod, $salaryMin, $salaryMax, $endDate);
+        $resp = $jp->updateJobPost(
+            $jobPostID,
+            $jobPosition,
+            $workLocation,
+            $jobCategory,
+            $talentNeeded,
+            $jobDescription,
+            $jobRequirement,
+            $employeeBenefit,
+            $employeeSkill,
+            $careerPath,
+            $workingHours,
+            $probationPeriod,
+            $salaryMin,
+            $salaryMax,
+            $endDate
+        );
         $response = '';
 
         if ($resp) {
@@ -219,13 +244,14 @@ class JobPostController extends Controller
                 'msg' => 'Failed update',
             );
         }
-        
+
         return json_encode($response);
     }
 
-    public function deleteJobPost() {
+    public function deleteJobPost()
+    {
         $job_post_id       = htmlspecialchars(Input::get('job_post_id'));
-        
+
         $jp = new JobPost();
 
         $resp = $jp->deleteJobPost($job_post_id);
@@ -242,7 +268,7 @@ class JobPostController extends Controller
                 'msg' => 'Failed delete',
             );
         }
-        
+
         return json_encode($response);
     }
 }

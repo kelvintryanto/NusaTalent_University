@@ -1,4 +1,4 @@
-	<!-- Core -->
+<!-- Core -->
 <script type="text/javascript" src="{{ url('assets/js/plugins/loaders/pace.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('assets/js/core/libraries/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('assets/js/core/libraries/bootstrap.min.js') }}"></script>

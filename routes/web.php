@@ -94,7 +94,6 @@ Route::post(
 /* End of Dashboard */
 
 /* JobPost Controller */
-
 Route::get('/JobPost/post-job', "JobPostController@ShowCreateJobPostPage");
 
 Route::post(
@@ -120,7 +119,7 @@ Route::get('/JobPost/list-job-post', "JobPostController@showListJobPostPage");
 
 /* Company Controller */
 Route::post('/Company/sort-list-company', "CompanyController@SortListCompany");
-Route::get("/Company/add-company-page", "CompanyController@showAddCompanyPage");
+
 
 
 // FOKUS SAMA KEDUA FUNGSI INI DULU
@@ -130,8 +129,10 @@ Route::post("/Company/add-company", "CompanyController@AddCompany");
 // checked CompanyController@showListCompanyPage 02/08/2019 16:23
 // rebuild CompanyController@showListCompanyPage 05/08/2019 16:40 table berubah
 Route::get("/Company/list-company", "CompanyController@showListCompanyPage");
-Route::get("/company", "CompanyController@index");
 
+// KT rebuild company controller 07/08/2019 15:18
+Route::get("/company", "CompanyController@index");
+Route::get("/company/add-company-page", "CompanyController@showAddCompanyPage");
 
 
 

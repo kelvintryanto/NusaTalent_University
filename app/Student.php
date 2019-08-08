@@ -14,6 +14,7 @@ class Student extends Model
 
     public function __construct()
     {
+        date_default_timezone_set("Asia/Bangkok");
         $this->_user = new User();
     }
 
