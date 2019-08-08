@@ -168,7 +168,7 @@ $(function() {
     // ------------------------------
 
 	// Hide elements first
-	$(".sidebar, .navbar, .navbar-brand, .navbar-text, .navbar-nav > li, .page-header, .page-title, .page-header .heading-elements, .breadcrumb, .breadcrumb-elements > li, .content > .panel, .content .row > [class*=col-], .footer")
+	$(".sidebar, .navbar, .navbar-brand, .navbar-text, .navbar-nav > li, .page-header, .page-title, .page-header .heading-elements, .breadcrumb, .breadcrumb-elements > li, .content-wrapper > .panel, .content-wrapper .row > [class*=col-], .footer")
 		.css('opacity', 0);
 
 
@@ -176,7 +176,7 @@ $(function() {
     Pace.on('done', function () {
 
 		// Layout parts
-		$(".navbar, .navbar-brand, .navbar-text, .navbar-nav > li, .page-header, .page-title, .page-header .heading-elements, .breadcrumb, .breadcrumb-elements > li, .content > .panel, .content .row > [class*=col-], .footer")
+		$(".navbar, .navbar-brand, .navbar-text, .navbar-nav > li, .page-header, .page-title, .page-header .heading-elements, .breadcrumb, .breadcrumb-elements > li, .content-wrapper > .panel, .content-wrapper .row > [class*=col-], .footer")
 			.css('opacity', 1)
 			.velocity("transition.slideDownIn", {
 				stagger: 200,

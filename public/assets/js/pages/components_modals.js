@@ -103,7 +103,7 @@ $(function() {
     // Custom bootbox dialog with form
     $('#bootbox_form').on('click', function() {
         bootbox.dialog({
-                title: "This is a form in a modal.",
+                title: "EDIT JOB POST",
                 message: '<div class="row">  ' +
                     '<div class="col-md-12">' +
                         '<form class="form-horizontal">' +

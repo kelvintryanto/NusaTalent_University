@@ -30,7 +30,7 @@ class CompanyController extends Controller
 
             $data[] = array();
             // $data['css'] = view('css');
-            // $data['js'] = view('js');
+            $data['js'] = view('js');
             $data['navbar'] = view('includes.navbar');
             // $data['sidebar'] = view('template.sidebar');
             // $data['footer'] = view('template.footer');

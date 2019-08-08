@@ -112,7 +112,7 @@
 	color : #04518D !important;
 	font-size: 14px;
 	padding-left: 5px;
-	text-transform: capitalize !important;
+	text-transform: normal !important;
 	font-weight: normal !important;
 	cursor: pointer;
 }
@@ -368,9 +368,9 @@
 
 .textareaGI{
 	width: 100%;
-	border:unset;
-	border-bottom: 1px solid black;
-	max-height: 120px;
+    border: unset;
+    border-bottom: 1px solid #e6e6e6;
+    max-height: 120px;
 }
 
 .btngoback{
@@ -1175,6 +1175,7 @@ input:checked+label>.choices {
 
 .dropdown-menu{
 	width: 180px;
+	left: -26px;
 }
 
 .dropdown-b{
@@ -1694,21 +1695,6 @@ input:checked+label>.choices {
 	background-color: white !important;
 }
 
-.btn-editstudent{
-	background-color: #04518D;
-	font-size: 18px;
-	font-family: roboto;
-	color: white;
-	width: 239px;
-	height: 52px;
-	font-weight: normal;
-	text-transform: none;
-	border:unset !important;
-	border-radius: 20px;
-	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-	margin-left: 8%;
-	margin-top: 70px;
-}
 
 .btn-disqualified{
 	background-color: white;
@@ -1980,6 +1966,7 @@ input:checked+label>.choices {
 .icon{
 	margin-right: 5px;
 	color: #04518D;
+	margin-bottom: 4px;
 }
 
 .icon2{
@@ -2679,6 +2666,9 @@ input:checked+label>.choices {
 	}
 }
 
+
+/*UNIVERSITY*/
+
 @media screen and (max-width: 831px){
 	.col-row5{
 		margin-left: 10%;
@@ -2692,3 +2682,71 @@ input:checked+label>.choices {
 }
 
 
+.btn-update{
+	background-color: #246BB3;
+	box-shadow: 0px 2px 10px rgba(36, 107, 179, 0.25);
+	border-radius: 20px;
+	width: 154px;
+	height: 51px;
+	color: white;
+	font-size: 18px;
+	font-weight: 500;
+	font-family: roboto;
+	text-transform: capitalize;
+}
+
+.textareaAS{
+	width: 100%;
+    border: unset;
+    border-bottom: 1px solid #e6e6e6;
+    max-height: 120px;
+}
+
+.panel-k2{
+	width: 320px;
+	height: 376px;
+	border-radius: 20px;
+	background-color: #C8E6F0;
+	padding-top: 40px;
+	padding-left: 40px;
+}
+
+.panel-list{
+	display: flex;
+	background-color: white;
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-bottom: 20px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+	margin-right: 40px;
+	cursor: pointer;
+	margin-bottom: 40px !important;
+}
+
+.panel-list:hover{
+	background-color: #7BA6D1;
+	color: white;
+}
+
+.avatar-listjob {
+  vertical-align: middle;
+  width: 90px;
+  height: 90px;
+}
+
+.btn-add{
+	background-color: #246BB3;
+	font-size: 18px;
+	font-family: roboto;
+	color: white;
+	width: 239px;
+	height: 52px;
+	font-weight: normal;
+	text-transform: none;
+	border:unset !important;
+	border-radius: 20px;
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+	margin-left: 8%;
+	margin-top: 70px;
+}

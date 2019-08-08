@@ -79,7 +79,7 @@ $(function() {
     var eventColors = [
         {
             title: 'All Day Event',
-            start: '2014-11-01',
+            start: '2014/11/01',
             color: '#EF5350'
         },
         {
@@ -140,7 +140,7 @@ $(function() {
         {
             title: 'Click for Google',
             url: 'http://google.com/',
-            start: '2014-11-28',
+            start: '2014/11/28',
             color: '#FF7043'
         }
     ];
@@ -220,6 +220,7 @@ $(function() {
             center: 'title',
             right: 'month,basicWeek,basicDay'
         },
+        height: 340,
         defaultDate: '2014-11-12',
         editable: true,
         events: events
@@ -236,7 +237,6 @@ $(function() {
         defaultDate: '2014-11-12',
         defaultView: 'agendaWeek',
         editable: true,
-        businessHours: true,
         events: events
     });
 

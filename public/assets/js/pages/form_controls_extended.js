@@ -465,11 +465,7 @@ $(function() {
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('word'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         local: [
-            { word: "الإنجليزية" },
-            { word: "نعم" },
-            { word: "لا" },
-            { word: "مرحبا" },
-            { word: "أهلا" }
+            { word: "Hello world"}
         ]
     });
 

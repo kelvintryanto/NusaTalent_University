@@ -71,7 +71,7 @@
             endLabel: 'End date:',
             cancelLabel: 'Cancel',
             weekLabel: 'W',
-            //customRangeLabel: 'Custom Range',
+            customRangeLabel: 'Custom Range',
             daysOfWeek: moment.weekdaysMin(),
             monthNames: moment.monthsShort(),
             firstDay: moment.localeData().firstDayOfWeek()
@@ -116,6 +116,22 @@
                 '</div>' +
 
                 '<div class="ranges">' +
+                    '<div class="daterangepicker-inputs">' +
+                        '<div class="daterangepicker_input">' +
+                            '<span class="start-date-label"></span>' +
+                            '<input class="form-control" type="text" name="daterangepicker_start" value="" />' +
+                            '<i class="icon-calendar3"></i>' +
+                        '</div>' +
+                        '<div class="daterangepicker_input">' +
+                            '<span class="end-date-label"></span>' +
+                            '<input class="form-control" type="text" name="daterangepicker_end" value="" />' +
+                            '<i class="icon-calendar3"></i>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="range_inputs">' +
+                        '<button class="applyBtn" disabled="disabled" type="button"></button> ' +
+                        '<button class="cancelBtn" type="button"></button>' +
+                    '</div>' +
                 '</div>' +
             '</div>';
 
@@ -340,7 +356,7 @@
             for (range in this.ranges) {
                 list += '<li data-range-key="' + range + '">' + range + '</li>';
             }
-           // list += '<li data-range-key="' + this.locale.customRangeLabel + '">' + this.locale.customRangeLabel + '</li>';
+            list += '<li data-range-key="' + this.locale.customRangeLabel + '">' + this.locale.customRangeLabel + '</li>';
             list += '</ul>';
             this.container.find('.ranges').prepend(list);
         }

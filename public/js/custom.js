@@ -411,3 +411,18 @@ $(document).ready(function () {
 	  o.style.height = "1px";
 	  o.style.height = (9+o.scrollHeight)+"px";
 	}
+
+
+/*UNIVERSITY*/
+
+	$(document).ready(function(){
+		$(".update1").click(function(e){
+		 	$('#modal-detail-update').css('display','block');
+		 	$('#modal-detail').css('display','none');
+		});
+		
+		$(".close2").click(function(e){
+		 	$('#modal-detail-update').css('display','none');
+		 	$('#modal-detail').css('display','block');
+		});
+	})

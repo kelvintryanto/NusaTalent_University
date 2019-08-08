@@ -78,7 +78,7 @@ $(function() {
                         // Remove affix
                         $('#navbar-second').removeClass('navbar-affix-xs');
                         $(window).off('.affix');
-                        $('#navbar-second').removeData('bs.affix').removeClass('affix affix-top affix-bottom')
+                        $('#navbar-second').removeData('bs.affix').removeClass('affix affix-top affix-bottom');
                     }
                     else {
 
@@ -94,12 +94,12 @@ $(function() {
 
                         // When affixed
                         $('.navbar-affix-xs').on('affixed.bs.affix', function() {
-                            $(this).next('.page-container').css('margin-top', $(this).outerHeight())
+                            $(this).next('.page-header').css('margin-top', $(this).outerHeight())
                         });
 
                         // When on top
                         $('.navbar-affix-xs').on('affixed-top.bs.affix', function() {
-                            $(this).next('.page-container').css('margin-top', '')
+                            $(this).next('.page-header').css('margin-top', '');
                         });
                     }
                 }, 100);
@@ -108,19 +108,17 @@ $(function() {
         else {
             $('#navbar-second').removeClass('navbar-affix-xs');
             $(window).off('.affix');
-            $('#navbar-second').removeData('bs.affix').removeClass('affix affix-top affix-bottom')
+            $('#navbar-second').removeData('bs.affix').removeClass('affix affix-top affix-bottom');
         }
 
 
         // Main bottom
         if (vals == 'main_bottom') {
             $('#navbar-main').addClass('navbar-fixed-bottom');
-            $('body').addClass('navbar-bottom');
             $('.footer').hide();
         }
         else {
             $('#navbar-main').removeClass('navbar-fixed-bottom');
-            $('body').removeClass('navbar-bottom');
             $('.footer').show();
         }
     });
@@ -160,12 +158,12 @@ $(function() {
         // Multiple bottom
         if (vals == 'multiple_bottom') {
             $('body').addClass('navbar-bottom-md-xs');
-            $('#navbar-main, #navbar-second').wrapAll('<div class="navbar-fixed-bottom" />');
+            $('#navbar-main, #navbar-second').wrapAll('<div class="navbar-fixed-bottom navbar-multiple" />');
             $('.footer').hide();
         }
         else {
             $('body').removeClass('navbar-bottom-md-xs');
-            $('body').children('.navbar-fixed-bottom').children().unwrap();
+            $('body').find('.navbar-multiple').children().unwrap();
             $('.footer').show();
         }
     });

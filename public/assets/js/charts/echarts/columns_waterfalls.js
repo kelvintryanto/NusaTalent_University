@@ -516,19 +516,18 @@ $(function () {
                         type: 'shadow'
                     },
                     formatter: function (params) {
-                        var tar;
-                        if (params[1].value != '-') {
-                            tar = params[1];
-                        }
-                        else {
-                            tar = params[0];
-                        }
-                        return tar.name + '<br/>' + tar.seriesName + ': ' + tar.value;
+                        if(params[1].value == '-')
+                            params[1].value = 0;
+                        if(params[0].value == '-')
+                            params[0].value = 0;
+                        var total = params[1].value - params[0].value;
+                        return 'Total <br/>' + params[1].seriesName + ': ' + params[1].value + " <br/> " + params[0].seriesName + ': ' + params[0].value + "<br/> Total : " + total;
                     }
                 },
 
                 // Add legend
-                legend: {
+                legend: 
+                {
                     data: ['Expenses','Income']
                 },
 
@@ -566,13 +565,13 @@ $(function () {
                         type: 'bar',
                         stack: 'Total',
                         itemStyle: { normal: {label: {show: true, position: 'top'}}},
-                        data: [900, 345, 393, '-', '-', 135, 178, 286, '-', '-', '-']
+                        data: [900, 345, 393, 400, '-', 135, 178, 286, '-', '-', '-']
                     },
                     {
                         name: 'Expenses',
                         type: 'bar',
                         stack: 'Total',
-                        itemStyle: { normal: {label: {show: true, position: 'bottom'}}},
+                        itemStyle: { normal: {label: {show: true, position: 'top'}}},
                         data: ['-', '-', '-', 108, 154, '-', '-', '-', 119, 361, 203,300]
                     }
                 ]

@@ -23,23 +23,23 @@ function drawLineChart() {
 
     // Data
     var data = google.visualization.arrayToDataTable([
-        ['Year', 'Revenue', 'Total Revenue', 'Asd'],
-        ['2004',  1000,      400,             500],
-        ['2005',  1170,      460,             100],
-        ['2006',  660,       1120,             300],
-        ['2007',  1030,      540,             900]
+        ['Year', 'Viewed', 'Applied', 'Hired'],
+        ['2004',  300,      400, 200],
+        ['2005',  220,      460, 200],
+        ['2006',  330,       1120, 100],
+        ['2007',  1030,      540, 50]
     ]);
 
     // Options
     var options = {
         fontName: 'Roboto',
-        height: 400,
+        height: 500,
         curveType: 'function',
         fontSize: 12,
         chartArea: {
             left: '5%',
-            width: '90%',
-            height: 350
+            width: '50%',
+            height: 450
         },
         pointSize: 4,
         tooltip: {
@@ -49,7 +49,7 @@ function drawLineChart() {
             }
         },
         vAxis: {
-            title: 'Sales and Expenses',
+            title: 'Total users',
             titleTextStyle: {
                 fontSize: 13,
                 italic: false
@@ -61,10 +61,10 @@ function drawLineChart() {
             minValue: 0
         },
         legend: {
-            position: 'top',
+            position: 'right',
             alignment: 'center',
             textStyle: {
-                fontSize: 12
+                fontSize: 25
             }
         }
     };
