@@ -34,6 +34,7 @@
                 <tbody>
                 @php
                     $i = 1;
+                    $u = 1;
                 @endphp
                 @foreach ($data['companyData'] as $comp)
                 @php
