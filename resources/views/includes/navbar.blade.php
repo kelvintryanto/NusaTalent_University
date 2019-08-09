@@ -45,7 +45,7 @@
 					</ul>
 				</li>
 				<li class="dropdown-submenu">
-					<a class="text4" href="#"><i class="far fa-credit-card fa-lg" style="margin-right: 10px;"></i>Payment</a>
+					<a class="text4" href="/Access/change-password"><i class="far fa-credit-card fa-lg" style="margin-right: 10px;"></i>Change Password</a>
 					<ul class="dropdown-menu dropdown-b">
 						<li><a class="text4" href="#">Payment Information</a></li>
 						<li><a class="text4" href="#">Payment History</a></li>

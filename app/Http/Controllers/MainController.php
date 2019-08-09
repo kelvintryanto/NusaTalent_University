@@ -141,7 +141,7 @@ class MainController extends Controller
 
             $data['css'] = view('css');
             $data['js'] = view('js');
-            $data['navbar'] = view('template.navbar')->with('univName', $user->getUnivName());
+            $data['navbar'] = view('includes.navbar')->with('univName', $user->getUnivName());
             $data['sidebar'] = view('template.sidebar');
             $data['footer'] = view('template.footer');
 
