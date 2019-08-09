@@ -1,6 +1,6 @@
 <div class="nav">
 	<div class="nav-title">
-		<a class="navbar-brand " href="index.html"><img src="/images/logomini.png" class="img-navbar" alt="" ></a>
+		<a class="navbar-brand " href="/dashboard"><img src="/images/logomini.png" class="img-navbar" alt="" ></a>
 	</div>
 
 	<div class="nav-menu1 text2 {{ request()->is('dashboard','dashboard/*') ? 'content-active' : 'content-nonactive' }}"><a href="/dashboard">Dashboard</a></div>

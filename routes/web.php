@@ -43,7 +43,7 @@ Route::get('/dashboard', 'DashboardController@index');
 Route::get('/company', 'CompanyController@showListCompanyPage');
 Route::get('/job', 'JobPostController@showListJobPostPage');
 Route::get('/student', 'StudentController@showStudentDetailPage');
-Route::get('/event', 'EventController@index');
+Route::get('/event', 'EventsController@index');
 
 
 // draft Controller
