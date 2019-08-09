@@ -11,6 +11,12 @@ class StudentController extends Controller
     private $_student;
     private $_user;
 
+    private function checkSession()
+    {
+        $user = new User();
+
+        return $user->checkSession();
+    }
 
     public function __construct()
     {
@@ -22,18 +28,18 @@ class StudentController extends Controller
     public function showStudentDetailPage()
     {
 
-        $data[] = array();
+        // $data[] = array();
 
-        $data['css'] = view('css');
-        $data['js'] = view('js');
-        $data['navbar'] = view('template.navbar')->with('univName', $this->_user->getUnivName());
-        $data['sidebar'] = view('template.sidebar');
-        $data['footer'] = view('template.footer');
+        // $data['css'] = view('css');
+        // $data['js'] = view('js');
+        $data['navbar'] = view('includes.navbar');
+        // $data['sidebar'] = view('template.sidebar');
+        // $data['footer'] = view('template.footer');
 
         //check this method class
-        $data['students'] = $this->_student->getAllStudent();
+        // $data['students'] = $this->_student->getAllStudent();
 
-        return view('student.index')->with('data', $data);
+        return view('pages.allstudent')->with('data', $data);
         // return 'test';
     }
 }

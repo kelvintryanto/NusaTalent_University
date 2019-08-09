@@ -22,6 +22,28 @@ class CompanyController extends Controller
         return $user->checkSession();
     }
 
+    // rebuild CompanyController@showListCompanyPage 05/08/2019 16:40 table berubah
+    public function showListCompanyPage()
+    {
+        // $user = new User();
+        // $company = new Company();
+        if ($this->checkSession()) {
+            $data[] = array();
+            // $data['css'] = view('css');
+            // $data['js'] = view('js');
+            $data['navbar'] = view('includes.navbar');
+            // $data['sidebar'] = view('template.sidebar');
+            // $data['footer'] = view('template.footer');
+
+            // getListCompany isinya untuk $sortby
+            // $data['lstCompany'] = $company->GetListCompany("");
+            // $data['totalCompany'] = $company->GetTotalCompany();
+            return view('pages.companylist')->with('data', $data);
+        }
+
+        return redirect("/login");
+    }
+
     public function showListCompanyPartnership()
     {
         if ($this->checkSession()) {
@@ -77,29 +99,7 @@ class CompanyController extends Controller
             $data['footer'] = view('template.footer');
 
             $data['companyData'] = $data_company;
-            return view('Company.show-profile')->with('data', $data);
-        }
-
-        return redirect("/login");
-    }
-
-    // rebuild CompanyController@showListCompanyPage 05/08/2019 16:40 table berubah
-    public function showListCompanyPage()
-    {
-        $user = new User();
-        $company = new Company();
-        if ($this->checkSession()) {
-            $data[] = array();
-            $data['css'] = view('css');
-            $data['js'] = view('js');
-            $data['navbar'] = view('template.navbar')->with('univName', $user->getUnivName());
-            $data['sidebar'] = view('template.sidebar');
-            $data['footer'] = view('template.footer');
-
-            // getListCompany isinya untuk $sortby
-            $data['lstCompany'] = $company->GetListCompany("");
-            $data['totalCompany'] = $company->GetTotalCompany();
-            return view('Company.list-company')->with('data', $data);
+            return view('pages.companylist')->with('data', $data);
         }
 
         return redirect("/login");

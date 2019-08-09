@@ -16,22 +16,19 @@ class JobPostController extends Controller
         return $user->checkSession();
     }
 
+    // confirm job 1st page 09/08/2019 11:28
     public function showListJobPostPage()
     {
-        $user = new User();
-
-        $jp = new JobPost();
+        // $jp = new JobPost();
 
         if ($this->checkSession()) {
             $data[] = array();
-            $data['css'] = view('css');
-            $data['js'] = view('js');
-            $data['navbar'] = view('template.navbar')->with('univName', $user->getUnivName());
-            $data['sidebar'] = view('template.sidebar');
-            $data['footer'] = view('template.footer');
-            $data['lstJobPost'] = $jp->GetListJobPost();
-            $data['totalJobPost'] = $jp->GetTotalJobPost();
-            return view('JobPosts.manage-job-post')->with('data', $data);
+            $data['navbar'] = view('includes.navbar');
+            // $data['sidebar'] = view('template.sidebar');
+            // $data['footer'] = view('template.footer');
+            // $data['lstJobPost'] = $jp->GetListJobPost();
+            // $data['totalJobPost'] = $jp->GetTotalJobPost();
+            return view('pages.listjobpost')->with('data', $data);
         }
         return redirect("/login");
     }

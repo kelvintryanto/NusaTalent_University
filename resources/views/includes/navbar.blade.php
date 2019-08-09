@@ -3,12 +3,12 @@
 		<a class="navbar-brand " href="index.html"><img src="/images/logomini.png" class="img-navbar" alt="" ></a>
 	</div>
 
-	<div class="nav-menu1 text2 {{ request()->is('dashboard') ? 'content-active' : 'content-nonactive' }}"><a href="/dashboard">Dashboard</a></div>
-	<div class="nav-menu1 text2 {{ request()->is('job') ? 'content-active' : 'content-nonactive' }}"><a href="/job">Job</a></div>
-	<div class="nav-menu1 text2 {{ request()->is('student') ? 'content-active' : 'content-nonactive' }}"><a href="/student">Student</a></div>
-	<div class="nav-menu1 text2 {{ request()->is('company') ? 'content-active' : 'content-nonactive' }}"><a href="/company">Company</a></div>
-	<div class="nav-menu1 text2 {{ request()->is('event') ? 'content-active' : 'content-nonactive' }}"><a href="/event">Event</a></div>
-	<div class="nav-menu2 text2 content-active">
+	<div class="nav-menu1 text2 {{ request()->is('dashboard','dashboard/*') ? 'content-active' : 'content-nonactive' }}"><a href="/dashboard">Dashboard</a></div>
+	<div class="nav-menu1 text2 {{ request()->is('job','job/*') ? 'content-active' : 'content-nonactive' }}"><a href="/job">Job</a></div>
+	<div class="nav-menu1 text2 {{ request()->is('student','student/*') ? 'content-active' : 'content-nonactive' }}"><a href="/student">Student</a></div>
+	<div class="nav-menu1 text2 {{ request()->is('company','company/*') ? 'content-active' : 'content-nonactive' }}"><a href="/company">Company</a></div>
+	<div class="nav-menu1 text2 {{ request()->is('event','event/*') ? 'content-active' : 'content-nonactive' }}"><a href="/event">Event</a></div>
+	<div class="nav-menu2 text2">
 		<div class="has-feedback">
 			<input type="search" class="form-control box-search text2" placeholder="Search">
 			<div class="form-control-feedback" style="z-index: 0;">
@@ -53,7 +53,7 @@
 				</li>
 				<li class="divider"></li>
 				<li class="dropdown-submenu">
-					<a class="text4" href="#"><i class="fas fa-power-off fa-lg" style="margin-right: 10px;"></i>Logout</a>
+					<a class="text4" href="/logout"><i class="fas fa-power-off fa-lg" style="margin-right: 10px;"></i>Logout</a>
 					<ul class="dropdown-menu dropdown-b">
 						<li><a class="text4" href="#">Third level</a></li>
 						<li><a class="text4" href="#">Third level</a></li>

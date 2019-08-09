@@ -9,15 +9,25 @@ use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
+    private function checkSession()
+    {
+        $user = new User();
+
+        return $user->checkSession();
+    }
 
     //checked 02/08/2019 11:16
     //ada error di dashboard.js untuk chart
+    //confirm dashboard 1st page
     public function index()
     {
-        $data[] = array();
-        $data['navbar'] = view('includes.navbar');
+        if ($this->checkSession()) {
+            $data[] = array();
+            $data['navbar'] = view('includes.navbar');
 
-        return view('pages.dashboard')->with('data', $data);
+            return view('pages.dashboard')->with('data', $data);
+        }
+        return redirect('/login');
     }
     // checked finished 02/08/2019 11:16
     // matikan dulu untuk dashboard.js

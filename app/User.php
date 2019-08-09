@@ -79,7 +79,7 @@ class User extends Model
     // checked 02/08/2019 11:20
     public function checkSession()
     {
-        if (Session::has("univID"))
+        if (Session::has("univName"))
             return true;
         else
             return false;

@@ -12,6 +12,7 @@ use App\Talents;
 use App\User;
 use App\Student;
 use Validator;
+use GuzzleHttp\RedirectMiddleware;
 
 class MainController extends Controller
 {
@@ -25,16 +26,22 @@ class MainController extends Controller
 
     public function showLoginPage()
     {
-        $data[] = array();
+        // $data[] = array();
 
-        $data['css'] = view('css');
-        $data['js'] = view('js');
-        $data['navbar'] = view('template.navbar');
-        $data['sidebar'] = view('template.sidebar');
-        $data['footer'] = view('template.footer');
+        // $data['css'] = view('css');
+        // $data['js'] = view('js');
+        // $data['navbar'] = view('template.navbar');
+        // $data['sidebar'] = view('template.sidebar');
+        // $data['footer'] = view('template.footer');
 
+        // dd($this->checkSession());
         // return view('index')->with('data', $data);
-        return view('pages.login')->with('data', $data);
+        if ($this->checkSession()) {
+            return redirect('/dashboard');
+        } else {
+            // dd('udah masuk nih');
+            return view('pages.login');
+        }
     }
 
     public function TalentReviewed($id)

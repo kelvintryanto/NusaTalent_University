@@ -21,30 +21,37 @@ Route::get(
 /* Main Controller */
 
 //checked 06/08/2019 16:24
+
+
+//checked MainController@showLoginPage 08/08/2019 10:46
+Route::get('/login', "MainController@showLoginPage");
+Route::get("/Access/change-password", "MainController@ChangePasswordPage");
+
 Route::get(
     "/logout",
     function () {
+        Session::flush();
         return redirect('/login');
     }
 );
 
-// fokus dulu sama PagesController setiap navigasi
+// fokus dulu sama Controller setiap navigasi
 // KT rebuild company controller 07/08/2019 15:18
 // checked dashboard controller 06/08/2019 15:03
 /* Dashboard Controller */
 Route::get('/dashboard', 'DashboardController@index');
-Route::get('/company', 'CompanyController@showListCompanyPartnership');
-Route::get('/job','JobController@index');
-Route::get('/student','StudentController@index');
-Route::get('/event','EventController@index');
+Route::get('/company', 'CompanyController@showListCompanyPage');
+Route::get('/job', 'JobPostController@showListJobPostPage');
+Route::get('/student', 'StudentController@showStudentDetailPage');
+Route::get('/event', 'EventController@index');
+
+
+// draft Controller
+// Route::get('/JobPost/list-job-post', "JobPostController@showListJobPostPage");
+// kemungkinan draftController ga dipake
+
 
 Route::get("/company/add-company-page", "CompanyController@showAddCompanyPage");
-
-//checked MainController@showLoginPage 08/08/2019 10:46
-Route::get('/login', "MainController@showLoginPage");
-
-Route::get("/Access/change-password", "MainController@ChangePasswordPage");
-
 Route::get('/ManageCompany', 'MainController@CompanyProfile');
 
 Route::get('/JobPost/Edit/jpID={id}', "JobPostController@showEditJobPostPage");
@@ -123,7 +130,7 @@ Route::post(
 
 Route::post("/update-job-post-status", "JobPostController@updateJobPostStatus");
 
-Route::get('/JobPost/list-job-post', "JobPostController@showListJobPostPage");
+
 
 /* End of Controller */
 
