@@ -11,18 +11,19 @@
         <div class="content">
             <div class="page-container">
                 <div class="content-wrapper">
-                    <form action="index.html" class="login-form">
+                    <form action="{{ action('MainController@authorizedAccess') }}" method="post" class="login-form">
+                        {{ csrf_field() }}
                         <div class="panel panel-body">
                             <div class="text-center">
                                 <h3 class="content1">Are you ready to meet</h3>
                                 <h3 class="content4">your future employees?</h3>
                             </div>
-                            <div class="content5">  
-                                <input type="text" class="form-control" placeholder="Username">  
+                            <div class="content5">
+                                <input type="text" class="form-control" placeholder="hello@nusatalent.com" name="txtEmail">
                             </div>
 
                             <div class="content2">
-                                <input type="password" class="form-control" placeholder="Password">
+                                <input type="password" class="form-control" placeholder="**********" name="txtPassword">
                             </div>
 
                             <!-- Forgot Password -->
@@ -41,6 +42,7 @@
                             </div>
                             <!-- /Sign In -->
 
+
                             <!-- Join Us -->
                              <div class="form-group div-forgot roboto">
                                 <div class="row">
@@ -50,9 +52,9 @@
                                 </div>
                             </div>
                             <!-- /Join Us -->
-                        </div>       
+                        </div>
                     </form>
-                </div>     
+                </div>
             </div>
         </div>
         <!-- /Panel Login -->

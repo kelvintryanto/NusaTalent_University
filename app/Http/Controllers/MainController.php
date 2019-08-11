@@ -157,7 +157,6 @@ class MainController extends Controller
         $email    = htmlspecialchars(Input::get('txtEmail'));
         $password = htmlspecialchars(Input::get('txtPassword'));
 
-
         //membuat object class baru User
         $user = new User();
 
