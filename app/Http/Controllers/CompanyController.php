@@ -23,7 +23,6 @@ class CompanyController extends Controller
         return $user->checkSession();
     }
 
-    // rebuild CompanyController@showListCompanyPage 05/08/2019 16:40 table berubah
     public function showListCompanyPage()
     {
         // $user = new User();
@@ -38,9 +37,23 @@ class CompanyController extends Controller
             // $data['totalCompany'] = $company->GetTotalCompany();
             return view('pages.companylist')->with('data', $data);
         }
-
         return redirect("/login");
     }
+
+    public function showAddCompanyPage()
+    {
+        if ($this->checkSession()) {
+            $data[] = array();
+            // $data['js'] = view('js');
+            // $data['css'] = view('css');
+            $data['navbar'] = view('includes.navbar');
+
+            return view('pages.addcompany')->with('data', $data);
+        }
+        return redirect("/login");
+    }
+
+    // 13/08/2019
 
     public function showListCompanyPartnership()
     {
@@ -123,19 +136,6 @@ class CompanyController extends Controller
             return view('Company.edit-profile')->with('data', $data);
         }
 
-        return redirect("/login");
-    }
-
-    public function showAddCompanyPage()
-    {
-        if ($this->checkSession()) {
-            $data[] = array();
-            $data['js'] = view('js');
-            $data['css'] = view('css');
-            $data['navbar'] = view('includes.navbar');
-
-            return view('company.add-company')->with('data', $data);
-        }
         return redirect("/login");
     }
 

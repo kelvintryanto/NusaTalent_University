@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="col-row5">
-                        <h3>Total Data : <span id="total_records"></span></h3>
+                        <h3>Total Data : {{$data['listCompany']->total()}}</h3>
                         @foreach ($data['listCompany'] as $company)
                             <div class="panel-list">
                                 <div style="margin-right: 60px;">
@@ -98,7 +98,10 @@
                                     </div>
 
                                     <div style="display: flex; justify-content: space-between; width: 80%; margin-top: 20px;">
-                                        <div>
+                                        {{-- Company Viewed dan Company Favorited sudah tidak ada --}}
+                                        {{--  --}}
+
+                                        {{-- <div>
                                             <label class="text13">710</label>
                                             <label class="text13">Viewed</label>
                                         </div>
@@ -106,18 +109,23 @@
                                         <div>
                                             <label class="text13">127</label>
                                             <label class="text13">Favorited</label>
-                                        </div>
+                                        </div> --}}
 
                                         <div>
-                                            <label class="text13">10</label>
+                                        @if ($company->amount)
+                                            <label class="text13">{{$company->amount}}</label>
                                             <label class="text13">Job&nbsp;Post(s)</label>
+                                        @else
+                                            <label class="text13">No Job Post</label>
+                                        @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                        {{$data['listCompany']->links()}}
-
+                        {{-- <div class="bootpag-prev-next"> --}}
+                            {{$data['listCompany']->links()}}
+                        {{-- </div> --}}
 
                         {{-- <div class="panel-list">
                             <div style="margin-right: 60px;">

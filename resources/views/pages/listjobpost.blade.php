@@ -56,8 +56,8 @@
 
 
 					<div class="col-lg-4 col-sm-6 col-md-5" style="display: flex; justify-content: flex-end; margin-right: 3%;">
-						<div style="margin-right: 10px;"><a class="text left20" href="#"><i class="fas fa-sort-amount-down"></i></a></div>
-						<div style="margin-right: 10px;"><a class="text left20" href="#"><i class="fas fa-sort-amount-down-alt"></i></a></div>
+						<div style="margin-right: 10px;" title="descending"><a class="text left20" href="#"><i class="fas fa-sort-amount-down"></i></a></div>
+                        <div style="margin-right: 10px;" title="ascending"><a class="text left20" href="#"><i class="fas fa-sort-amount-down-alt"></i></a></div>
 						<div>
 							<label class="text">Sort by:</label>
 							<select class="dropdown-li text14" id="filter" name="filter">
@@ -280,7 +280,8 @@
 
 		</div>
 
-		<div style="display: flex; justify-content: center;">
+        <div style="display: flex; justify-content: center;">
+            {{-- lihat bootpag-prev-next ada js mana? --}}
 			<div class="text-center bootpag-prev-next"></div>
 		</div>
 

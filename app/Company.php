@@ -24,10 +24,15 @@ class Company extends Model
     {
         $result = DB::table('university_partnership as up')
             ->join('company_profile as cp', 'up.company_id', '=', 'cp.id')
-            ->where('univ_id', $univID)
+            ->leftjoin(DB::raw("(select cp_id, count(cp_id) as amount
+                                from job_post
+                                where event_id is null
+                                group by cp_id) as jp"), "jp.cp_id", "=", "cp.id")
+            ->where([['univ_id', $univID], ['up.status', '=', '1']])
             ->select('*')
-            ->paginate(1);
+            ->paginate();
 
+        // dd($result);
         return $result;
     }
 
@@ -250,13 +255,13 @@ class Company extends Model
             $results =
                 DB::table('university_partnership AS up')
                 ->join('career_fair AS cf', 'cf.id', '=', 'up.company_id')
-                // ->leftJoin(DB::raw("(SELECT SUM(CASE WHEN sjpe.viewed = 1 THEN 1 ELSE 0 END) AS totalViewed,
-                //                         SUM(CASE WHEN sjpe.applied = 1 THEN 1 ELSE 0 END) AS totalApplied,
-                //                         SUM(CASE WHEN sjpe.favorite = 1 THEN 1 ELSE 0 END) AS totalFavorite,
-                //                         SUM(CASE WHEN jpe.id IS NOT NULL THEN 1 ELSE 0 END) AS totalJobPost,
-                //                         jpe.cf_id
-                //                     FROM jp_event AS jpe
-                //                     GROUP BY jpe.cf_id) AS jpe"), "jpe.cf_id", "=", "cf.id")
+                ->leftJoin(DB::raw("(SELECT SUM(CASE WHEN sjpe.viewed = 1 THEN 1 ELSE 0 END) AS totalViewed,
+                                        SUM(CASE WHEN sjpe.applied = 1 THEN 1 ELSE 0 END) AS totalApplied,
+                                        SUM(CASE WHEN sjpe.favorite = 1 THEN 1 ELSE 0 END) AS totalFavorite,
+                                        SUM(CASE WHEN jpe.id IS NOT NULL THEN 1 ELSE 0 END) AS totalJobPost,
+                                        jpe.cf_id
+                                    FROM jp_event AS jpe
+                                    GROUP BY jpe.cf_id) AS jpe"), "jpe.cf_id", "=", "cf.id")
                 ->leftJoin("booth_event AS be", "be.event_id", "=", "cf.id")
                 // ->leftJoin("company_user AS cu", "cu.cf_id", "=", "cf.id")
                 ->select(

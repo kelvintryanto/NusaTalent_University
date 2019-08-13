@@ -54,10 +54,6 @@
 				<li class="divider"></li>
 				<li class="dropdown-submenu">
 					<a class="text4" href="/logout"><i class="fas fa-power-off fa-lg" style="margin-right: 10px;"></i>Logout</a>
-					<ul class="dropdown-menu dropdown-b">
-						<li><a class="text4" href="#">Third level</a></li>
-						<li><a class="text4" href="#">Third level</a></li>
-					</ul>
 				</li>
 			</ul>
 		</div>

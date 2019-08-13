@@ -10,58 +10,38 @@
 
 	<!-- Page Container -->
 	<div class="page-container">
-        <ul>
-            <li>container sebaiknya menggunakan class bootstrap, seperti contohnya di bawah ini menggunakan container</li>
-            <li>Universitas hanya bisa melihat student yang ada di dalam kampusnya</li>
-            <li>Apakah universitas dapat merubah profil yang dimiliki oleh mahasiswanya?</li>
-            <li>Saran : kampus hanya dapat memverifikasi bahwa mahasiswa tersebut benar dari universitas tersebut dengan logo verified_university</li>
-        </ul>
+		
 		<div class="nav-ah-1">
 			<div class="page-title">
 				<h5>
-					<span class="title">All Students</span>
+					<span class="title">All Visitor</span> 
 					<small class="display-block subtitle">Lorem ipsum dolor sit amet,<br>consectetur adipiscing elit. </small>
 				</h5>
 			</div>
-
-			<button class="btn-add" style="margin-right: 3%;">Add Student</button>
+	
+			<button class="btn-add" style="margin-right: 3%;">Add Visitor</button>
 		</div>
 
 		<div class="nav-ah-2">
 			<div style="display: flex" >
-				<div class="panel-k" style="height: 100%;">
-                    <ul>
-                        <li>Tombol university tidak diperlukan, karena Student yang ditampilkan hanyalah mahasiswa yang terdapat di kampus mereka</li>
-                        <li>Register Date? Apakah tidak tahunnya saja? universitas memanage begitu banyak mahasiswa, bagaimana melihat tanggalnya?</li>
-                        <li>Saran filter Register Date : menggunakan tahun dan bulan saja</li>
-                        <li>Enrollment Batch apa ya?</li>
-                        <li>Status?</li>
-                        <li>tombol reset harus bisa dihover supaya kelihatan bisa diklik</li>
-                    </ul>
+				<div class="panel-l">
 					<form>
 						<div class="form-group">
-	                        <label class="text">University</label>
+	                        <label class="text">University</label>    
 	                        <select class="form-control form-control-a text14" id="university" placeholder="University" name="university" style="width: 80%;">
 	                        	<option class="text14">hahha</option>
 	                        </select>
 	                    </div>
 
 	                    <div class="form-group">
-	                        <label class="text">Register Date</label>
+	                        <label class="text">Register Date</label> 
 	                       	<input type="date" class="form-control form-control-a text14 form-bottom" id="registerdate" placeholder="Register Date" name="registerdate" style="width: 60%;">
 	                    </div>
 
 	                    <div class="form-group">
-	                        <label class="text">Enrollment Batch</label>
+	                        <label class="text">Event Knowledge</label>    
 	                        <select class="form-control form-control-b text14" id="enrollmentbatch" placeholder="Enrollment Batch" name="enrollmentbatch" style="width: 50%;">
-	                        	<option class="text14"></option>
-	                        </select>
-	                    </div>
-
-	                     <div class="form-group">
-	                        <label class="text">Status</label>
-	                        <select class="form-control form-control-b text14" id="status" placeholder="Status" name="status" style="width: 50%;">
-	                        	<option class="text14"></option>
+	                        	<option class="text14">Instagram</option>
 	                        </select>
 	                    </div>
 
@@ -72,18 +52,19 @@
 	                </form>
 				</div>
 			</div>
-
+			
 			<div style="display: flex; flex-flow: column; width: 100%">
 				<div style="display: flex; justify-content: space-around; margin-left: 25px;">
 					<div class=" col-lg-7 col-sm-6 col-md-6 form-group">
 		            	<!-- <label for="search" class="sr-only">Search Applicants</label> -->
-		            	<input type="text" class="form-control text2" name="search" id="search" placeholder="Search for Student">
+		            	<input type="text" class="form-control text2" name="search" id="search" placeholder="Search for Visitor">
 		              	<span class="glyphicon glyphicon-search form-control-feedback" style="color: #246BB3; z-index: 0;"></span>
-                     </div>
-
+			         </div>
+		    
+				
 					<div class="col-lg-4 col-sm-6 col-md-5" style="display: flex; justify-content: flex-end; margin-right: 3%;">
-						<div style="margin-right: 10px;" title="descending"a class="text left20" href="#"><i class="fas fa-sort-amount-down"></i></a></div>
-						<div style="margin-right: 10px;" title="ascending"><a class="text left20" href="#"><i class="fas fa-sort-amount-down-alt"></i></a></div>
+						<div style="margin-right: 10px;"><a class="text left20" href="#"><i class="fas fa-sort-amount-down"></i></a></div>
+						<div style="margin-right: 10px;"><a class="text left20" href="#"><i class="fas fa-sort-amount-down-alt"></i></a></div>
 						<div>
 							<label class="text">Sort by:</label>
 							<select class="dropdown-li text14" id="filter" name="filter">
@@ -91,185 +72,180 @@
 				            </select>
 				        </div>
 					</div>
-                </div>
-
-				<div class="col-row5">
-                    <h1>Total Data : {{$data['students']->total()}}</h1>
-                    @foreach ($data['students'] as $student)
-                        <a href="#closemodal1" rel="modal:open">
-                            <button class="btn btninformasi column-c">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div><label class="text5">{{$student->fullName}}</label></div>
-                                        <div style="margin-top: -10px"><label class="text4">Summary</label></div>
-                                    </div>
-                                </div>
-
-                                <div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
-                                    <label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>{{$student->universityName}}</label>
-                                </div>
-
-                                <div style="display: flex; justify-content: flex-end;">
-                                <label class="text4" style="float: right;">{{date_format(date_create($student->registerDate),"d/m/Y")}}</label>
-                                </div>
-                            </button>
-                        </a>
-                    @endforeach
-
-					{{-- <a href="#closemodal1" rel="modal:open">
-					<button class="btn btninformasi column-c">
-						<div class="row">
-							<div class="col-lg-3">
-								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
-							</div>
-							<div class="col-lg-6">
-								<div><label class="text5">John Dae</label></div>
-								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
-							</div>
-						</div>
-
-						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
-							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
-						</div>
-
-						<div style="display: flex; justify-content: flex-end;">
-							<label class="text4" style="float: right;">21/02/2019</label>
-						</div>
-					</button></a>
-
-					<a href="#closemodal1" rel="modal:open">
-					<button class="btn btninformasi column-c">
-						<div class="row">
-							<div class="col-lg-3">
-								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
-							</div>
-							<div class="col-lg-6">
-								<div><label class="text5">John Dae</label></div>
-								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
-							</div>
-						</div>
-
-						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
-							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
-						</div>
-
-						<div style="display: flex; justify-content: flex-end;">
-							<label class="text4" style="float: right;">21/02/2019</label>
-						</div>
-					</button></a>
-
-					<a href="#closemodal1" rel="modal:open">
-					<button class="btn btninformasi column-c">
-						<div class="row">
-							<div class="col-lg-3">
-								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
-							</div>
-							<div class="col-lg-6">
-								<div><label class="text5">John Dae</label></div>
-								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
-							</div>
-						</div>
-
-						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
-							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
-						</div>
-
-						<div style="display: flex; justify-content: flex-end;">
-							<label class="text4" style="float: right;">21/02/2019</label>
-						</div>
-					</button></a>
-
-					<a href="#closemodal1" rel="modal:open">
-					<button class="btn btninformasi column-c">
-						<div class="row">
-							<div class="col-lg-3">
-								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
-							</div>
-							<div class="col-lg-6">
-								<div><label class="text5">John Dae</label></div>
-								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
-							</div>
-						</div>
-
-						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
-							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
-						</div>
-
-						<div style="display: flex; justify-content: flex-end;">
-							<label class="text4" style="float: right;">21/02/2019</label>
-						</div>
-					</button></a>
-
-					<a href="#closemodal1" rel="modal:open">
-					<button class="btn btninformasi column-c">
-						<div class="row">
-							<div class="col-lg-3">
-								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
-							</div>
-							<div class="col-lg-6">
-								<div><label class="text5">John Dae</label></div>
-								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
-							</div>
-						</div>
-
-						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
-							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
-						</div>
-
-						<div style="display: flex; justify-content: flex-end;">
-							<label class="text4" style="float: right;">21/02/2019</label>
-						</div>
-					</button></a>
-					<a href="#closemodal1" rel="modal:open">
-					<button class="btn btninformasi column-c">
-						<div class="row">
-							<div class="col-lg-3">
-								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
-							</div>
-							<div class="col-lg-6">
-								<div><label class="text5">John Dae</label></div>
-								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
-							</div>
-						</div>
-
-						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
-							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
-						</div>
-
-						<div style="display: flex; justify-content: flex-end;">
-							<label class="text4" style="float: right;">21/02/2019</label>
-						</div>
-					</button></a>
-
-					<a href="#closemodal1" rel="modal:open">
-					<button class="btn btninformasi column-c">
-						<div class="row">
-							<div class="col-lg-3">
-								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
-							</div>
-							<div class="col-lg-6">
-								<div><label class="text5">John Dae</label></div>
-								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
-							</div>
-						</div>
-
-						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
-							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
-						</div>
-
-						<div style="display: flex; justify-content: flex-end;">
-							<label class="text4" style="float: right;">21/02/2019</label>
-						</div>
-                    </button></a> --}}
-                    <br>
-                    {{$data['students']->links()}}
 				</div>
 
-				 <!-- Modal button See Details-->
-				<div id="closemodal1" class="modal modal-detail">
+				<div class="col-row5">
+					<a href="#closemodal1" rel="modal:open">
+					<button class="btn btninformasi column-c">
+						<div class="row">
+							<div class="col-lg-3">
+								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
+							</div>
+							<div class="col-lg-6">
+								<div><label class="text5">John Dae</label></div>
+								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
+							</div>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
+							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end;">
+							<label class="text4" style="float: right;">21/02/2019</label>
+						</div>
+					</button></a>
+
+					<a href="#closemodal1" rel="modal:open">
+					<button class="btn btninformasi column-c">
+						<div class="row">
+							<div class="col-lg-3">
+								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
+							</div>
+							<div class="col-lg-6">
+								<div><label class="text5">John Dae</label></div>
+								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
+							</div>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
+							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end;">
+							<label class="text4" style="float: right;">21/02/2019</label>
+						</div>
+					</button></a>
+
+					<a href="#closemodal1" rel="modal:open">
+					<button class="btn btninformasi column-c">
+						<div class="row">
+							<div class="col-lg-3">
+								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
+							</div>
+							<div class="col-lg-6">
+								<div><label class="text5">John Dae</label></div>
+								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
+							</div>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
+							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end;">
+							<label class="text4" style="float: right;">21/02/2019</label>
+						</div>
+					</button></a>
+
+					<a href="#closemodal1" rel="modal:open">
+					<button class="btn btninformasi column-c">
+						<div class="row">
+							<div class="col-lg-3">
+								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
+							</div>
+							<div class="col-lg-6">
+								<div><label class="text5">John Dae</label></div>
+								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
+							</div>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
+							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end;">
+							<label class="text4" style="float: right;">21/02/2019</label>
+						</div>
+					</button></a>
+
+					<a href="#closemodal1" rel="modal:open">
+					<button class="btn btninformasi column-c">
+						<div class="row">
+							<div class="col-lg-3">
+								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
+							</div>
+							<div class="col-lg-6">
+								<div><label class="text5">John Dae</label></div>
+								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
+							</div>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
+							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end;">
+							<label class="text4" style="float: right;">21/02/2019</label>
+						</div>
+					</button></a>
+
+					<a href="#closemodal1" rel="modal:open">
+					<button class="btn btninformasi column-c">
+						<div class="row">
+							<div class="col-lg-3">
+								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
+							</div>
+							<div class="col-lg-6">
+								<div><label class="text5">John Dae</label></div>
+								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
+							</div>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
+							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end;">
+							<label class="text4" style="float: right;">21/02/2019</label>
+						</div>
+					</button></a>
+					<a href="#closemodal1" rel="modal:open">
+					<button class="btn btninformasi column-c">
+						<div class="row">
+							<div class="col-lg-3">
+								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
+							</div>
+							<div class="col-lg-6">
+								<div><label class="text5">John Dae</label></div>
+								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
+							</div>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
+							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end;">
+							<label class="text4" style="float: right;">21/02/2019</label>
+						</div>
+					</button></a>
+
+					<a href="#closemodal1" rel="modal:open">
+					<button class="btn btninformasi column-c">
+						<div class="row">
+							<div class="col-lg-3">
+								<img src="../icon/avatar.png" alt="Avatar" class="avatar-mini">
+							</div>
+							<div class="col-lg-6">
+								<div><label class="text5">John Dae</label></div>
+								<div style="margin-top: -10px"><label class="text4">Summary</label></div>
+							</div>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end; margin-top: 20px; margin-bottom: 15px;">
+							<label class="text4"><i class="fas fa-briefcase" style="margin-right: 5px; "></i>Bina Nusantara Univer...</label>
+						</div>
+
+						<div style="display: flex; justify-content: flex-end;">
+							<label class="text4" style="float: right;">21/02/2019</label>
+						</div>
+					</button></a>
+
+				</div>
+
+				 <!-- Modal Button-->
+				<div id="closemodal1" class="modal modal-detail" style="z-index: 999;">
 				 	<div id="modal-detail" style="display: block;">
 					 	<div class="panel-heading" style="display: flex;">
 							<div style="margin-right: 2%;">
@@ -285,9 +261,8 @@
 								<div class="flex-flow" style="margin-bottom: 40px;">
 									<a class="text7" style="margin-right: 20px">Application in process</a>
 								</div>
-
-
-								<div style="margin-bottom: 10px; display: flex;">
+						
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Employment</label>
 									</div>
@@ -296,7 +271,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Employment<br>Date</label>
 									</div>
@@ -305,7 +280,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Company</label>
 									</div>
@@ -314,7 +289,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Employment</label>
 									</div>
@@ -323,7 +298,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Company<br>Type</label>
 									</div>
@@ -332,7 +307,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Salary</label>
 									</div>
@@ -341,7 +316,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Aligned<br>with Study</label>
 									</div>
@@ -350,13 +325,13 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3" style="width: 7%;">
 										<hr>
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">School</label>
 									</div>
@@ -365,7 +340,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Major</label>
 									</div>
@@ -374,7 +349,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Enrollment</label>
 									</div>
@@ -383,7 +358,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Graduation</label>
 									</div>
@@ -391,14 +366,14 @@
 										<label class="text9">2019</label>
 									</div>
 								</div>
-
-								<div style="margin-bottom: 10px; display: flex;">
+							
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3" style="width: 7%;">
 										<hr>
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Address</label>
 									</div>
@@ -407,7 +382,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Phone</label>
 									</div>
@@ -416,7 +391,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Email</label>
 									</div>
@@ -425,7 +400,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">LinkedIn</label>
 									</div>
@@ -451,7 +426,7 @@
 	                   			<input id="upload" type="file"/>
 							</div>
 							<div style="flex-grow: 1;">
-								<div style="margin-bottom: 10px; margin-top: 5%; display: flex;">
+								<div style="margin-bottom: 10px; margin-top: 5%; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Name</label>
 									</div>
@@ -460,7 +435,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Student ID</label>
 									</div>
@@ -469,13 +444,13 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3" style="width: 7%;">
 										<hr>
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Employment</label>
 									</div>
@@ -486,7 +461,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Employment<br>Date</label>
 									</div>
@@ -495,7 +470,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Company</label>
 									</div>
@@ -504,7 +479,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Company<br>Type</label>
 									</div>
@@ -515,7 +490,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Salary</label>
 									</div>
@@ -526,7 +501,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Aligned<br>with Study</label>
 									</div>
@@ -537,13 +512,13 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3" style="width: 7%;">
 										<hr>
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">School</label>
 									</div>
@@ -552,7 +527,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Major</label>
 									</div>
@@ -563,7 +538,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Enrollment</label>
 									</div>
@@ -574,7 +549,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Graduation</label>
 									</div>
@@ -584,14 +559,14 @@
 				                        </select>
 									</div>
 								</div>
-
-								<div style="margin-bottom: 10px; display: flex;">
+							
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3" style="width: 7%;">
 										<hr>
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Address</label>
 									</div>
@@ -600,7 +575,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Phone</label>
 									</div>
@@ -609,7 +584,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">Email</label>
 									</div>
@@ -618,7 +593,7 @@
 									</div>
 								</div>
 
-								<div style="margin-bottom: 10px; display: flex;">
+								<div style="margin-bottom: 10px; display: flex;">			
 									<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 										<label class="text2">LinkedIn</label>
 									</div>
@@ -638,18 +613,18 @@
 				<!-- / Modal button See Details-->
 
 			</div>
-
+								
 		</div>
 
 
+	
 
-
-
+		
 		<div style="display: flex; justify-content: center;">
 			<div class="text-center bootpag-prev-next"></div>
 		</div>
-
-
+		
+		
 	</div>
 </div>
 <!-- /Page Header -->
