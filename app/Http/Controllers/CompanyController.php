@@ -11,6 +11,7 @@ use App\Dashboard;
 use App\User;
 use Session;
 use Validator;
+use function GuzzleHttp\Promise\all;
 
 class CompanyController extends Controller
 {
@@ -26,17 +27,14 @@ class CompanyController extends Controller
     public function showListCompanyPage()
     {
         // $user = new User();
-        // $company = new Company();
+        $company = new Company();
         if ($this->checkSession()) {
             $data[] = array();
-            // $data['css'] = view('css');
-            // $data['js'] = view('js');
             $data['navbar'] = view('includes.navbar');
-            // $data['sidebar'] = view('template.sidebar');
-            // $data['footer'] = view('template.footer');
 
             // getListCompany isinya untuk $sortby
-            // $data['lstCompany'] = $company->GetListCompany("");
+            $data['listCompany'] = $company->showListCompany(Session::get('univID'),);
+            $data['listCompanyIndustry'] = $company->showIndustry(Session::get('univID'));
             // $data['totalCompany'] = $company->GetTotalCompany();
             return view('pages.companylist')->with('data', $data);
         }
@@ -308,7 +306,7 @@ class CompanyController extends Controller
         }
     }
 
-    public function SortListCompany()
+    public function sortListCompany()
     {
         $sortBy = $_POST['sortBy'];
 

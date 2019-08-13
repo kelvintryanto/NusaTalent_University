@@ -20,6 +20,30 @@ class Company extends Model
         $this->_companyID = $this->GenerateCompanyID();
     }
 
+    public function showListCompany($univID)
+    {
+        $result = DB::table('university_partnership as up')
+            ->join('company_profile as cp', 'up.company_id', '=', 'cp.id')
+            ->where('univ_id', $univID)
+            ->select('*')
+            ->paginate(1);
+
+        return $result;
+    }
+
+    //jobindustry ini harus dipisah karena adanya paginate
+    public function showIndustry($univID)
+    {
+        $result = DB::table('university_partnership as up')
+            ->join('company_profile as cp', 'up.company_id', '=', 'cp.id')
+            ->where('univ_id', $univID)
+            ->distinct()
+            ->select('industry')
+            ->get();
+
+        return $result;
+    }
+
     private function GenerateCompanyUserID()
     {
         $cuID = str_random(32);

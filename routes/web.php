@@ -40,7 +40,13 @@ Route::get(
 // checked dashboard controller 06/08/2019 15:03
 /* Dashboard Controller */
 Route::get('/dashboard', 'DashboardController@index');
+
+// Company Controller
 Route::get('/company', 'CompanyController@showListCompanyPage');
+Route::get("/company/add-company-page", "CompanyController@showAddCompanyPage");
+Route::post('/company/sort-list-company', "CompanyController@sortListCompany");
+
+
 Route::get('/job', 'JobPostController@showListJobPostPage');
 Route::get('/student', 'StudentController@showStudentDetailPage');
 Route::get('/event', 'EventsController@index');
@@ -51,7 +57,6 @@ Route::get('/event', 'EventsController@index');
 // kemungkinan draftController ga dipake
 
 
-Route::get("/company/add-company-page", "CompanyController@showAddCompanyPage");
 Route::get('/ManageCompany', 'MainController@CompanyProfile');
 
 Route::get('/JobPost/Edit/jpID={id}', "JobPostController@showEditJobPostPage");
@@ -134,8 +139,7 @@ Route::post("/update-job-post-status", "JobPostController@updateJobPostStatus");
 
 /* End of Controller */
 
-/* Company Controller */
-Route::post('/Company/sort-list-company', "CompanyController@SortListCompany");
+
 
 
 

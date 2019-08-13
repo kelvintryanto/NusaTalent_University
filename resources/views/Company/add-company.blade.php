@@ -294,6 +294,6 @@
     </div>
     <!-- /page container -->
 
-
+    <script src="{{asset("assets/js/add-company-validation.js")}}"></script>
 @endsection
 

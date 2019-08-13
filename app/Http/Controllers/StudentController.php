@@ -37,7 +37,7 @@ class StudentController extends Controller
         // $data['footer'] = view('template.footer');
 
         //check this method class
-        // $data['students'] = $this->_student->getAllStudent();
+        $data['students'] = $this->_student->getAllStudent();
 
         return view('pages.allstudent')->with('data', $data);
         // return 'test';

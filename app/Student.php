@@ -39,9 +39,10 @@ class Student extends Model
                 ->groupBy('s.id')
                 ->orderBy('e.degree', 'desc')
                 ->orderBy('s.created_at', 'desc')
-                ->get()
-                ->toArray();
+                ->paginate();
+            // ->toArray();
 
+            // dd($results);
             if (!empty($results))
                 return $results;
 
