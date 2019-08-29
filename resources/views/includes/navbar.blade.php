@@ -1,6 +1,6 @@
-<div class="nav">
+<div class="nav navbar-fixed-top" style="border-bottom: 1px solid ">
 	<div class="nav-title">
-		<a class="navbar-brand " href="/dashboard"><img src="/images/logomini.png" class="img-navbar" alt="" ></a>
+		<a class="navbar-brand " href="/dashboard"><img src="{{asset('/images/logomini.png')}}" class="img-navbar" alt="" ></a>
 	</div>
 
 	<div class="nav-menu1 text2 {{ request()->is('dashboard','dashboard/*') ? 'content-active' : 'content-nonactive' }}"><a href="/dashboard">Dashboard</a></div>
@@ -22,20 +22,20 @@
 			<a href="#" class="text2 dropdown-toggle" data-toggle="dropdown" style="margin-top: 10px;"><img src="http://placehold.it/18x18" class="profile-image img-circle"> {{Session::get('univName')}}<span class="glyphicon glyphicon-chevron-down glyphicon-c " aria-hidden="true"></span></a>
 			<ul class="dropdown-menu">
 				<a class=" text3 margintitledropdown">{{Session::get('univName')}}</a>
-				<a class=" text4 margintitledropdown">hr@zengroup.co.id</a>
-				<br>
-				<a class=" text4 margintitledropdown">Human Resource</a>
-				<br> <br>
-				<a class=" text4 margintitledropdown">Monthly until 03/05/19</a>
+				<a class=" text4 margintitledropdown">{{Session::get('email')}}</a>
+				{{-- <br> --}}
+				{{-- <a class=" text4 margintitledropdown">Human Resource</a> --}}
+				{{-- <br> <br> --}}
+				{{-- <a class=" text4 margintitledropdown">Monthly until 03/05/19</a> --}}
 				<li class="divider"></li>
-				<li class="dropdown-submenu">
+				{{-- <li class="dropdown-submenu">
 				<a class="text4" href="#"><i class="far fa-building fa-lg" style="margin-right: 10px;"></i>Company</a>
 					<ul class="dropdown-menu dropdown-b">
 						<li><a class="text4" href="#">Third level</a></li>
 						<li><a class="text4" href="#">Third level</a></li>
 					</ul>
-				</li>
-				<li class="dropdown-submenu">
+				</li> --}}
+				{{-- <li class="dropdown-submenu">
 				<a class="text4" href="#"><i class="fas fa-cog fa-lg" style="margin-right: 10px;"></i>My Account </a>
 					<ul class="dropdown-menu dropdown-b">
 						<li><a class="text4" href="#">Third level</a></li>
@@ -43,15 +43,15 @@
 						<li><a class="text4" href="#">Third level</a></li>
 						<li><a class="text4" href="#">Third level</a></li>
 					</ul>
-				</li>
+				</li> --}}
 				<li class="dropdown-submenu">
 					<a class="text4" href="/Access/change-password"><i class="far fa-credit-card fa-lg" style="margin-right: 10px;"></i>Change Password</a>
-					<ul class="dropdown-menu dropdown-b">
+					{{-- <ul class="dropdown-menu dropdown-b">
 						<li><a class="text4" href="#">Payment Information</a></li>
 						<li><a class="text4" href="#">Payment History</a></li>
-					</ul>
+					</ul> --}}
 				</li>
-				<li class="divider"></li>
+				{{-- <li class="divider"></li> --}}
 				<li class="dropdown-submenu">
 					<a class="text4" href="/logout"><i class="fas fa-power-off fa-lg" style="margin-right: 10px;"></i>Logout</a>
 				</li>

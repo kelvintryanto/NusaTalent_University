@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use DB;
+use Session;
 
 class Company extends Model
 {
@@ -20,19 +21,117 @@ class Company extends Model
         $this->_companyID = $this->GenerateCompanyID();
     }
 
-    public function showListCompany($univID)
+    public function showListCompany($univID, $sortBy, $adesc, $jobIndustry, $searchCompany)
     {
+        if ($jobIndustry == "") $jobIndustry = "%";
+        if ($searchCompany == "") $searchCompany = "%";
+        else $searchCompany = "%" . strtolower($searchCompany) . "%";
+        if ($sortBy == "") $sortBy = "name";
+
         $result = DB::table('university_partnership as up')
             ->join('company_profile as cp', 'up.company_id', '=', 'cp.id')
             ->leftjoin(DB::raw("(select cp_id, count(cp_id) as amount
                                 from job_post
                                 where event_id is null
                                 group by cp_id) as jp"), "jp.cp_id", "=", "cp.id")
-            ->where([['univ_id', $univID], ['up.status', '=', '1']])
-            ->select('*')
+            // company tersebut masih aktif dengan up.status
+            ->where([['univ_id', $univID], ['up.status', '1'], ['industry', 'like', $jobIndustry], [strtolower('name'), 'like', $searchCompany]])
+            ->select(
+                'up.company_id AS company_id',
+                'up.univ_id AS univ_id',
+                'up.status AS univ_id',
+                'up.timestamp AS timestamp',
+                'cp.id AS id',
+                'cp.name AS name',
+                'cp.website AS website',
+                'cp.industry AS industry',
+                'cp.linkedin AS linkedin',
+                'cp.short_desc AS short_desc',
+                'cp.employees AS employees',
+                'cp.logo_path AS logo_path',
+                'cp.created_at AS created_at',
+                DB::raw("(CASE WHEN jp.amount is null THEN 0 ELSE jp.amount END) AS amount")
+            )
+            ->orderBy($sortBy, $adesc)
             ->paginate();
+        // } else {
+        //     $result = DB::table('university_partnership as up')
+        //         ->join('company_profile as cp', 'up.company_id', '=', 'cp.id')
+        //         ->leftjoin(DB::raw("(select cp_id, count(cp_id) as amount
+        //                         from job_post
+        //                         where event_id is null
+        //                         group by cp_id) as jp"), "jp.cp_id", "=", "cp.id")
+        //         // company tersebut masih aktif dengan up.status
+        //         ->where([['univ_id', $univID], ['up.status', '1'], ['industry', 'like', $jobIndustry], ['name', 'like', $searchCompany]])
+        //         ->select(
+        //             'up.company_id AS company.id',
+        //             'up.univ_id AS univ_id',
+        //             'up.status AS univ_id',
+        //             'up.timestamp AS timestamp',
+        //             'cp.id AS id',
+        //             'cp.name AS name',
+        //             'cp.website AS website',
+        //             'cp.industry AS industry',
+        //             'cp.linkedin AS linkedin',
+        //             'cp.short_desc AS short_desc',
+        //             'cp.employees AS employees',
+        //             'cp.logo_path AS logo_path',
+        //             'cp.created_at AS created_at',
+        //             DB::raw("(CASE WHEN jp.amount is null THEN 0 ELSE jp.amount END) AS amount")
+        //         )
+        //         ->orderBy('name', $adesc)
+        //         ->paginate();
+        // }
 
         // dd($result);
+        return $result;
+    }
+
+    public function retrieveSingleCompany($companyID)
+    {
+        $result = DB::table("company_profile AS cp")
+            ->where("cp.id", $companyID)
+            ->leftjoin("cp_location AS cpl", "cpl.cp_id", "=", "cp.id")
+            ->select(
+                "cp.id AS id",
+                "cp.name AS name",
+                "cp.website AS website",
+                "cp.industry AS industry",
+                "cp.linkedin AS linkedin",
+                "cp.short_desc AS short_desc",
+                "cp.employees AS employees",
+                "cp.logo_path AS logo_path",
+                "cp.status AS status",
+                "cp.created_at AS created_at",
+                "cpl.name AS addressName",
+                "cpl.address AS address",
+                "cpl.country AS country",
+                "cpl.subdistrict AS subdistrict",
+                "cpl.city_id AS city_id",
+                "cpl.province_id AS province_id",
+                "cpl.postal_code AS postal_code"
+            )
+            ->first();
+
+        // dd($result);
+        return $result;
+    }
+
+    public function retrieveIndustry()
+    {
+        $result = DB::table("m_industry AS industry")
+            ->select("id", "description")
+            ->orderBy("description")
+            ->get();
+
+        return $result;
+    }
+    public function retrieveTotalEmployees()
+    {
+        $result = DB::table("total_employees as te")
+            ->select("description")
+            ->get();
+
         return $result;
     }
 
@@ -80,7 +179,7 @@ class Company extends Model
     {
         $companyID = str_random(64);
 
-        $exists = DB::table("career_fair")->where("id", $companyID)->first();
+        $exists = DB::table("company_profile")->where("id", $companyID)->first();
 
         if (!is_null($exists))
             $this->GenerateCompanyID();
@@ -107,8 +206,7 @@ class Company extends Model
         return $this->_companyID;
     }
 
-
-    public function RetrieveDataCompany($univID)
+    public function retrieveDataCompany($univID)
     {
         $result = DB::table("university_partnership AS up")
             ->where("univ_id", $univID)
@@ -122,6 +220,57 @@ class Company extends Model
             ->get()
             ->toArray();
         return $result;
+    }
+
+    public function AddCompanyRegular(
+        $companyName,
+        $companyWebsite,
+        $companyIndustry,
+        $companyLinkedin,
+        $companyShortdesc,
+        $companyEmployees
+    ) {
+        $createdAt = date('Y-m-d H:i:s');
+        $comp_id = $this->_companyID;
+
+        $data = array(
+            "id"            => $comp_id,
+            "name"          => $companyName,
+            "website"       => $companyWebsite,
+            "industry"      => $companyIndustry,
+            "linkedIn"      => $companyLinkedin,
+            "short_desc"    => $companyShortdesc,
+            "employees"     => $companyEmployees,
+            "logo_path"     => null,
+            "status"        => 1,
+            "created_at"    => $createdAt
+        );
+
+        $resp = DB::table('company_profile')->insert($data);
+        $univID = Session::get('univID');
+        if ($resp) {
+            unset($resp);
+            $resp = $this->AddUniversityPartnership($comp_id, $univID);
+
+            return $resp;
+        }
+        return false;
+    }
+
+    public function AddUniversityPartnership($companyID, $univID)
+    {
+
+        $createdAt = date('Y-m-d H:i:s');
+
+        $data = array(
+            'company_id' => $companyID,
+            'univ_id' => $univID,
+            'status' => 1,
+            'timestamp' => $createdAt
+        );
+
+        $resp = DB::table('university_partnership')->insert($data);
+        return $resp;
     }
 
     public function AddCompany(
@@ -172,6 +321,7 @@ class Company extends Model
             ->insert($data);
 
         if ($resp) {
+            //hapus $resp dan ganti dengan add univ partnership yang baru
             unset($resp);
             $resp = $this->AddUnivPartnership($this->_companyID, $univID);
 
@@ -376,11 +526,11 @@ class Company extends Model
     public function DeleteCompany($companyID)
     {
         $data = array(
-            "status_active" => 2
+            "status" => 0
         );
 
-        $resp = DB::table("career_fair")
-            ->where("id", $companyID)
+        $resp = DB::table("university_partnership")
+            ->where("company_id", $companyID)
             ->update($data);
 
         return $resp;

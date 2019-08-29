@@ -5,7 +5,8 @@
 <!-- Page Header -->
 	<div>
 		<!-- Navbar -->
-		@include('includes.navbar')
+        @include('includes.navbar')
+        @include('includes.navbarEvent')
 		<!-- /Navbar -->
 
 		<!-- Page Container -->

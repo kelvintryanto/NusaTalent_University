@@ -2,14 +2,15 @@
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
     <head>
         @include('includes.generalstyle')
-        @include('includes.generalscript')
     </head>
 
     <body>
-        @yield('content')
-        
+        <div style="margin-top: 70px;">
+            @yield('content')
+        </div>
+
+        @include('includes.generalscript')
         @include('includes.footer')
     </body>
 </html>
 
-   

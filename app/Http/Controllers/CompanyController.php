@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Company;
 use App\Dashboard;
+use App\Location;
 // use App\Talents;
 use App\User;
 use Session;
@@ -31,8 +32,7 @@ class CompanyController extends Controller
             $data[] = array();
             $data['navbar'] = view('includes.navbar');
 
-            // getListCompany isinya untuk $sortby
-            $data['listCompany'] = $company->showListCompany(Session::get('univID'),);
+            $data['listCompany'] = $company->showListCompany(Session::get('univID'), "", "asc", "", "");
             $data['listCompanyIndustry'] = $company->showIndustry(Session::get('univID'));
             // $data['totalCompany'] = $company->GetTotalCompany();
             return view('pages.companylist')->with('data', $data);
@@ -40,15 +40,82 @@ class CompanyController extends Controller
         return redirect("/login");
     }
 
+    public function sortListCompany(Request $request)
+    {
+        $company = new Company();
+
+        $sortBy = $request['sortBy'];
+        $adesc = $request['ordered'];
+        $jobIndustry = $request['jobIndustry'];
+        $searchCompany = $request['searchCompany'];
+
+        if ($this->checkSession()) {
+            // $data[] = array();
+            // $data['navbar'] = view('includes.navbar');
+
+            $listCompany = $company->showListCompany(Session::get('univID'), $sortBy, $adesc, $jobIndustry, $searchCompany);
+            // $data['listCompanyIndustry'] = $company->showIndustry(Session::get('univID'));
+            return $listCompany;
+        }
+        return redirect("/login");
+    }
+
+    public function deleteCompany($companyID)
+    {
+        $company = new Company();
+        $company->DeleteCompany($companyID);
+
+        return redirect('/company');
+    }
+
+    public function showEditCompanyProfilePage($companyID)
+    {
+        $company = new Company();
+
+        if ($this->checkSession()) {
+            $data[] = array();
+
+            $data['navbar'] = view('includes.navbar');
+            $data['companyData'] = $company->retrieveSingleCompany($companyID);
+            // $data['city'] = $location->retrieveCity();
+            // $data['province'] = $location->retrieveProvince();
+            $data['industry'] = $company->retrieveIndustry();
+            // dd($data['companyData'][0]->name);
+            // $data['boothNumber'] = $company->GetSingleBoothNumber($companyID);
+            // $data['companyID'] = $companyID;
+            return view('pages.editcompany')->with('data', $data);
+        }
+
+        return redirect("/login");
+    }
+
     public function showAddCompanyPage()
     {
+        $company = new Company();
+
         if ($this->checkSession()) {
             $data[] = array();
             // $data['js'] = view('js');
             // $data['css'] = view('css');
             $data['navbar'] = view('includes.navbar');
+            $data['industry'] = $company->retrieveIndustry();
+            $data['totalEmployee'] = $company->retrieveTotalEmployees();
 
             return view('pages.addcompany')->with('data', $data);
+        }
+        return redirect("/login");
+    }
+
+    public function showDetailCompanyProfilePage($companyID)
+    {
+        $company = new Company();
+        if ($this->checkSession()) {
+            $data[] = array();
+
+            $data['navbar'] = view('includes.navbar');
+            $data['companyData'] = $company->retrieveSingleCompany($companyID);
+
+            return view('pages.companydetail')->with('data', $data);
         }
         return redirect("/login");
     }
@@ -116,28 +183,7 @@ class CompanyController extends Controller
         return redirect("/login");
     }
 
-    public function showEditCompanyProfilePage($companyID)
-    {
-        $company = new Company();
-        $user = new User();
 
-        if ($this->checkSession()) {
-            $data[] = array();
-
-            $data['css'] = view('css');
-            $data['js'] = view('js');
-            $data['navbar'] = view('template.navbar')->with('univName', $user->getUnivName());
-            $data['sidebar'] = view('template.sidebar');
-            $data['footer'] = view('template.footer');
-
-            $data['companyData'] = $company->retrieveDataCompany($companyID);
-            $data['boothNumber'] = $company->GetSingleBoothNumber($companyID);
-            $data['companyID'] = $companyID;
-            return view('Company.edit-profile')->with('data', $data);
-        }
-
-        return redirect("/login");
-    }
 
     public function ChangePassword()
     {
@@ -159,17 +205,28 @@ class CompanyController extends Controller
         }
     }
 
-
-
-    public function DeleteCompany()
+    public function AddCompanyRegular(Request $request)
     {
-        $companyID = $_POST['companyID'];
+        // dd($request->companyEmployees);
+        $companyName        = htmlspecialchars($request->input("companyName"));
+        $companyWebsite     = htmlspecialchars($request->input("companyWebsite"));
+        $companyIndustry    = htmlspecialchars($request->input("companyIndustry"));
+        $companyLinkedin    = htmlspecialchars($request->input("companyLinkedin"));
+        $companyShortdesc   = htmlspecialchars($request->input("companyShortdesc"));
+        $companyEmployees   = htmlspecialchars($request->companyEmployees);
 
-        $company = new Company;
+        $company = new Company();
+        // $companyID = $company->GetCompanyID();
+        $company->addCompanyRegular(
+            $companyName,
+            $companyWebsite,
+            $companyIndustry,
+            $companyLinkedin,
+            $companyShortdesc,
+            $companyEmployees
+        );
 
-        $resp = $company->DeleteCompany($companyID);
-
-        return $resp;
+        return redirect('/company');
     }
 
     public function AddCompany(Request $request)
@@ -306,18 +363,6 @@ class CompanyController extends Controller
         }
     }
 
-    public function sortListCompany()
-    {
-        $sortBy = $_POST['sortBy'];
-
-        $company = new Company();
-
-        $resp = $company->GetListCompany($sortBy);
-
-        return $resp;
-    }
-
-
     public function SaveProfilePicture(Request $request)
     {
         $validated = Validator::make($request->all(), [
@@ -358,5 +403,13 @@ class CompanyController extends Controller
         $resp = $company->SetActive($jobPostID);
 
         return json_encode($resp);
+    }
+
+    public function retrieveCity(Request $request)
+    {
+        $location = new Location();
+        $city = $location->retrieveCity($request['province']);
+
+        return $city;
     }
 }

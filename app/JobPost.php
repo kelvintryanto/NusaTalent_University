@@ -62,11 +62,47 @@ class JobPost extends Model
         return false;
     }
 
+    public function GetListJobPostPartnership($univID, $status, $companyFilter, $searchJob, $adesc, $sortBy)
+    {
+        if ($sortBy == "" || $sortBy == null) $sortBy = 'cpName';
+
+        if ($companyFilter == "") $companyFilter = "%";
+        else $companyFilter = "%" . strtolower($companyFilter) . "%";
+
+        if ($searchJob == "") $searchJob = "%";
+        else $searchJob = "%" . strtolower($searchJob) . "%";
+
+        $result = DB::table("university_partnership AS up")
+            ->join('company_profile AS cp', 'up.company_id', '=', 'cp.id')
+            ->rightjoin('job_post AS jp', 'jp.cp_id', '=', 'cp.id')
+            ->join(DB::raw("(select jp_id,count(*) AS viewed from job_post_viewed GROUP BY jp_id) as jpv"), "jpv.jp_id", "=", "jp.id")
+            ->join(DB::raw("(select jp_id,count(*) AS favorited from job_post_favorited GROUP BY jp_id) as jpf"), "jpf.jp_id", "=", "jp.id")
+            ->join(DB::raw("(select jp_id,count(*) AS applied from job_post_applied GROUP BY jp_id) as jpa"), "jpa.jp_id", "=", "jp.id")
+            ->where([['up.univ_id', $univID], ['up.status', $status], ['event_id', null], ['cp.id', 'like', $companyFilter], [strtolower('jp.name'), 'like', $searchJob]])
+            ->select(
+                "cp.id AS id",
+                "cp.name AS cpName",
+                "jp.name AS jpName",
+                "jp.created_at AS date",
+                "cp.industry AS industry",
+                "jp.work_hour AS workhour",
+                "jp.id AS jobpost_id",
+                "jpv.viewed AS viewed",
+                "jpf.favorited AS favorited",
+                "jpa.applied AS applied"
+            )
+            ->orderBy($sortBy, $adesc)
+            ->get();
+
+        // dd($result);
+        return $result;
+    }
+
     public function GetListJobPost()
     {
-        $user = new User();
+        // $user = new User();
 
-        $univID = $user->getUnivID();
+        // $univID = $user->getUnivID();
 
         $resp =
             DB::table("university_partnership AS up")

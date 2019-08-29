@@ -2094,7 +2094,7 @@ fieldset[disabled] .btn-raised:not(.btn-flat):not(.btn-link) {
   -moz-osx-font-smoothing: grayscale;
 }
 .dropdown-menu {
-  min-width: 180px;
+  min-width: 300px;
   padding: 8px 0;
   color: #333333;
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -2315,7 +2315,7 @@ fieldset[disabled] .btn-raised:not(.btn-flat):not(.btn-link) {
   transform: rotateY(-180deg);
   top: 50%;
   margin-top: -8px;
-  right: 170px;
+  right: 288px;
   font-size: 16px;
   font-weight: 400;
   line-height: 1;

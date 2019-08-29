@@ -1,8 +1,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link id="favicon" rel="shortcut icon" href="{{asset('assets/icons/nusatalent.png')}}" type="image/png">
 <title>NusaTalent</title>
-
 
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Signika" />
 
@@ -17,6 +17,6 @@
 <link href="/css/regular.css" rel="stylesheet" >
 <link href="/css/brands.css" rel="stylesheet" >
 <link href="/css/solid.css" rel="stylesheet" >
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> --}}
 
 

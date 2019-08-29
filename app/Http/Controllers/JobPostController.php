@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\User;
 use App\JobPost;
+use App\Company;
+use Session;
 
 class JobPostController extends Controller
 {
@@ -19,16 +21,33 @@ class JobPostController extends Controller
     // confirm job 1st page 09/08/2019 11:28
     public function showListJobPostPage()
     {
-        // $jp = new JobPost();
+        $jp = new JobPost();
+        $company = new Company();
 
         if ($this->checkSession()) {
             $data[] = array();
             $data['navbar'] = view('includes.navbar');
-            // $data['sidebar'] = view('template.sidebar');
-            // $data['footer'] = view('template.footer');
-            // $data['lstJobPost'] = $jp->GetListJobPost();
+            $data['listJobPost'] = $jp->GetListJobPostPartnership(Session::get('univID'), 1, "", "", "asc", "");
+            $data['listCompany'] = $company->showListCompany(Session::get('univID'), "", "asc", "", "");
             // $data['totalJobPost'] = $jp->GetTotalJobPost();
             return view('pages.listjobpost')->with('data', $data);
+        }
+        return redirect("/login");
+    }
+
+    public function sortListJob(Request $request)
+    {
+        $jp = new JobPost();
+
+        $companyFilter = $request['companyFilter'];
+        $jobStatus = $request['jobStatus'];
+        $searchJob = $request['searchJob'];
+        $adesc = $request['adesc'];
+        $sortBy = $request['sortBy'];
+
+        if ($this->checkSession()) {
+            $listJob = $jp->GetListJobPostPartnership(Session::get('univID'), $jobStatus, $companyFilter, $searchJob, $adesc, $sortBy);
+            return $listJob;
         }
         return redirect("/login");
     }

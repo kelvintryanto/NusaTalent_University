@@ -14,8 +14,8 @@
 
 		<div class="nav-ah-1">
             <h5>
-                <span class="title">Company Detail</span>
-                <small class="display-block subtitle">Profile of the Company</small>
+                <span class="title">Student Detail</span>
+                <small class="display-block subtitle">Profile of the Student</small>
             </h5>
 		</div>
 
