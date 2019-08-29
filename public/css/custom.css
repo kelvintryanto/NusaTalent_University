@@ -44,7 +44,18 @@
 	display: flex;
 	background: white;
 	color:#dddddd;
-	height: 70px;
+	height: 60px;
+	cursor: pointer;
+	font-family: roboto;
+}
+
+.nav2{
+    display: flex;
+    padding: 3px;
+    padding-top: 10px;
+	background: white;
+	color:#dddddd;
+	height: 50px;
 	cursor: pointer;
 	font-family: roboto;
 }
@@ -82,6 +93,11 @@
 	flex-grow: 1;
 	text-align: center;
 	margin-top: 10px;
+}
+
+.nav-menu4{
+    flex-grow: 1;
+    text-align: center;
 }
 
 .text{
@@ -959,6 +975,10 @@ input:checked+label>.choices {
 	margin-bottom: 10px;
 }
 
+.content-active2{
+	margin-bottom: 10px;
+}
+
 .dropdown-schedule-width{
 	width: 20%;
 }
@@ -1690,8 +1710,20 @@ input:checked+label>.choices {
 	color: white;
 	text-transform: capitalize !important;
 }
-.page-container{
-	background-color: white !important;
+
+@media (min-width: 769px){
+    .page-container-event {
+        width: 100%;
+        display: table;
+        table-layout: fixed;
+        margin-top: 110px;
+    }
+}
+
+.page-container-event{
+    background-color: white;
+    position: relative;
+    margin-top: 110px;
 }
 
 

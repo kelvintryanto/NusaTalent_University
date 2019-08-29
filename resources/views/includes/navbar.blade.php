@@ -3,17 +3,17 @@
 		<a class="navbar-brand " href="/dashboard"><img src="{{asset('/images/logomini.png')}}" class="img-navbar" alt="" ></a>
 	</div>
 
-	<div class="nav-menu1 text2 {{ request()->is('dashboard','dashboard/*') ? 'content-active' : 'content-nonactive' }}"><a href="/dashboard">Dashboard</a></div>
-	<div class="nav-menu1 text2 {{ request()->is('job','job/*') ? 'content-active' : 'content-nonactive' }}"><a href="/job">Job</a></div>
-	<div class="nav-menu1 text2 {{ request()->is('student','student/*') ? 'content-active' : 'content-nonactive' }}"><a href="/student">Student</a></div>
-	<div class="nav-menu1 text2 {{ request()->is('company','company/*') ? 'content-active' : 'content-nonactive' }}"><a href="/company">Company</a></div>
-	<div class="nav-menu1 text2 {{ request()->is('event','event/*') ? 'content-active' : 'content-nonactive' }}"><a href="/event">Event</a></div>
+	<a href="/dashboard" class="nav-menu1 text2 {{ request()->is('dashboard','dashboard/*') ? 'content-active' : 'content-nonactive' }}"><div>Dashboard</div></a>
+	<a href="/job" class="nav-menu1 text2 {{ request()->is('job','job/*') ? 'content-active' : 'content-nonactive' }}"><div >Job</div></a>
+	<a href="/student" class="nav-menu1 text2 {{ request()->is('student','student/*') ? 'content-active' : 'content-nonactive' }}"><div>Student</div></a>
+	<a href="/company"  class="nav-menu1 text2 {{ request()->is('company','company/*') ? 'content-active' : 'content-nonactive' }}"><div>Company</div></a>
+	<a href="/event" class="nav-menu1 text2 {{ request()->is('event','event/*') ? 'content-active' : 'content-nonactive' }}"><div>Event</div></a>
 	<div class="nav-menu2 text2">
 		<div class="has-feedback">
 			<input type="search" class="form-control box-search text2" placeholder="Search">
-			<div class="form-control-feedback" style="z-index: 0;">
-				<i class="icon-search4 text-size-small text-muted" style="color: #246BB3; z-index: 0;"></i>
-			</div>
+			{{-- <div class="form-control-feedback" style="z-index: 0;"> --}}
+				<i class="icon-search4 text-size-small text-muted form-control-feedback" style="color: #246BB3; z-index: 0;"></i>
+			{{-- </div> --}}
 		</div>
 	</div>
 	<div class="nav-menu3 text2" style="margin-top: 15px;">|</div>

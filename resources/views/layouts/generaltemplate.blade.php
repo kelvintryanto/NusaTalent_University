@@ -4,8 +4,8 @@
         @include('includes.generalstyle')
     </head>
 
-    <body>
-        <div style="margin-top: 70px;">
+    <body style="background:white;">
+        <div style="margin-top: 55px;">
             @yield('content')
         </div>
 

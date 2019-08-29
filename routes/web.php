@@ -39,33 +39,36 @@ Route::get(
 // KT rebuild company controller 07/08/2019 15:18
 // checked dashboard controller 06/08/2019 15:03
 /* Dashboard Controller */
-Route::get('/dashboard', 'DashboardController@index');
+Route::get("/dashboard", "DashboardController@index");
 
 // Company Controller
-Route::get('/company', 'CompanyController@showListCompanyPage');
+Route::get("/company", "CompanyController@showListCompanyPage");
 Route::get("/company/add-company", "CompanyController@showAddCompanyPage");
 Route::get("/company/addCompanyRegular", "CompanyController@AddCompanyRegular");
-Route::get('/company/edit/{id}', "CompanyController@showEditCompanyProfilePage");
-Route::get('/company/detail/{id}', "CompanyController@showDetailCompanyProfilePage");
-Route::get('/company/delete/{id}', "CompanyController@deleteCompany");
-Route::post('/company/sortList', "CompanyController@sortListCompany");
-// Route::post('/retrieveCity', "CompanyController@retrieveCity");
-// Route::post('/company/sort-list-company', "CompanyController@sortListCompany");
+Route::get("/company/edit/{id}", "CompanyController@showEditCompanyProfilePage");
+Route::get("/company/detail/{id}", "CompanyController@showDetailCompanyProfilePage");
+Route::get("/company/delete/{id}", "CompanyController@deleteCompany");
+Route::post("/company/sortList", "CompanyController@sortListCompany");
+// Route::post("/retrieveCity", "CompanyController@retrieveCity");
+// Route::post("/company/sort-list-company", "CompanyController@sortListCompany");
 
 
 // checked StudentController@showStudentDetailPage 08/08/2019 11:27
-Route::get('/student', 'StudentController@showStudentDetailPage');
-Route::get('/student/detail/{id}', 'StudentController@studentDetail');
-Route::post('/student/sortList', 'StudentController@sortListStudent');
-// Route::get('/Student', 'StudentController@showStudentDetailPage');
+Route::get("/student", "StudentController@showStudentDetailPage");
+Route::get("/student/detail/{id}", "StudentController@studentDetail");
+Route::post("/student/sortList", "StudentController@sortListStudent");
+// Route::get("/Student", "StudentController@showStudentDetailPage");
 
 
 // Job Controller
-Route::get('/job', 'JobPostController@showListJobPostPage');
-Route::post('/job/sortList', 'JobPostController@sortListJob');
+Route::get("/job", "JobPostController@showListJobPostPage");
+Route::post("/job/sortList", "JobPostController@sortListJob");
 
-
-Route::get('/event', 'EventsController@index');
+// Event Controller
+Route::get("/event", "EventsController@index");
+Route::get("/event/company", "EventsController@EventCompanyPage");
+Route::get("/event/job", "EventsController@EventJobPage");
+Route::get("/event/visitor", "EventsController@EventVisitorPage");
 
 
 // draft Controller

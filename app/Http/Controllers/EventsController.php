@@ -15,16 +15,58 @@ class EventsController extends Controller
         // $company = new Company();
 
         $data[] = array();
-        // $data['css'] = view('css');
-        // $data['js'] = view('js');
         $data['navbar'] = view('includes.navbar');
-        // $data['sidebar'] = view('template.sidebar');
-        // $data['footer'] = view('template.footer');
+        $data['navbarEvent'] = view('includes.navbarEvent');
 
         // $data['boothNumber'] = $company->GetBoothNumber();
         // $data['lstCompanyBooth'] = $company->GetListCompanyBooth();
 
         return view('pages.event')->with('data', $data);
+    }
+
+    public function EventCompanyPage()
+    {
+        // $user = new User();
+        // $company = new Company();
+
+        $data[] = array();
+        $data['navbar'] = view('includes.navbar');
+        $data['navbarEvent'] = view('includes.navbarEvent');
+
+        // $data['boothNumber'] = $company->GetBoothNumber();
+        // $data['lstCompanyBooth'] = $company->GetListCompanyBooth();
+
+        return view('pages.eventcompanylist')->with('data', $data);
+    }
+
+    public function EventJobPage()
+    {
+        // $user = new User();
+        // $company = new Company();
+
+        $data[] = array();
+        $data['navbar'] = view('includes.navbar');
+        $data['navbarEvent'] = view('includes.navbarEvent');
+
+        // $data['boothNumber'] = $company->GetBoothNumber();
+        // $data['lstCompanyBooth'] = $company->GetListCompanyBooth();
+
+        return view('pages.eventjoblist')->with('data', $data);
+    }
+
+    public function EventVisitorPage()
+    {
+        // $user = new User();
+        // $company = new Company();
+
+        $data[] = array();
+        $data['navbar'] = view('includes.navbar');
+        $data['navbarEvent'] = view('includes.navbarEvent');
+
+        // $data['boothNumber'] = $company->GetBoothNumber();
+        // $data['lstCompanyBooth'] = $company->GetListCompanyBooth();
+
+        return view('pages.eventvisitorlist')->with('data', $data);
     }
 
     public function GetCareerFairSchedule()

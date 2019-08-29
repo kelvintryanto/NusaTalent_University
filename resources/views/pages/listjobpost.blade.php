@@ -6,7 +6,7 @@
 <!-- Page Header -->
 <div class="page-header">
 	<!-- Navbar -->
-	@include('includes.navbar')
+	{!!$data['navbar']!!}
 	<!-- /Navbar -->
 
 	<!-- Page Container -->
@@ -17,9 +17,9 @@
                 <small class="display-block subtitle">List of Job</small>
             </h5>
 
-			<a href="/company/add-job-post" class="verticalCenter">
+			{{-- <a href="/company/add-job-post" class="verticalCenter">
 				<button class="btn-add">Add Job Post</button>
-			</a>
+			</a> --}}
 		</div>
 
 		<div class="nav-ah-2">

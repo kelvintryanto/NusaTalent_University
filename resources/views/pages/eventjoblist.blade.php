@@ -12,9 +12,13 @@
         <div class="page-container">
             <div class="nav-ah-1">
                 <h5>
-                    <span class="title">Dashboard</span>
-                    <small class="display-block subtitle">Event List and Summary of Job Fair</small>
+                    <span class="title">Job Posts</span>
+                    <small class="display-block subtitle">List of Job</small>
                 </h5>
+
+                <a href="/company/add-company" class="verticalCenter">
+                    <button class="btn-add">Add Job Event</button>
+                </a>
             </div>
         </div>
 		<!-- Page Container -->

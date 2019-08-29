@@ -6,7 +6,7 @@
 <!-- Page Header -->
 <div class="page-header">
 	<!-- Navbar -->
-	@include('includes.navbar')
+	{!!$data['navbar']!!}
 	<!-- /Navbar -->
 
 	<!-- Page Container -->
