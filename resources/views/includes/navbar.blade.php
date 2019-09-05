@@ -4,9 +4,9 @@
 	</div>
 
 	<a href="/dashboard" class="nav-menu1 text2 {{ request()->is('dashboard','dashboard/*') ? 'content-active' : 'content-nonactive' }}"><div>Dashboard</div></a>
-	<a href="/job" class="nav-menu1 text2 {{ request()->is('job','job/*') ? 'content-active' : 'content-nonactive' }}"><div >Job</div></a>
+	{{-- <a href="/job" class="nav-menu1 text2 {{ request()->is('job','job/*') ? 'content-active' : 'content-nonactive' }}"><div >Job</div></a> --}}
 	<a href="/student" class="nav-menu1 text2 {{ request()->is('student','student/*') ? 'content-active' : 'content-nonactive' }}"><div>Student</div></a>
-	<a href="/company"  class="nav-menu1 text2 {{ request()->is('company','company/*') ? 'content-active' : 'content-nonactive' }}"><div>Company</div></a>
+	{{-- <a href="/company"  class="nav-menu1 text2 {{ request()->is('company','company/*') ? 'content-active' : 'content-nonactive' }}"><div>Company</div></a> --}}
 	<a href="/event" class="nav-menu1 text2 {{ request()->is('event','event/*') ? 'content-active' : 'content-nonactive' }}"><div>Event</div></a>
 	<div class="nav-menu2 text2">
 		<div class="has-feedback">

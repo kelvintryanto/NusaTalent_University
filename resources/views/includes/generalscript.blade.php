@@ -33,6 +33,7 @@
 <script src="{{asset("assets/js/manage-list-company.js")}}"></script>
 <script src="{{asset("assets/js/manage-list-jobpost.js")}}"></script>
 <script src="{{asset("assets/js/manage-list-student.js")}}"></script>
+<script src="{{asset("assets/js/manage-list-event.js")}}"></script>
 
 <script type="text/javascript" src="/js/pages/components_pagination.js"></script>
 <script type="text/javascript" src="/js/custom.js"></script>

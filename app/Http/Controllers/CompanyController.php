@@ -16,7 +16,6 @@ use function GuzzleHttp\Promise\all;
 
 class CompanyController extends Controller
 {
-
     private function checkSession()
     {
         $user = new User();
@@ -208,25 +207,30 @@ class CompanyController extends Controller
     public function AddCompanyRegular(Request $request)
     {
         // dd($request->companyEmployees);
-        $companyName        = htmlspecialchars($request->input("companyName"));
-        $companyWebsite     = htmlspecialchars($request->input("companyWebsite"));
-        $companyIndustry    = htmlspecialchars($request->input("companyIndustry"));
-        $companyLinkedin    = htmlspecialchars($request->input("companyLinkedin"));
-        $companyShortdesc   = htmlspecialchars($request->input("companyShortdesc"));
-        $companyEmployees   = htmlspecialchars($request->companyEmployees);
+        if ($this->checkSession()) {
+            $companyName        = htmlspecialchars($request->input("companyName"));
+            $companyWebsite     = htmlspecialchars($request->input("companyWebsite"));
+            $companyIndustry    = htmlspecialchars($request->input("companyIndustry"));
+            $companyLinkedin    = htmlspecialchars($request->input("companyLinkedin"));
+            $companyShortdesc   = htmlspecialchars($request->input("companyShortdesc"));
+            $companyEmployees   = htmlspecialchars($request->companyEmployees);
 
-        $company = new Company();
-        // $companyID = $company->GetCompanyID();
-        $company->addCompanyRegular(
-            $companyName,
-            $companyWebsite,
-            $companyIndustry,
-            $companyLinkedin,
-            $companyShortdesc,
-            $companyEmployees
-        );
+            $company = new Company();
+            // $companyID = $company->GetCompanyID();
+            $univID = Session::get('univID');
+            $company->addCompanyRegular(
+                $univID,
+                $companyName,
+                $companyWebsite,
+                $companyIndustry,
+                $companyLinkedin,
+                $companyShortdesc,
+                $companyEmployees
+            );
 
-        return redirect('/company');
+            return redirect('/company');
+        }
+        return redirect('/login');
     }
 
     public function AddCompany(Request $request)

@@ -54,34 +54,6 @@ class Company extends Model
             )
             ->orderBy($sortBy, $adesc)
             ->paginate();
-        // } else {
-        //     $result = DB::table('university_partnership as up')
-        //         ->join('company_profile as cp', 'up.company_id', '=', 'cp.id')
-        //         ->leftjoin(DB::raw("(select cp_id, count(cp_id) as amount
-        //                         from job_post
-        //                         where event_id is null
-        //                         group by cp_id) as jp"), "jp.cp_id", "=", "cp.id")
-        //         // company tersebut masih aktif dengan up.status
-        //         ->where([['univ_id', $univID], ['up.status', '1'], ['industry', 'like', $jobIndustry], ['name', 'like', $searchCompany]])
-        //         ->select(
-        //             'up.company_id AS company.id',
-        //             'up.univ_id AS univ_id',
-        //             'up.status AS univ_id',
-        //             'up.timestamp AS timestamp',
-        //             'cp.id AS id',
-        //             'cp.name AS name',
-        //             'cp.website AS website',
-        //             'cp.industry AS industry',
-        //             'cp.linkedin AS linkedin',
-        //             'cp.short_desc AS short_desc',
-        //             'cp.employees AS employees',
-        //             'cp.logo_path AS logo_path',
-        //             'cp.created_at AS created_at',
-        //             DB::raw("(CASE WHEN jp.amount is null THEN 0 ELSE jp.amount END) AS amount")
-        //         )
-        //         ->orderBy('name', $adesc)
-        //         ->paginate();
-        // }
 
         // dd($result);
         return $result;
@@ -177,9 +149,10 @@ class Company extends Model
 
     private function GenerateCompanyID()
     {
-        $companyID = str_random(64);
+        $companyID = str_random(11);
 
         $exists = DB::table("company_profile")->where("id", $companyID)->first();
+        DB::table("company_profile")->where("id", $companyID)->first();
 
         if (!is_null($exists))
             $this->GenerateCompanyID();
@@ -189,7 +162,7 @@ class Company extends Model
 
     private function GenerateBoothID()
     {
-        $boothID = str_random(64);
+        $boothID = str_random(11);
 
         $exists = DB::table("booth_event")
             ->where("id", $boothID)
@@ -222,7 +195,9 @@ class Company extends Model
         return $result;
     }
 
-    public function AddCompanyRegular(
+    public function AddCompanyEvent(
+        $univID,
+        $cp_id,
         $companyName,
         $companyWebsite,
         $companyIndustry,
@@ -231,10 +206,9 @@ class Company extends Model
         $companyEmployees
     ) {
         $createdAt = date('Y-m-d H:i:s');
-        $comp_id = $this->_companyID;
 
         $data = array(
-            "id"            => $comp_id,
+            "id"            => $cp_id,
             "name"          => $companyName,
             "website"       => $companyWebsite,
             "industry"      => $companyIndustry,
@@ -246,11 +220,11 @@ class Company extends Model
             "created_at"    => $createdAt
         );
 
-        $resp = DB::table('company_profile')->insert($data);
-        $univID = Session::get('univID');
+        $resp = DB::table('company_profile_event')->insert($data);
+
         if ($resp) {
             unset($resp);
-            $resp = $this->AddUniversityPartnership($comp_id, $univID);
+            $resp = $this->AddUniversityPartnership($cp_id, $univID);
 
             return $resp;
         }
@@ -259,7 +233,6 @@ class Company extends Model
 
     public function AddUniversityPartnership($companyID, $univID)
     {
-
         $createdAt = date('Y-m-d H:i:s');
 
         $data = array(
@@ -734,7 +707,7 @@ class Company extends Model
     {
         $results =
             DB::table('career_fair AS cf')
-            ->join('company_user AS cu', 'cu.cf_id', '=', 'cf.id')
+            ->join('company_user_event AS cu', 'cu.cf_id', '=', 'cf.id')
             ->where('email', $email)
             ->orWhere('hr_email', $email)
             ->select('cf.name', 'cu.username')
