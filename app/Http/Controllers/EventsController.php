@@ -54,6 +54,23 @@ class EventsController extends Controller
         return redirect('/login');
     }
 
+    public function editCompanyEvent($companyID)
+    {
+        $company = new Company();
+        if ($this->checkSession()) {
+            $data[] = array();
+            // $data['js'] = view('js');
+            // $data['css'] = view('css');
+            $data['navbar'] = view('includes.navbar');
+            $data['industry'] = $company->retrieveIndustry();
+            $data['totalEmployee'] = $company->retrieveTotalEmployees();
+            $data['companyID'] = $companyID;
+
+            return view('pages.editCompanyEvent')->with('data', $data);
+        }
+        return redirect("/login");
+    }
+
     public function showAddCompanyEvent($id)
     {
         $company = new Company();
@@ -69,11 +86,6 @@ class EventsController extends Controller
             return view('pages.addCompanyEvent')->with('data', $data);
         }
         return redirect("/login");
-    }
-
-    public function showEditEvent($id)
-    {
-
     }
 
     public function addCompanyData(Request $request)
@@ -147,6 +159,51 @@ class EventsController extends Controller
         return redirect("/login");
     }
 
+    public function showEditEvent($eventID)
+    {
+        if ($this->checkSession()) {
+            $event = new Events();
+            $company = new Company();
+            $data[] = array();
+
+            $data['eventData'] = $event->RetrieveSingleEvent($eventID);
+            $data['navbar'] = view('includes.navbar');
+            $data['industry'] = $company->retrieveIndustry();
+            $data['totalEmployee'] = $company->retrieveTotalEmployees();
+            $data['eventID'] = $eventID;
+            return view('pages.editEvent')->with('data', $data);
+        }
+        return redirect("/login");
+    }
+
+    public function editEventData(Request $request)
+    {
+        if ($this->checkSession()) {
+            $eventID        = htmlspecialchars($request->input('eventID'));
+            $eventName      = htmlspecialchars($request->input('eventName'));
+            $description    = htmlspecialchars($request->input('eventShortDesc'));
+            $startDate      = htmlspecialchars($request->input('startDate'));
+            $endDate        = htmlspecialchars($request->input('endDate'));
+            $capacity       = htmlspecialchars($request->input('capacity'));
+            $place          = htmlspecialchars($request->input('place'));
+            $univID         = Session::get('univID');
+
+            $event = new Events();
+            $event->editEvent(
+                $eventID,
+                $eventName,
+                $description,
+                $startDate,
+                $endDate,
+                $capacity,
+                $place,
+                $univID
+            );
+            return redirect('/event');
+        }
+        return redirect('/login');
+    }
+
     public function EventCompanyPage()
     {
         $company = new Company();
@@ -178,26 +235,28 @@ class EventsController extends Controller
 
     public function addEvent(Request $request)
     {
-        $eventName      = htmlspecialchars($request->input('eventName'));
-        $description    = htmlspecialchars($request->input('eventShortDesc'));
-        $startDate      = htmlspecialchars($request->input('startDate'));
-        $endDate        = htmlspecialchars($request->input('endDate'));
-        $capacity       = htmlspecialchars($request->input('capacity'));
-        $place          = htmlspecialchars($request->input('place'));
-        $univID         = Session::get('univID');
+        if ($this->checkSession()) {
+            $eventName      = htmlspecialchars($request->input('eventName'));
+            $description    = htmlspecialchars($request->input('eventShortDesc'));
+            $startDate      = htmlspecialchars($request->input('startDate'));
+            $endDate        = htmlspecialchars($request->input('endDate'));
+            $capacity       = htmlspecialchars($request->input('capacity'));
+            $place          = htmlspecialchars($request->input('place'));
+            $univID         = Session::get('univID');
 
-        $event = new Events();
-        $event->addEvent(
-            $eventName,
-            $description,
-            $startDate,
-            $endDate,
-            $capacity,
-            $place,
-            $univID
-        );
-
-        return redirect('/event');
+            $event = new Events();
+            $event->addEvent(
+                $eventName,
+                $description,
+                $startDate,
+                $endDate,
+                $capacity,
+                $place,
+                $univID
+            );
+            return redirect('/event');
+        }
+        return redirect('/login');
     }
 
     public function EventVisitorPage()

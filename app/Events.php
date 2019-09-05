@@ -23,6 +23,7 @@ class Events extends Model
     {
         if ($searchEventCompany == "") $searchEventCompany = "%";
         else $searchEventCompany = "%" . strtolower($searchEventCompany) . "%";
+        if ($sortBy == "") $sortBy = "date";
 
         if ($statusActive == "") {
             $results = DB::table("career_fair as cf")
@@ -33,7 +34,7 @@ class Events extends Model
                 ->orderBy($sortBy, $adesc)
                 ->get();
         } else {
-            $results = DB::table("career_fair")
+            $results = DB::table("career_fair as cf")
                 ->leftJoin(DB::raw('(SELECT event_id,count(*) as company FROM `booth_event`
                         group by event_id) as be'), 'cf.id', '=', 'be.event_id')
                 ->where([["univ_id", $univID], [strtolower("name"), "like", $searchEventCompany], ['endDate', $statusActive, date('Y-m-d H:i:s')]])
@@ -181,5 +182,32 @@ class Events extends Model
         // dd($result);
 
         return $result;
+    }
+
+    public function editEvent(
+        $eventID,
+        $eventName,
+        $description,
+        $startDate,
+        $endDate,
+        $capacity,
+        $place,
+        $univ_id
+    ) {
+
+        $data = array(
+            "id"            => $eventID,
+            "name"          => $eventName,
+            "startDate"     => $startDate,
+            "endDate"       => $endDate,
+            "capacity"      => $capacity,
+            "place"         => $place,
+            "description"   => $description,
+            "univ_id"       => $univ_id
+        );
+
+        $resp = DB::table('career_fair')
+            ->where('id', $eventID)
+            ->update($data);
     }
 }

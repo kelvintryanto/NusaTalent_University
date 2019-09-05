@@ -86,7 +86,7 @@
 
                                         <div>
                                             <object>
-                                            <a type="button" href="/company/edit/">
+                                            <a type="button" href="/event/{{$eventList->id}}/editEvent">
                                                 <i class="fas fa-edit fa-lg" style="color: #04518D; margin-right:20px;"></i>
                                             </a>
                                             <a type="button" data-toggle="modal" data-target="#deleteCompany">
