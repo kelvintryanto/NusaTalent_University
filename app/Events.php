@@ -10,13 +10,12 @@ use Session;
 class Events extends Model
 {
     private $_eventID;
-    private $_boothEventID;
 
     public function __construct()
     {
         date_default_timezone_set("Asia/Bangkok");
         $this->_eventID = $this->GenerateEventID();
-        $this->_boothEventID = $this->GenerateBoothEventID();
+        // $this->_boothEventID = $this->GenerateBoothEventID();
     }
 
     public function RetrieveCareerFair($univID, $searchEventCompany, $sortBy, $adesc, $statusActive)
@@ -42,7 +41,6 @@ class Events extends Model
                 ->orderBy($sortBy, $adesc)
                 ->get();
         }
-
 
         if ($results) {
             return $results;
@@ -73,18 +71,6 @@ class Events extends Model
         return $eventID;
     }
 
-    private function GenerateBoothEventID()
-    {
-        $_boothEventID = str_random(11);
-
-        $exists = DB::table("booth_event")->where("id", $_boothEventID)->first();
-
-        if (!is_null($exists))
-            $this->GenerateBoothEventID();
-
-        return $_boothEventID;
-    }
-
     public function addEvent(
         $eventName,
         $description,
@@ -112,78 +98,6 @@ class Events extends Model
             ->insert($data);
     }
 
-    public function AddCompanyEvent(
-        $univID,
-        $eventID,
-        $cp_id,
-        $companyName,
-        $boothNum,
-        $description,
-        $website,
-        $numberofEmployees,
-        $industry,
-        $linkedIn,
-        $updatedAt
-    ) {
-        $createdAt = date('Y-m-d H:i:s');
-        $company = new Company();
-        $company->AddCompanyEvent(
-            $univID,
-            $cp_id,
-            $companyName,
-            $website,
-            $industry,
-            $linkedIn,
-            $description,
-            $numberofEmployees
-        );
-
-        $this->addBoothEvent(
-            $eventID,
-            $cp_id,
-            $boothNum,
-            $createdAt,
-            $updatedAt
-        );
-    }
-
-    public function addBoothEvent(
-        $eventID,
-        $companyID,
-        $boothNo,
-        $createdAt,
-        $updatedAt
-    ) {
-        $data = array(
-            "id"            => $this->_boothEventID,
-            "event_id"      => $eventID,
-            "cp_id"         => $companyID,
-            "booth_no"      => $boothNo,
-            "created_at"    => $createdAt,
-            "updated_at"    => $updatedAt
-        );
-
-        DB::table('booth_event')
-            ->insert($data);
-    }
-
-    public function showListCompanyEvent($eventID)
-    {
-        $result = DB::table("booth_event AS be")
-            ->leftJoin('company_profile_event AS cp', 'cp.id', '=', 'be.cp_id')
-            ->leftjoin(DB::raw("(select cp_id, count(cp_id) as amount
-                                from job_post_event
-                                where event_id is null
-                                group by cp_id) as jp"), "jp.cp_id", "=", "cp.id")
-            ->where("event_id", $eventID)
-            ->select("*")
-            ->get();
-
-        // dd($result);
-
-        return $result;
-    }
-
     public function editEvent(
         $eventID,
         $eventName,
@@ -194,7 +108,6 @@ class Events extends Model
         $place,
         $univ_id
     ) {
-
         $data = array(
             "id"            => $eventID,
             "name"          => $eventName,

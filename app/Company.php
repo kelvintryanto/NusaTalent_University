@@ -89,6 +89,38 @@ class Company extends Model
         return $result;
     }
 
+    public function retrieveSingleCompanyEvent($companyID)
+    {
+        $result = $result = DB::table("company_profile_event AS cpe")
+            ->where("cpe.id", $companyID)
+            ->leftjoin("cp_location_event AS cpl", "cpl.cp_id", "=", "cpe.id")
+            ->leftjoin("booth_event as be", "be.cp_id", "=", "cpe.id")
+            ->select(
+                "cpe.id AS id",
+                "cpe.name AS name",
+                "cpe.website AS website",
+                "cpe.industry AS industry",
+                "cpe.linkedin AS linkedin",
+                "cpe.short_desc AS short_desc",
+                "cpe.employees AS employees",
+                "cpe.logo_path AS logo_path",
+                "cpe.status AS status",
+                "cpe.created_at AS created_at",
+                "cpl.name AS addressName",
+                "cpl.address AS address",
+                "cpl.country AS country",
+                "cpl.subdistrict AS subdistrict",
+                "cpl.city_id AS city_id",
+                "cpl.province_id AS province_id",
+                "cpl.postal_code AS postal_code",
+                "be.booth_no AS booth_no",
+                "be.updated_at AS updated_at"
+            )
+            ->first();
+
+        return $result;
+    }
+
     public function retrieveIndustry()
     {
         $result = DB::table("m_industry AS industry")

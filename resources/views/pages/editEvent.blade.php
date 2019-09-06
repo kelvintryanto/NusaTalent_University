@@ -73,7 +73,7 @@
                         </div>
                         <div class="flex-content" style="width: 50%; margin-top: 5px;">
                             <label class="text16">Place</label>
-                            <input type="text" class="form-control text2 form-bottom" id="place" name="place" placeholder="pengambilan dari map google API">
+                            <input type="text" class="form-control text2 form-bottom" id="place" name="place" placeholder="pengambilan dari map google API" value="{{$data['eventData']->place}}">
                         </div>
                         <div class="flex-content" style="width: 50%;">
                             <hr class="hr-1">

@@ -61,7 +61,7 @@
                             <select class="dropdown-li text14" id="sortByEvent" name="sortByEvent">
                                 <option value="startDate" class="text14">Date</option>
                                 <option value="name" class="text14">Name</option>
-                                <option value="" class="text14">Company</option>
+                                <option value="company" class="text14">Company</option>
                                 <option value="" class="text14">Job Post</option>
                                 <option value="" class="text14">Visitor</option>
                             </select>
@@ -110,7 +110,11 @@
 
 
                                         <div>
-                                            <label class="text13">{{$eventList->company}}</label>
+                                            @if($eventList->company)
+                                                <label class="text13">{{$eventList->company}}</label>
+                                            @else
+                                                <label class="text13">No</label>
+                                            @endif
                                             <label class="text13">Company</label>
                                         </div>
 

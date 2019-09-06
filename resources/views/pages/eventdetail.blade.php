@@ -96,10 +96,11 @@
                                             <div>
                                                 <label class="panel-title">{{$companyEvent->name}}</label>
                                             </div>
+                                            <input type="hidden" id="eventID" name="eventID" value="{{$data['eventID']}}">
 
                                             <div>
                                                 <object>
-                                                <a type="button" href="/event/{{$companyEvent->id}}/editCompanyEvent">
+                                                <a type="button" href="/event/{{$data['eventID']}}/{{$companyEvent->id}}/editCompanyEvent">
                                                     <i class="fas fa-edit fa-lg" style="color: #04518D; margin-right:20px;"></i>
                                                 </a>
                                                 <a type="button" data-toggle="modal" data-target="#deleteCompany{{$companyEvent->id}}">

@@ -19,19 +19,12 @@ class EventsController extends Controller
 
     public function index()
     {
-        // $user = new User();
-        // $company = new Company();
         if ($this->checkSession()) {
             $event = new Events();
 
             $data[] = array();
             $data['navbar'] = view('includes.navbar');
-            // $data['navbarEvent'] = view('includes.navbarEvent');
-
             $data['eventList'] = $event->RetrieveCareerFair(Session::get('univID'), "", 'startDate', 'asc', "");
-            // $data['listCompanyIndustry'] = $company->showIndustry(Session::get('univID'));
-            // $data['boothNumber'] = $company->GetBoothNumber();
-            // $data['lstCompanyBooth'] = $company->GetListCompanyBooth();
 
             return view('pages.event')->with('data', $data);
         }
@@ -47,6 +40,7 @@ class EventsController extends Controller
             $data[] = array();
             $data['navbar'] = view('includes.navbar');
             $data['eventDetail'] = $event->RetrieveSingleEvent($eventID);
+            $data['eventID'] = $eventID;
 
             $data['listCompanyEvent'] = $event->showListCompanyEvent($eventID);
             return view('pages.eventDetail')->with('data', $data);
@@ -54,80 +48,9 @@ class EventsController extends Controller
         return redirect('/login');
     }
 
-    public function editCompanyEvent($companyID)
-    {
-        $company = new Company();
-        if ($this->checkSession()) {
-            $data[] = array();
-            // $data['js'] = view('js');
-            // $data['css'] = view('css');
-            $data['navbar'] = view('includes.navbar');
-            $data['industry'] = $company->retrieveIndustry();
-            $data['totalEmployee'] = $company->retrieveTotalEmployees();
-            $data['companyID'] = $companyID;
 
-            return view('pages.editCompanyEvent')->with('data', $data);
-        }
-        return redirect("/login");
-    }
 
-    public function showAddCompanyEvent($id)
-    {
-        $company = new Company();
-        if ($this->checkSession()) {
-            $data[] = array();
-            // $data['js'] = view('js');
-            // $data['css'] = view('css');
-            $data['navbar'] = view('includes.navbar');
-            $data['industry'] = $company->retrieveIndustry();
-            $data['totalEmployee'] = $company->retrieveTotalEmployees();
-            $data['eventID'] = $id;
-
-            return view('pages.addCompanyEvent')->with('data', $data);
-        }
-        return redirect("/login");
-    }
-
-    public function addCompanyData(Request $request)
-    {
-        if ($this->checkSession()) {
-            $company = new Company();
-            $event = new Events();
-
-            //untuk booth_event table
-            $eventID = htmlspecialchars($request->input("eventID"));
-            $cp_id = $company->GetCompanyID();
-            $companyName = htmlspecialchars($request->input("companyEventName"));
-            $boothNum = htmlspecialchars($request->input("boothNo"));
-
-            //untuk company_profile table dan university profile
-            $description = htmlspecialchars($request->input("companyEventDesc"));
-            $website = htmlspecialchars($request->input("companyWebsiteEvent"));
-            $numberofEmployees = htmlspecialchars($request->input("companyWebsiteEvent"));
-            $industry = htmlspecialchars($request->input("companyEventIndustry"));
-            $linkedIn = htmlspecialchars($request->input("companyEventLinkedIn"));
-            $updatedAt = date('Y-m-d H:i:s');
-
-            $resp = $event->AddCompanyEvent(
-                Session::get('univID'),
-                $eventID,
-                $cp_id,
-                $companyName,
-                $boothNum,
-                $description,
-                $website,
-                $numberofEmployees,
-                $industry,
-                $linkedIn,
-                $updatedAt
-            );
-
-            return redirect('/event/' . $eventID);
-        }
-        return redirect('/login');
-    }
-
-    public function sortEventCompany(Request $request)
+    public function sortEventList(Request $request)
     {
         if ($this->checkSession()) {
             $searchEventCompany = $request['searchEventCompany'];
@@ -204,34 +127,7 @@ class EventsController extends Controller
         return redirect('/login');
     }
 
-    public function EventCompanyPage()
-    {
-        $company = new Company();
 
-        $data[] = array();
-        $data['navbar'] = view('includes.navbar');
-        $data['navbarEvent'] = view('includes.navbarEvent');
-
-        // $data['boothNumber'] = $company->GetBoothNumber();
-        // $data['lstCompanyBooth'] = $company->GetListCompanyBooth();
-
-        return view('pages.eventcompanylist')->with('data', $data);
-    }
-
-    public function EventJobPage()
-    {
-        // $user = new User();
-        // $company = new Company();
-
-        $data[] = array();
-        $data['navbar'] = view('includes.navbar');
-        $data['navbarEvent'] = view('includes.navbarEvent');
-
-        // $data['boothNumber'] = $company->GetBoothNumber();
-        // $data['lstCompanyBooth'] = $company->GetListCompanyBooth();
-
-        return view('pages.eventjoblist')->with('data', $data);
-    }
 
     public function addEvent(Request $request)
     {

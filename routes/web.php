@@ -67,18 +67,20 @@ Route::post("/job/sortList", "JobPostController@sortListJob");
 // Event Controller
 Route::get("/event", "EventsController@index");
 
-//Event Controller Event List
+//Controller : EventController, Model : Events
 Route::get("/event/addEvent", "EventsController@showAddEvent");
 Route::get("/event/addEventData", "EventsController@addEvent");
 Route::get("/event/{id}/editEvent", "EventsController@showEditEvent");
 Route::get("/event/{id}/editEventData", "EventsController@editEventData");
-Route::post("/event/sortEvent", "EventsController@sortEventCompany");
+Route::post("/event/sortEvent", "EventsController@sortEventList");
+//done check
 
-//Event Controller Company Event List
+//Controller : CompanyEventController, Model : CompanyEvent
+Route::get("/event/{id}", "EventsController@detailEvent");
 Route::get("/event/{id}/addCompany", "EventsController@showAddCompanyEvent");
 Route::get("/event/{id}/addCompanyData", "EventsController@addCompanyData");
-Route::get("/event/{id}", "EventsController@detailEvent");
-Route::get("/event/{id}/editCompanyevent", "EventsController@editCompanyEvent");
+Route::get("/event/{eventID}/{companyID}/editCompanyEvent", "EventsController@showEditCompanyEvent");
+Route::get("/event/{companyID}/editCompanyData", "EventsController@editCompanyData");
 
 //Event Controller Job Company Event List
 Route::get("/event/job", "EventsController@EventJobPage");
